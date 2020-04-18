@@ -68,6 +68,7 @@ class Dialogue implements Level {
                 }
             }
         }
+        return null;
     }
 
 
