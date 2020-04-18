@@ -1,6 +1,5 @@
-import scenes.Chopping;
 import scenes.Level;
-import scenes.Kneading;
+import scenes.MapLevel;
 
 class Main extends hxd.App {
 
@@ -9,9 +8,10 @@ class Main extends hxd.App {
     override function init() {
         hxd.Res.initEmbed();
 
-        curLevel = new Kneading();
+        curLevel = new MapLevel();
         curLevel.init();
     }
+
     static function main() {
         new Main();
     }
