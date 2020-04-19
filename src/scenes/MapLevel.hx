@@ -1,9 +1,12 @@
 package scenes;
 
+import h2d.Object;
+import hxd.Event;
+import h2d.Interactive;
+import h2d.Graphics;
 import hxd.Res;
 import h2d.col.Point;
 import h2d.Bitmap;
-import h2d.Tile;
 import h2d.Scene;
 import h2d.col.Bounds;
 import data.MapData;
@@ -18,7 +21,7 @@ class MapLevel implements Level {
     }
 
     public function init() {
-        var townTile = Tile.fromColor(0xFF0000);//Res.img.town1.toTile();
+        var townTile = Res.img.town1.toTile();
         townTile.scaleToSize(200, 200);
         var townSize = new Point(townTile.width, townTile.height);
 
@@ -28,11 +31,31 @@ class MapLevel implements Level {
 
         scene.addChild(new Bitmap(Res.img.grass.toTile()));
 
+        var roads = new Object(scene);
+
         mapData = new MapData(townSize.length()/2, playableArea);
-        for (town in mapData.towns) {
+        var lineDrawer = new Graphics(roads);
+        lineDrawer.lineStyle(10);
+        for (cell in mapData.diagram.cells) {
+            var town = cell.point;
             var townSprite = new Bitmap(townTile);
             townSprite.setPosition(town.x - (townSize.clone().x/2), town.y - (townSize.clone().y/2));
             scene.addChild(townSprite);
+
+            var interactiveTile = new Interactive(townSize.x, townSize.y, townSprite);
+
+            interactiveTile.onOver = function (e: Event) {
+                for (neighbor in cell.getNeighbors()) {
+                    lineDrawer.moveTo(town.x, town.y);
+                    lineDrawer.lineTo(neighbor.x, neighbor.y);
+                }
+            }
+
+            interactiveTile.onOut = function (e: Event) {
+                lineDrawer.clear();
+                lineDrawer = new Graphics(roads);
+                lineDrawer.lineStyle(10);
+            }
         }
     }
 

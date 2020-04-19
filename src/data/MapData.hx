@@ -1,17 +1,21 @@
 package data;
 
+import h2d.col.Voronoi;
+import h2d.col.Voronoi.Diagram;
 import h2d.col.Bounds;
 import h2d.col.Point;
 
 class MapData {
     private final minDistance: Float;
     private final dims: Bounds;
-    public var towns: Array<Point>;
+    public var diagram: Diagram;
 
     public function new(minDistance: Float, dims: Bounds) {
         this.minDistance = minDistance;
         this.dims = dims;
-        this.towns = generatePoints();
+        var towns = generatePoints();
+        var voronoi = new Voronoi();
+        this.diagram = voronoi.compute(towns, dims);
     }
 
     private function generatePoints(): Array<Point> {
@@ -24,7 +28,6 @@ class MapData {
                 false
             ]
         ];
-        trace(grid);
 
         var points = new Array<Point>();
         var spawnPoints = new Array<Point>();
@@ -43,7 +46,7 @@ class MapData {
 
             var foundCandidate = false;
 
-            for (x in 0...50) {
+            for (x in 0...30) {
                 var r = Math.random() * minDistance + (1.5 * minDistance);
                 var theta = Math.random() * 2 * Math.PI;
 
@@ -65,7 +68,6 @@ class MapData {
                     points.push(candidate);
                     spawnPoints.push(candidate);
                     grid[Math.floor(gridPoint.x)][Math.floor(gridPoint.y)] = true;
-                    trace(grid);
                     break;
                 }
             }
@@ -93,8 +95,6 @@ class MapData {
         for (x in xMin...(xMax + 1)) {
             for (y in yMin...(yMax + 1)) {
                 if (grid[x][y]) {
-                    trace(x);
-                    trace(y);
                     return false;
                 }
             }
