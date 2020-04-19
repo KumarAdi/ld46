@@ -16,6 +16,6 @@ class MainMenu implements Level {
     }
 
     public function update(dt: Float): Level {
-        return new MapSelectLevel(this);
+        return new FirstLevel(this);
     }
 }
