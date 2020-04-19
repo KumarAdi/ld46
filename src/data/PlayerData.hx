@@ -2,7 +2,7 @@ package data;
 
 import haxe.ds.HashMap;
 
-class Player {
+class PlayerData {
     public var flags: Map<String, Int>;
 
     // private var items

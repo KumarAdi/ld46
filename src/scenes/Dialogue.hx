@@ -5,8 +5,8 @@ import haxe.display.Display.Package;
 import h2d.Bitmap;
 import h2d.Tile;
 import h2d.Scene;
-import data.Events;
-import data.Player;
+import data.EventsData;
+import data.PlayerData;
 import hxd.Res;
 
 class Dialogue implements Level {
@@ -14,16 +14,16 @@ class Dialogue implements Level {
     public var textbox: Bitmap;
     public var option1: Interactive;
     public var option2: Interactive;
-    public var event: Event;
-    public var player: Player;
+    public var eventData: EventData;
+    public var playerData: PlayerData;
 
-    public function new(events: Events, player: Player) {
+    public function new(eventsData: EventsData, playerData: PlayerData) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
-        var scenario = Math.floor(Math.random() * events.events.length); // just random picking for now, might need to add logic based on flags
-        event = events.events[scenario];
-        events.events.remove(event); // remove the encountered event from the list
-        this.player = player;
+        var scenario = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
+        eventData = eventsData.events[scenario];
+        eventsData.events.remove(eventData); // remove the encountered event from the list
+        this.playerData = playerData;
     }
 
     public function init(): Void {
@@ -36,50 +36,46 @@ class Dialogue implements Level {
 
         // Init text
         var main = new h2d.Text(font);
-        main.text = event.main;
+        main.text = eventData.main;
         main.textColor = 0xFFFFFF;
         textbox.addChild(main);
 
         var opt1 = new h2d.Text(font);
-        opt1.text = event.opt1.text;
-        option1 = new h2d.Interactive(300, 100, opt1); // need to change size
+        opt1.text = eventData.opt1.text;
         opt1.textColor = 0xFFFFFF;
         opt1.y = 100;
+        option1 = new h2d.Interactive(300, 100, opt1); // need to change size
+        option1.onClick = function(event : hxd.Event) {
+            var flags = playerData.flags;
+            for (consequence in eventData.opt1.consequences) {
+                if (flags.exists(consequence.flag)) {
+                    flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
+                } else {
+                    flags.set(consequence.flag, consequence.magnitude);
+                }
+            }
+        }
         textbox.addChild(opt1); // and placement
 
         var opt2 = new h2d.Text(font);
-        opt2.text = event.opt2.text;
-        option2 = new h2d.Interactive(300, 100, opt2);
+        opt2.text = eventData.opt2.text;
         opt2.textColor = 0xFFFFFF;
         opt2.y = 150;
+        option2 = new h2d.Interactive(300, 100, opt2);
+        option2.onClick = function(event : hxd.Event) {
+            var flags = playerData.flags;
+            for (consequence in eventData.opt2.consequences) {
+                if (flags.exists(consequence.flag)) {
+                    flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
+                } else {
+                    flags.set(consequence.flag, consequence.magnitude);
+                }
+            }
+        }
         textbox.addChild(opt2);
-        // example of how to access data from the consequences object
-        trace(event.opt1.consequences.money);
     }
 
     public function update(dt: Float): Null<Level> {
-        // TODO: these should probably be moved to init before being uncommented
-
-        // option1.onClick = function(event : hxd.Event) {
-        //     var flags = player.flags;
-        //     for (String flag : event.get("opt1").get("consequences").keyset()) {
-        //         if (flags.keyset.contains(flag)) {
-        //             flags.set(flag, flags.get(flag) + event.get("opt1").get("consequences").get(flag));
-        //         } else {
-        //             flags.set(flag, 1);
-        //         }
-        //     }
-        // }
-        // option2.onClick = function(event : hxd.Event) {
-        //     var flags = player.flags;
-        //     for (String flag : event.get("opt2").get("consequences").keyset()) {
-        //         if (flags.keyset.contains(flag)) {
-        //             flags.set(flag, flags.get(flag) + event.get("opt2").get("consequences").get(flag));
-        //         } else {
-        //             flags.set(flag, 1);
-        //         }
-        //     }
-        // }
         return null;
     }
 
