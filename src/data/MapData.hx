@@ -60,9 +60,7 @@ class MapData {
                 }
 
                 var gridPoint = screenToGrid(candidate, cellSize);
-                trace(gridPoint);
                 var result = isValid(gridPoint, grid);
-                trace(result);
                 if (result) {
                     foundCandidate = true;
                     points.push(candidate);

@@ -36,6 +36,9 @@ class DialogueLevel implements Level {
 
     public function init(): Void {
         // Init textbox
+
+        var bgTile = Res.img.village_bg.toTile();
+        var bg = new Bitmap(bgTile, scene);
         textbox = new Bitmap(Tile.fromColor(0x00AA00, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
         textbox.x = 1920/2 - textbox.getBounds().width/2;
         textbox.y = 1080/2 - textbox.getBounds().height/2;
@@ -69,8 +72,6 @@ class DialogueLevel implements Level {
         passage.text = passageData.text;
         passage.maxWidth = textbox.getBounds().width - 40;
         passage.textColor = 0xFFFFFF;
-        passage.x = 20;
-        passage.y = 20;
         textbox.addChild(passage);
 
         // Init next height for placement of options
@@ -99,6 +100,7 @@ class DialogueLevel implements Level {
             option.textColor = 0xFFFFFF;
             option.x = 20;
             option.y = nextHeight;
+            option.maxWidth = textbox.tile.width;
             textbox.addChild(option);
 
             // set up option onclick listener
@@ -107,6 +109,9 @@ class DialogueLevel implements Level {
                 var flags = playerData.flags;
                 if (opt.consequences != null) {
                     for (consequence in opt.consequences) {
+                        if (consequence.probability != null && Math.random() > consequence.probability) {
+                            break;
+                        }
                         if (flags.exists(consequence.flag)) {
                             flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
                         } else {
