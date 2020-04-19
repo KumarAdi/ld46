@@ -9,7 +9,7 @@ import data.EventsData;
 import data.PlayerData;
 import hxd.Res;
 
-class Dialogue implements Level {
+class DialogueLevel implements Level {
     public var scene: Scene;
     public var textbox: Bitmap;
     public var option1: Interactive;

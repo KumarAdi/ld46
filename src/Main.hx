@@ -2,7 +2,7 @@ import data.EventsData;
 import data.PlayerData;
 import scenes.Level;
 import scenes.MapLevel;
-import scenes.Dialogue;
+import scenes.DialogueLevel;
 import hxd.Res;
 
 class Main extends hxd.App {
@@ -14,7 +14,7 @@ class Main extends hxd.App {
         var playerData = new PlayerData();
         var eventsData = new EventsData();
 
-        curLevel = new Dialogue(eventsData, playerData);
+        curLevel = new DialogueLevel(eventsData, playerData);
         curLevel.init();
     }
 
