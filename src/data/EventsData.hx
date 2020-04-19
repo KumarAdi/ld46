@@ -3,20 +3,26 @@ package data;
 import hxd.Res;
 import haxe.Json;
 
-typedef ConsequenceData = {
+typedef FlagData = {
     var flag: String;
     var magnitude: Int;
 }
 
 typedef OptionData = {
     var text: String;
-    var consequences: Array<ConsequenceData>;
+    var nextid: String;
+    var requirements: Array<FlagData>;
+    var consequences: Array<FlagData>;
+}
+
+typedef PassageData = {
+    var text: String;
+    var options: Array<OptionData>;
 }
 
 typedef EventData = {
-    var main: String;
-    var opt1: OptionData;
-    var opt2: OptionData;
+    var scenarioid: Int;
+    var passages: Map<String, PassageData>;
 }
 
 class EventsData {

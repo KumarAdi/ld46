@@ -1,38 +1,177 @@
 [
     {
-        "main": "this is a test scenario",
-        "id": 1,
-        "opt1": {
-            "text": "this is a test option 1",
-            "consequences": [
-                {"flag": "money", "magnitude": -1},
-                {"flag": "supplies", "magnitude": 2}
-            ]
-        },
-        "opt2": {
-            "text": "this is a test option 2",
-            "consequences": [
-                {"flag": "curse", "magnitude": 1},
-                {"flag": "testflag", "magnitude": 1}
-            ]
+        "scenarioid": 1,
+        "passages": {
+            "a":
+            {
+                "text": "Hey look! A dragon pup!",
+                "options":
+                [
+                    {
+                        "text": "continue >",
+                        "nextid": "b"
+                    }
+                ]
+            },
+            "b":
+            {
+                "text": "Oh no, it's afflicted with 'The Curse'\nWe're going to have to take you to the Grand Wizard Abracadabraham in The Misty Mountains!",
+                "options":
+                [
+                    {
+                        "text": "continue >",
+                        "nextid": "c"
+                    }
+                ]
+            },
+            "c":
+            {
+                "text": "Looks like we're going to be traveling a while, what shall I name you?",
+                "options":
+                [
+                    {
+                        "text": "1. (Pick one male name: Daniel, Sherman, Peter, Dale, Freddy, Norman, Samuel, Wally)",
+                        "consequences":
+                        [
+                            {"flag": "name", "magnitude": 0}
+                        ],
+                        "nextid": "d"
+                    },
+                    {
+                        "text": "2. (Pick one female name: Mackenzie, Madeline, Megan, Macy, Marie, Mia, Melissa)",
+                        "consequences":
+                        [
+                            {"flag": "name", "magnitude": 1}
+                        ],
+                        "nextid": "d"
+                    },
+                    {
+                        "text": "3. Something cool and badass!",
+                        "consequences":
+                        [
+                            {"flag": "name", "magnitude": 2}
+                        ],
+                        "nextid": "e"
+                    }
+                ]
+            },
+            "d":
+            {
+                "text": "I'll call you... [Name] !",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            "e":
+            {
+                "text": "Well you are a dragon, and look really awesome… How about [The Drag Queen]!\nYeah! That sounds amazing, people are going to be terrified of you.",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
         }
     },
     {
-        "main": "this is a test scenario 2",
-        "id": 2,
-        "opt1": {
-            "text": "this is a test option 1",
-            "consequences": [
-                {"flag": "supplies", "magnitude": -1},
-                {"flag": "testflag", "magnitude": 1}
-            ]
-        },
-        "opt2": {
-            "text": "this is a test option 2",
-            "consequences": [
-                {"flag": "money", "magnitude": -1},
-                {"flag": "supplies", "magnitude": 2}
-            ]
+        "scenarioid": 2,
+        "passages": {
+            "a":
+            {
+                "text": "You spot a broken down wagon with some people nearby. They look half starved, they've been stuck for a while.\nPlease take us to the nearest town and let us borrow some supplies, we have plenty of money!",
+                "options":
+                [
+                    {
+                        "text": "Offer some supplies (-2S)",
+                        "consequences":
+                        [
+                            {"flag": "supplies", "magnitude": -2},
+                            {"flag": "money", "magnitude": 25}
+                        ],
+                        "nextid": "b"
+                    },
+                    {
+                        "text": "Offer supplies, and let them hitch a ride to town (-2S)",
+                        "consequences":
+                        [
+                            {"flag": "supplies", "magnitude": -2},
+                            {"flag": "stowaways", "magnitude": 1}
+                        ],
+                        "nextid": "c"
+                    },
+                    {
+                        "text": "Offer to help fix their wagon (-1 Spare Part)",
+                        "requirements":
+                        [
+                            {"flag": "sparepart", "magnitude": 1}
+                        ],
+                        "consequences":
+                        [
+                            {"flag": "sparepart", "magnitude": -1},
+                            {"flag": "money", "magnitude": 200},
+                            {"flag": "goodluckcharm", "magnitude": 1}
+                        ],
+                        "nextid": "d"
+                    },
+                    {
+                        "text": "Offer to help fix their wagon (Engineer's help)",
+                        "requirements":
+                        [
+                            {"flag": "engineer", "magnitude": 1}
+                        ],
+                        "consequences":
+                        [
+                            {"flag": "money", "magnitude": 200},
+                            {"flag": "goodluckcharm", "magnitude": 1}
+                        ],
+                        "nextid": "d"
+                    },
+                    {
+                        "text": "They have plenty of money? You have a dragon. Take their money.",
+                        "requirements":
+                        [
+                            {"flag": "health", "magnitude": 40}
+                        ],
+                        "consequences":
+                        [
+                            {"flag": "money", "magnitude": 200}
+                        ],
+                        "nextid": "e"
+                    }
+                ]
+            },
+            "b":
+            {
+                "text": "Thank you for the food, but it's no good without a way back home, here, take this I guess, +25g",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            "c":
+            {
+                "text": "Oh thank you so much, we'll reward you handsomely when we get to town!",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            "d":
+            {
+                "text": "It takes time to fix their wagon, but they look pleased with the result! Thank you, so much! Here take this, it's all we have, +200g, + a good luck charm",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            "e":
+            {
+                "text": "They cower in fear at the might of your dragon, they don't fight back and you leave them to die, +200g",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
         }
     }
 ]

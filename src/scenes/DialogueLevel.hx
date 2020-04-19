@@ -8,76 +8,105 @@ import h2d.Scene;
 import data.EventsData;
 import data.PlayerData;
 import hxd.Res;
+import h2d.Font;
 
 class DialogueLevel implements Level {
     public var scene: Scene;
     public var textbox: Bitmap;
-    public var option1: Interactive;
-    public var option2: Interactive;
+    public var optionListeners: Array<Interactive>;
     public var eventData: EventData;
     public var playerData: PlayerData;
+    public var font: Font;
 
     public function new(eventsData: EventsData, playerData: PlayerData) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
-        var scenario = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
-        eventData = eventsData.events[scenario];
+
+        var scenarioIdx = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
+        eventData = eventsData.events[scenarioIdx];
         eventsData.events.remove(eventData); // remove the encountered event from the list
+
         this.playerData = playerData;
     }
 
     public function init(): Void {
         // Init textbox
-        textbox = new Bitmap(Tile.fromColor(0x000000, 500, 300), scene);
+        textbox = new Bitmap(Tile.fromColor(0x00AA00, 500, 300), scene);
         textbox.x = 1920/2 - 250;
         textbox.y = 1080/2 - 150;
         // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
-        var font : h2d.Font = hxd.res.DefaultFont.get();
+        font = hxd.res.DefaultFont.get();
 
-        // Init text
-        var main = new h2d.Text(font);
-        main.text = eventData.main;
-        main.textColor = 0xFFFFFF;
-        textbox.addChild(main);
-
-        var opt1 = new h2d.Text(font);
-        opt1.text = eventData.opt1.text;
-        opt1.textColor = 0xFFFFFF;
-        opt1.y = 100;
-        option1 = new h2d.Interactive(300, 100, opt1); // need to change size
-        option1.onClick = function(event : hxd.Event) {
-            var flags = playerData.flags;
-            for (consequence in eventData.opt1.consequences) {
-                if (flags.exists(consequence.flag)) {
-                    flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
-                } else {
-                    flags.set(consequence.flag, consequence.magnitude);
-                }
-            }
-        }
-        textbox.addChild(opt1); // and placement
-
-        var opt2 = new h2d.Text(font);
-        opt2.text = eventData.opt2.text;
-        opt2.textColor = 0xFFFFFF;
-        opt2.y = 150;
-        option2 = new h2d.Interactive(300, 100, opt2);
-        option2.onClick = function(event : hxd.Event) {
-            var flags = playerData.flags;
-            for (consequence in eventData.opt2.consequences) {
-                if (flags.exists(consequence.flag)) {
-                    flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
-                } else {
-                    flags.set(consequence.flag, consequence.magnitude);
-                }
-            }
-        }
-        textbox.addChild(opt2);
+        // Init first passage
+        progressText("a");
     }
 
     public function update(dt: Float): Null<Level> {
         return null;
     }
 
+    public function progressText(nextid: String): Void {
 
+        // clear previous text
+        textbox.removeChildren();
+
+        // remove previous listeners
+        optionListeners = new Array();
+
+        // Init passage
+        var passageData:PassageData = eventData.passages.get(nextid);  // <-- issue here
+        var passage = new h2d.Text(font);
+        passage.text = passageData.text;
+        passage.textColor = 0xFFFFFF;
+        textbox.addChild(passage);
+
+        // Init next height for placement of options
+        var nextHeight = passage.textHeight + 50;
+
+        // Init options
+        for (opt in passageData.options) {
+
+            // if requirements not met, dont display option
+            if (opt.requirements != null) {
+                var flagsMet = true;
+                for (flagRequired in opt.requirements) {
+                    // overload to avoid null error
+                    if (playerData.flags.exists(flagRequired.flag) && playerData.flags.get(flagRequired.flag) < flagRequired.magnitude) {
+                        flagsMet = false;
+                        break;
+                    }
+                }
+                if (!flagsMet) {
+                    continue;
+                }
+            }
+            var option = new h2d.Text(font);
+            option.text = opt.text;
+            option.textColor = 0xFFFFFF;
+            option.y = nextHeight;
+            textbox.addChild(option);
+
+            // set up option onclick listener
+            var optionListen = new h2d.Interactive(300, 100, option);
+            optionListen.onClick = function(event : hxd.Event) {
+                var flags = playerData.flags;
+                if (opt.consequences != null) {
+                    for (consequence in opt.consequences) {
+                        if (flags.exists(consequence.flag)) {
+                            flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
+                        } else {
+                            flags.set(consequence.flag, consequence.magnitude);
+                        }
+                    }
+                }
+                if (opt.nextid != null) {
+                    progressText(opt.nextid);
+                } //otherwise close dialogue and go back to map level
+            }
+            optionListeners.push(optionListen);
+
+            // increment next height
+            nextHeight += option.textHeight + 50;
+        }
+    }
 }
