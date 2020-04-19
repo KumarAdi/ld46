@@ -78,7 +78,7 @@ class MapLevel implements Level {
         }
 
         var caravanTile = Res.img.caravan.toTile();
-        caravanTile.scaleToSize(townSize.x/2, townSize.y/2);
+        caravanTile.scaleToSize(townSize.x * 0.8, townSize.y * 0.8);
         playerMarker = new Bitmap(caravanTile, scene);
 
         var x = new Text(DefaultFont.get(), scene);
@@ -97,8 +97,8 @@ class MapLevel implements Level {
     }
 
     public function update(dt: Float): Null<Level> {
-        playerMarker.x = curTown.point.x - (townTile.width/4);
-        playerMarker.y = curTown.point.y - (townTile.height/4);
+        playerMarker.x = curTown.point.x - (townTile.width * 0.4);
+        playerMarker.y = curTown.point.y - (townTile.height * 0.4);
 
         // null out nextLevel so it's not set when we come back
         var ret = nextLevel;
