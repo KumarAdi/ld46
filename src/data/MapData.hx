@@ -17,7 +17,7 @@ class MapData {
     private function generatePoints(): Array<Point> {
         var cellSize = minDistance / Math.sqrt(2);
         var sceneSize = dims.getMax().sub(dims.getMin());
-        var gridDims = sceneSize.scale(1/cellSize);
+        var gridDims = sceneSize.clone().scale(1/cellSize);
 
         var grid = [for (x in 0...Math.ceil(gridDims.x)) 
             [for (y in 0...Math.ceil(gridDims.y)) 
@@ -28,10 +28,13 @@ class MapData {
         var points = new Array<Point>();
         var spawnPoints = new Array<Point>();
 
-        var firstPoint = getRandomPoint();
+        var firstPoint = getRandomPoint(sceneSize);
 
         points.push(firstPoint);
         spawnPoints.push(firstPoint);
+
+        var firstGridPoint = screenToGrid(firstPoint, cellSize);
+        grid[Math.floor(firstGridPoint.x)][Math.floor(firstGridPoint.y)] = true;
 
         while (spawnPoints.length > 0) {
             var spawnIdx = Math.floor(Math.random() * spawnPoints.length);
@@ -39,7 +42,7 @@ class MapData {
 
             var foundCandidate = false;
 
-            for (x in 0...45) {
+            for (x in 0...50) {
                 var r = Math.random() * minDistance + minDistance;
                 var theta = Math.random() * 2 * Math.PI;
 
@@ -70,8 +73,7 @@ class MapData {
         return points;
     }
 
-    private function getRandomPoint(): Point {
-        var sceneSize = dims.getMax().sub(dims.getMin());
+    private function getRandomPoint(sceneSize: Point): Point {
         return new Point(
             Math.random() * sceneSize.x,
             Math.random() * sceneSize.y
@@ -79,12 +81,12 @@ class MapData {
     }
 
     private function isValid(gridPoint: Point, grid:Array<Array<Bool>>): Bool {
-        var xMin = Math.ceil(Math.max(gridPoint.x - 2, 0));
+        var xMin = Math.floor(Math.max(gridPoint.x - 2, 0));
         var xMax = Math.ceil(Math.min(gridPoint.x + 2, grid.length - 1));
-        var yMin = Math.ceil(Math.max(gridPoint.y - 2, 0));
+        var yMin = Math.floor(Math.max(gridPoint.y - 2, 0));
         var yMax = Math.ceil(Math.min(gridPoint.y + 2, grid[0].length - 1));
-        for (x in xMin...xMax) {
-            for (y in yMin...yMax) {
+        for (x in xMin...(xMax + 1)) {
+            for (y in yMin...(yMax + 1)) {
                 if (grid[x][y]) {
                     return false;
                 }

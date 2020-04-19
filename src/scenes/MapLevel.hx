@@ -18,16 +18,20 @@ class MapLevel implements Level {
     }
 
     public function init() {
+        var townTile = Tile.fromColor(0xFF0000);//Res.img.town1.toTile();
+        townTile.scaleToSize(500, 500);
+        var townSize = new Point(townTile.width, townTile.height);
+
         var playableArea = new Bounds();
-        playableArea.setMin(new Point(200, 200));
-        playableArea.setMax(new Point(scene.width - 200, scene.height - 200));
+        playableArea.setMin(new Point(0, 0).add(townSize.scale(0.5)));
+        playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.scale(0.5)));
+
         scene.addChild(new Bitmap(Res.img.grass.toTile()));
-        mapData = new MapData(scene.width / 10, playableArea);
-        var townTile = Res.img.town1.toTile();
-        townTile.scaleToSize(400, 400);
+
+        mapData = new MapData(townSize.length() / 2, playableArea);
         for (town in mapData.towns) {
             var townSprite = new Bitmap(townTile);
-            townSprite.setPosition(town.x - 200, town.y - 200);
+            townSprite.setPosition(town.x - townSize.x/2, town.y - townSize.y/2);
             scene.addChild(townSprite);
         }
     }
