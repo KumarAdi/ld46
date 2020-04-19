@@ -1,0 +1,17 @@
+{
+    "main": "this is a test scenario",
+    "opt1": {
+        "text": "this is a test option 1",
+        "consequences": {
+            "money": -1,
+            "supplies": 2
+        }
+    },
+    "opt2": {
+        "text": "this is a test option 2",
+        "consequences": {
+            "curse": 1,
+            "newflag": 3
+        }
+    }
+}
