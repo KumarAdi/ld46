@@ -1,23 +1,27 @@
 package data;
 
+import h2d.col.Voronoi;
+import h2d.col.Voronoi.Diagram;
 import h2d.col.Bounds;
 import h2d.col.Point;
 
 class MapData {
     private final minDistance: Float;
     private final dims: Bounds;
-    public var towns: Array<Point>;
+    public var diagram: Diagram;
 
     public function new(minDistance: Float, dims: Bounds) {
         this.minDistance = minDistance;
         this.dims = dims;
-        this.towns = generatePoints();
+        var towns = generatePoints();
+        var voronoi = new Voronoi();
+        this.diagram = voronoi.compute(towns, dims);
     }
 
     private function generatePoints(): Array<Point> {
         var cellSize = minDistance / Math.sqrt(2);
         var sceneSize = dims.getMax().sub(dims.getMin());
-        var gridDims = sceneSize.scale(1/cellSize);
+        var gridDims = sceneSize.clone().scale(1/cellSize);
 
         var grid = [for (x in 0...Math.ceil(gridDims.x)) 
             [for (y in 0...Math.ceil(gridDims.y)) 
@@ -28,10 +32,13 @@ class MapData {
         var points = new Array<Point>();
         var spawnPoints = new Array<Point>();
 
-        var firstPoint = getRandomPoint();
+        var firstPoint = getRandomPoint(sceneSize);
 
         points.push(firstPoint);
         spawnPoints.push(firstPoint);
+
+        var firstGridPoint = screenToGrid(firstPoint, cellSize);
+        grid[Math.floor(firstGridPoint.x)][Math.floor(firstGridPoint.y)] = true;
 
         while (spawnPoints.length > 0) {
             var spawnIdx = Math.floor(Math.random() * spawnPoints.length);
@@ -39,8 +46,8 @@ class MapData {
 
             var foundCandidate = false;
 
-            for (x in 0...45) {
-                var r = Math.random() * minDistance + minDistance;
+            for (x in 0...30) {
+                var r = Math.random() * minDistance + (1.5 * minDistance);
                 var theta = Math.random() * 2 * Math.PI;
 
                 var candidate = new Point(
@@ -49,11 +56,14 @@ class MapData {
                 ).add(spawnPoint);
 
                 if (!dims.contains(candidate)) {
-                    break;
+                    continue;
                 }
 
                 var gridPoint = screenToGrid(candidate, cellSize);
-                if (isValid(gridPoint, grid)) {
+                trace(gridPoint);
+                var result = isValid(gridPoint, grid);
+                trace(result);
+                if (result) {
                     foundCandidate = true;
                     points.push(candidate);
                     spawnPoints.push(candidate);
@@ -70,8 +80,7 @@ class MapData {
         return points;
     }
 
-    private function getRandomPoint(): Point {
-        var sceneSize = dims.getMax().sub(dims.getMin());
+    private function getRandomPoint(sceneSize: Point): Point {
         return new Point(
             Math.random() * sceneSize.x,
             Math.random() * sceneSize.y
@@ -79,22 +88,21 @@ class MapData {
     }
 
     private function isValid(gridPoint: Point, grid:Array<Array<Bool>>): Bool {
-        var xMin = Math.ceil(Math.max(gridPoint.x - 2, 0));
-        var xMax = Math.ceil(Math.min(gridPoint.x + 2, grid.length - 1));
-        var yMin = Math.ceil(Math.max(gridPoint.y - 2, 0));
-        var yMax = Math.ceil(Math.min(gridPoint.y + 2, grid[0].length - 1));
-        for (x in xMin...xMax) {
-            for (y in yMin...yMax) {
+        var xMin = Math.floor(Math.max(gridPoint.x - 1.5, 0));
+        var xMax = Math.ceil(Math.min(gridPoint.x + 1.5, grid.length - 1));
+        var yMin = Math.floor(Math.max(gridPoint.y - 1.5, 0));
+        var yMax = Math.ceil(Math.min(gridPoint.y + 1.5, grid[0].length - 1));
+        for (x in xMin...(xMax + 1)) {
+            for (y in yMin...(yMax + 1)) {
                 if (grid[x][y]) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
     private inline function screenToGrid(point: Point, cellSize: Float): Point {
-        return point.sub(dims.getMin()).scale(1/cellSize);
+        return (point.clone().sub(dims.getMin())).scale(1/cellSize);
     }
 }
