@@ -12,9 +12,7 @@ class Main extends hxd.App {
     override function init() {
         hxd.Res.initEmbed();
         var player = new Player();
-        var json = Res.data.test.entry.getText();
-        trace(json);
-        var events = new Events(json);
+        var events = new Events();
 
         curLevel = new Dialogue(events, player);
         curLevel.init();

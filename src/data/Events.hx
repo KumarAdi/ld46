@@ -1,5 +1,6 @@
 package data;
 
+import hxd.Res;
 import haxe.Json;
 
 typedef Option = {
@@ -13,14 +14,11 @@ typedef Event = {
     var opt2: Option;
 }
 
-typedef EventsData = {
-    var eventsData: Array<Event>;
-}
-
 class Events {
-    public var events: EventsData;
+    public var events: Array<Event>;
 
-    public function new(json: String) {
+    public function new() {
+        var json = Res.data.test.entry.getText();
         events = Json.parse(json);
         trace(events);
     }

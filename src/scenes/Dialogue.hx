@@ -17,13 +17,13 @@ class Dialogue implements Level {
     public var event: Event;
     public var player: Player;
 
-    public function new(eventsData: Events, playerData: Player) {
+    public function new(events: Events, player: Player) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
-        var scenario = Math.floor(Math.random() * eventsData.events.eventsData.length); // just random picking for now, might need to add logic based on flags
-        event = eventsData.events.eventsData[scenario];
-        eventsData.events.eventsData.remove(event); // remove the encountered event from the list
-        player = playerData;
+        var scenario = Math.floor(Math.random() * events.events.length); // just random picking for now, might need to add logic based on flags
+        event = events.events[scenario];
+        events.events.remove(event); // remove the encountered event from the list
+        this.player = player;
     }
 
     public function init(): Void {
@@ -51,12 +51,14 @@ class Dialogue implements Level {
         opt2.text = event.opt2.text;
         option2 = new h2d.Interactive(300, 100, opt2);
         opt2.textColor = 0xFFFFFF;
-        opt2.y = 100;
+        opt2.y = 150;
         textbox.addChild(opt2);
     
     }
 
     public function update(dt: Float): Null<Level> {
+        // TODO: these should probably be moved to init before being uncommented
+
         // option1.onClick = function(event : hxd.Event) {
         //     var flags = player.flags;
         //     for (String flag : event.get("opt1").get("consequences").keyset()) {
