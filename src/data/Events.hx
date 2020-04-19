@@ -20,7 +20,6 @@ class Events {
     public function new() {
         var json = Res.data.test.entry.getText();
         events = Json.parse(json);
-        trace(events);
     }
 
     public function init(): Void {

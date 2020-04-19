@@ -53,6 +53,8 @@ class Dialogue implements Level {
         opt2.textColor = 0xFFFFFF;
         opt2.y = 150;
         textbox.addChild(opt2);
+        // example of how to access data from the consequences object
+        trace(event.opt1.consequences.money);
     }
 
     public function update(dt: Float): Null<Level> {
