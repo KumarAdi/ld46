@@ -6,7 +6,7 @@ import haxe.Json;
 typedef FlagData = {
     var flag: String;
     var magnitude: Int;
-    var probability: Int;
+    var probability: Null<Float>;
 }
 
 typedef OptionData = {

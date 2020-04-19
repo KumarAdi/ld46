@@ -105,6 +105,9 @@ class DialogueLevel implements Level {
                 var flags = playerData.flags;
                 if (opt.consequences != null) {
                     for (consequence in opt.consequences) {
+                        if (consequence.probability != null && Math.random() > consequence.probability) {
+                            break;
+                        }
                         if (flags.exists(consequence.flag)) {
                             flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
                         } else {
