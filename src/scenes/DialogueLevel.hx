@@ -69,6 +69,7 @@ class DialogueLevel implements Level {
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
         passage.textColor = 0xFFFFFF;
+        passage.maxWidth = textbox.tile.width;
         textbox.addChild(passage);
 
         // Init next height for placement of options
@@ -95,6 +96,7 @@ class DialogueLevel implements Level {
             option.text = opt.text;
             option.textColor = 0xFFFFFF;
             option.y = nextHeight;
+            option.maxWidth = textbox.tile.width;
             textbox.addChild(option);
 
             // set up option onclick listener
