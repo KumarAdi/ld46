@@ -36,7 +36,9 @@ class DialogueLevel implements Level {
 
     public function init(): Void {
         // Init textbox
-        textbox = new Bitmap(Tile.fromColor(0x00AA00, 500, 300), scene);
+        var bgTile = Res.img.village_bg.toTile();
+        var bg = new Bitmap(bgTile, scene);
+        textbox = new Bitmap(Tile.fromColor(0x000000, 500, 300), scene);
         textbox.x = 1920/2 - 250;
         textbox.y = 1080/2 - 150;
         // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox

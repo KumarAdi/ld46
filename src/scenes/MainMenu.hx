@@ -16,7 +16,6 @@ class MainMenu implements Level {
     }
 
     public function update(dt: Float): Level {
-        return new DialogueLevel(this, new EventsData(), PlayerData.getInstance());
-        //return new MapSelectLevel(this);
+        return new MapSelectLevel(this);
     }
 }
