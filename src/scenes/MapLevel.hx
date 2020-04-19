@@ -19,7 +19,7 @@ class MapLevel implements Level {
 
     public function init() {
         var townTile = Tile.fromColor(0xFF0000);//Res.img.town1.toTile();
-        townTile.scaleToSize(500, 500);
+        townTile.scaleToSize(200, 200);
         var townSize = new Point(townTile.width, townTile.height);
 
         var playableArea = new Bounds();

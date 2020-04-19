@@ -52,7 +52,7 @@ class MapData {
                 ).add(spawnPoint);
 
                 if (!dims.contains(candidate)) {
-                    break;
+                    continue;
                 }
 
                 var gridPoint = screenToGrid(candidate, cellSize);
