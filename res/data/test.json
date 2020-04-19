@@ -1,0 +1,38 @@
+[
+    {
+        "main": "this is a test scenario",
+        "id": 1,
+        "opt1": {
+            "text": "this is a test option 1",
+            "consequences": [
+                {"flag": "money", "magnitude": -1},
+                {"flag": "supplies", "magnitude": 2}
+            ]
+        },
+        "opt2": {
+            "text": "this is a test option 2",
+            "consequences": [
+                {"flag": "curse", "magnitude": 1},
+                {"flag": "testflag", "magnitude": 1}
+            ]
+        }
+    },
+    {
+        "main": "this is a test scenario 2",
+        "id": 2,
+        "opt1": {
+            "text": "this is a test option 1",
+            "consequences": [
+                {"flag": "supplies", "magnitude": -1},
+                {"flag": "testflag", "magnitude": 1}
+            ]
+        },
+        "opt2": {
+            "text": "this is a test option 2",
+            "consequences": [
+                {"flag": "money", "magnitude": -1},
+                {"flag": "supplies", "magnitude": 2}
+            ]
+        }
+    }
+]

@@ -1,5 +1,9 @@
+import data.EventsData;
+import data.PlayerData;
 import scenes.Level;
 import scenes.MapLevel;
+import scenes.DialogueLevel;
+import hxd.Res;
 
 class Main extends hxd.App {
 
@@ -7,8 +11,10 @@ class Main extends hxd.App {
 
     override function init() {
         hxd.Res.initEmbed();
+        var playerData = new PlayerData();
+        var eventsData = new EventsData();
 
-        curLevel = new MapLevel();
+        curLevel = new DialogueLevel(eventsData, playerData);
         curLevel.init();
     }
 
