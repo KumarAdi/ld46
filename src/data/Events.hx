@@ -5,7 +5,7 @@ import haxe.Json;
 
 typedef Option = {
     var text: String;
-    var consequences: Map<String, Int>;
+    var consequences: Dynamic;
 }
 
 typedef Event = {

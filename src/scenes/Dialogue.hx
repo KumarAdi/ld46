@@ -53,7 +53,6 @@ class Dialogue implements Level {
         opt2.textColor = 0xFFFFFF;
         opt2.y = 150;
         textbox.addChild(opt2);
-    
     }
 
     public function update(dt: Float): Null<Level> {
