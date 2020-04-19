@@ -23,15 +23,15 @@ class MapLevel implements Level {
         var townSize = new Point(townTile.width, townTile.height);
 
         var playableArea = new Bounds();
-        playableArea.setMin(new Point(0, 0).add(townSize.scale(0.5)));
-        playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.scale(0.5)));
+        playableArea.setMin(new Point(0, 0).add(townSize.clone().scale(0.5)));
+        playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)));
 
         scene.addChild(new Bitmap(Res.img.grass.toTile()));
 
-        mapData = new MapData(townSize.length() / 2, playableArea);
+        mapData = new MapData(townSize.length()/2, playableArea);
         for (town in mapData.towns) {
             var townSprite = new Bitmap(townTile);
-            townSprite.setPosition(town.x - townSize.x/2, town.y - townSize.y/2);
+            townSprite.setPosition(town.x - (townSize.clone().x/2), town.y - (townSize.clone().y/2));
             scene.addChild(townSprite);
         }
     }

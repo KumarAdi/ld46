@@ -24,6 +24,7 @@ class MapData {
                 false
             ]
         ];
+        trace(grid);
 
         var points = new Array<Point>();
         var spawnPoints = new Array<Point>();
@@ -43,7 +44,7 @@ class MapData {
             var foundCandidate = false;
 
             for (x in 0...50) {
-                var r = Math.random() * minDistance + minDistance;
+                var r = Math.random() * minDistance + (1.5 * minDistance);
                 var theta = Math.random() * 2 * Math.PI;
 
                 var candidate = new Point(
@@ -56,11 +57,15 @@ class MapData {
                 }
 
                 var gridPoint = screenToGrid(candidate, cellSize);
-                if (isValid(gridPoint, grid)) {
+                trace(gridPoint);
+                var result = isValid(gridPoint, grid);
+                trace(result);
+                if (result) {
                     foundCandidate = true;
                     points.push(candidate);
                     spawnPoints.push(candidate);
                     grid[Math.floor(gridPoint.x)][Math.floor(gridPoint.y)] = true;
+                    trace(grid);
                     break;
                 }
             }
@@ -81,22 +86,23 @@ class MapData {
     }
 
     private function isValid(gridPoint: Point, grid:Array<Array<Bool>>): Bool {
-        var xMin = Math.floor(Math.max(gridPoint.x - 2, 0));
-        var xMax = Math.ceil(Math.min(gridPoint.x + 2, grid.length - 1));
-        var yMin = Math.floor(Math.max(gridPoint.y - 2, 0));
-        var yMax = Math.ceil(Math.min(gridPoint.y + 2, grid[0].length - 1));
+        var xMin = Math.floor(Math.max(gridPoint.x - 1.5, 0));
+        var xMax = Math.ceil(Math.min(gridPoint.x + 1.5, grid.length - 1));
+        var yMin = Math.floor(Math.max(gridPoint.y - 1.5, 0));
+        var yMax = Math.ceil(Math.min(gridPoint.y + 1.5, grid[0].length - 1));
         for (x in xMin...(xMax + 1)) {
             for (y in yMin...(yMax + 1)) {
                 if (grid[x][y]) {
+                    trace(x);
+                    trace(y);
                     return false;
                 }
             }
         }
-
         return true;
     }
 
     private inline function screenToGrid(point: Point, cellSize: Float): Point {
-        return point.sub(dims.getMin()).scale(1/cellSize);
+        return (point.clone().sub(dims.getMin())).scale(1/cellSize);
     }
 }
