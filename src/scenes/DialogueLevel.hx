@@ -36,11 +36,12 @@ class DialogueLevel implements Level {
 
     public function init(): Void {
         // Init textbox
-        textbox = new Bitmap(Tile.fromColor(0x00AA00, 500, 300), scene);
-        textbox.x = 1920/2 - 250;
-        textbox.y = 1080/2 - 150;
+        textbox = new Bitmap(Tile.fromColor(0x00AA00, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
+        textbox.x = 1920/2 - textbox.getBounds().width/2;
+        textbox.y = 1080/2 - textbox.getBounds().height/2;
         // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
-        font = hxd.res.DefaultFont.get();
+        // font = hxd.res.DefaultFont.get();
+        font = Res.fonts.alagard.toFont();
 
         // Init first passage
         progressText("a");
@@ -66,11 +67,14 @@ class DialogueLevel implements Level {
             passage -> passage.id == nextid)[0];
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
+        passage.maxWidth = textbox.getBounds().width - 40;
         passage.textColor = 0xFFFFFF;
+        passage.x = 20;
+        passage.y = 20;
         textbox.addChild(passage);
 
         // Init next height for placement of options
-        var nextHeight = passage.textHeight + 50;
+        var nextHeight = passage.textHeight + 100;
 
         // Init options
         for (opt in passageData.options) {
@@ -91,12 +95,14 @@ class DialogueLevel implements Level {
             }
             var option = new h2d.Text(font);
             option.text = opt.text;
+            option.maxWidth = textbox.getBounds().width - 40;
             option.textColor = 0xFFFFFF;
+            option.x = 20;
             option.y = nextHeight;
             textbox.addChild(option);
 
             // set up option onclick listener
-            var optionListen = new h2d.Interactive(300, 100, option);
+            var optionListen = new h2d.Interactive(option.textWidth, option.textHeight, option);
             optionListen.onClick = function(event : hxd.Event) {
                 var flags = playerData.flags;
                 if (opt.consequences != null) {
