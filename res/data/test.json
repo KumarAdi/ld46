@@ -1,9 +1,9 @@
 [
     {
         "scenarioid": 1,
-        "passages": {
-            "a":
+        "passages": [
             {
+                "id": "a",
                 "text": "Hey look! A dragon pup!",
                 "options":
                 [
@@ -13,8 +13,8 @@
                     }
                 ]
             },
-            "b":
             {
+                "id": "b",
                 "text": "Oh no, it's afflicted with 'The Curse'\nWe're going to have to take you to the Grand Wizard Abracadabraham in The Misty Mountains!",
                 "options":
                 [
@@ -24,8 +24,8 @@
                     }
                 ]
             },
-            "c":
             {
+                "id": "c",
                 "text": "Looks like we're going to be traveling a while, what shall I name you?",
                 "options":
                 [
@@ -55,29 +55,29 @@
                     }
                 ]
             },
-            "d":
             {
+                "id": "d",
                 "text": "I'll call you... [Name] !",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             },
-            "e":
             {
+                "id": "e",
                 "text": "Well you are a dragon, and look really awesome… How about [The Drag Queen]!\nYeah! That sounds amazing, people are going to be terrified of you.",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             }
-        }
+        ]
     },
     {
         "scenarioid": 2,
-        "passages": {
-            "a":
+        "passages": [
             {
+                "id": "a",
                 "text": "You spot a broken down wagon with some people nearby. They look half starved, they've been stuck for a while.\nPlease take us to the nearest town and let us borrow some supplies, we have plenty of money!",
                 "options":
                 [
@@ -140,38 +140,38 @@
                     }
                 ]
             },
-            "b":
             {
+                "id": "b",
                 "text": "Thank you for the food, but it's no good without a way back home, here, take this I guess, +25g",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             },
-            "c":
             {
+                "id": "c",
                 "text": "Oh thank you so much, we'll reward you handsomely when we get to town!",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             },
-            "d":
             {
+                "id": "d",
                 "text": "It takes time to fix their wagon, but they look pleased with the result! Thank you, so much! Here take this, it's all we have, +200g, + a good luck charm",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             },
-            "e":
             {
+                "id": "e",
                 "text": "They cower in fear at the might of your dragon, they don't fight back and you leave them to die, +200g",
                 "options":
                 [
                     {"text": "continue >"}
                 ]
             }
-        }
+        ]
     }
 ]

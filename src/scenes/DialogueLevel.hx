@@ -17,10 +17,15 @@ class DialogueLevel implements Level {
     public var eventData: EventData;
     public var playerData: PlayerData;
     public var font: Font;
+    private var parent: Level;
+    private var done: Bool;
 
-    public function new(eventsData: EventsData, playerData: PlayerData) {
+    public function new(parent: Level, eventsData: EventsData, playerData: PlayerData) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
+
+        done = false;
+        this.parent = parent;
 
         var scenarioIdx = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
         eventData = eventsData.events[scenarioIdx];
@@ -42,6 +47,9 @@ class DialogueLevel implements Level {
     }
 
     public function update(dt: Float): Null<Level> {
+        if (done) {
+            return parent;
+        }
         return null;
     }
 
@@ -54,7 +62,8 @@ class DialogueLevel implements Level {
         optionListeners = new Array();
 
         // Init passage
-        var passageData:PassageData = eventData.passages.get(nextid);  // <-- issue here
+        var passageData:PassageData = eventData.passages.filter(
+            passage -> passage.id == nextid)[0];
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
         passage.textColor = 0xFFFFFF;
@@ -71,7 +80,7 @@ class DialogueLevel implements Level {
                 var flagsMet = true;
                 for (flagRequired in opt.requirements) {
                     // overload to avoid null error
-                    if (playerData.flags.exists(flagRequired.flag) && playerData.flags.get(flagRequired.flag) < flagRequired.magnitude) {
+                    if (!playerData.flags.exists(flagRequired.flag) || playerData.flags.get(flagRequired.flag) < flagRequired.magnitude) {
                         flagsMet = false;
                         break;
                     }
@@ -99,9 +108,13 @@ class DialogueLevel implements Level {
                         }
                     }
                 }
+                trace(opt.nextid);
                 if (opt.nextid != null) {
                     progressText(opt.nextid);
-                } //otherwise close dialogue and go back to map level
+                } else {
+                    //otherwise close dialogue and go back to map level
+                    done = true;
+                }
             }
             optionListeners.push(optionListen);
 

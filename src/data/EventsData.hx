@@ -6,6 +6,7 @@ import haxe.Json;
 typedef FlagData = {
     var flag: String;
     var magnitude: Int;
+    var probability: Int;
 }
 
 typedef OptionData = {
@@ -16,13 +17,14 @@ typedef OptionData = {
 }
 
 typedef PassageData = {
+    var id: String;
     var text: String;
     var options: Array<OptionData>;
 }
 
 typedef EventData = {
     var scenarioid: Int;
-    var passages: Map<String, PassageData>;
+    var passages: Array<PassageData>;
 }
 
 class EventsData {
