@@ -20,7 +20,7 @@ class DialogueLevel implements Level {
     private var parent: Level;
     private var done: Bool;
 
-    public function new(parent: Level, eventsData: EventsData, playerData: PlayerData) {
+    public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, ?scenario: Int) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
 
@@ -28,6 +28,9 @@ class DialogueLevel implements Level {
         this.parent = parent;
 
         var scenarioIdx = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
+        if (scenario != null) {
+            scenarioIdx = scenario;
+        }
         eventData = eventsData.events[scenarioIdx];
         eventsData.events.remove(eventData); // remove the encountered event from the list
 

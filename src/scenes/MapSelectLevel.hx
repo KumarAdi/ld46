@@ -39,6 +39,9 @@ class MapSelectLevel extends MapLevel {
                 }
             }
         }
+
+        // launch dialouge right when map opens up too
+        nextLevel = new DialogueLevel(this, eventData, playerData, 0);
     }
 
     override function init() {
