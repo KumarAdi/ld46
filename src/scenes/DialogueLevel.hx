@@ -1,5 +1,9 @@
 package scenes;
 
+import h2d.col.Voronoi.Cell;
+import hxd.Event;
+import h2d.Text;
+import data.MapData;
 import h2d.Interactive;
 import haxe.display.Display.Package;
 import h2d.Bitmap;
@@ -19,8 +23,13 @@ class DialogueLevel implements Level {
     public var font: Font;
     private var parent: Level;
     private var done: Bool;
+    private var mapData: MapData;
+    private var townTile: Tile;
+    private var nextLevel: Null<Level>;
+    private var curTown: Cell;
+    private var endTown: Cell;
 
-    public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, ?scenario: Int) {
+    public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, mapData: MapData, townTile: Tile, curTown: Cell, endTown: Cell, ?scenario: Int) {
         scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
 
@@ -35,19 +44,40 @@ class DialogueLevel implements Level {
         eventsData.events.remove(eventData); // remove the encountered event from the list
 
         this.playerData = playerData;
+
+        this.mapData = mapData;
+
+        this.townTile = townTile;
+
+        this.curTown = curTown;
+
+        this.endTown = endTown;
     }
 
     public function init(): Void {
-        // Init textbox
-
+        // Init Bg
         var bgTile = Res.img.village_bg.toTile();
         var bg = new Bitmap(bgTile, scene);
+        
+        // Init textbox
         textbox = new Bitmap(Tile.fromColor(0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
         textbox.x = 1920/2 - textbox.getBounds().width/2;
         textbox.y = 1080/2 - textbox.getBounds().height/2;
+        textbox.alpha = 1;
         // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
         // font = hxd.res.DefaultFont.get();
         font = Res.fonts.alagard.toFont();
+
+        // Init map view button
+        var x = new Text(Res.fonts.pixop.toFont(), scene);
+        x.text = "VIEW MAP";
+        x.scale(5);
+
+        var xBtn = new Interactive(x.textHeight, x.textHeight, x);
+
+        xBtn.onClick = function (e: Event) {
+            nextLevel = new MapLevel(this, scene, mapData, playerData, townTile, curTown, endTown);
+        }
 
         // Init first passage
         progressText("a");
@@ -57,7 +87,11 @@ class DialogueLevel implements Level {
         if (done) {
             return parent;
         }
-        return null;
+
+        // null out nextLevel so it's not set when we come back
+        var ret = nextLevel;
+        nextLevel = null;
+        return ret;
     }
 
     public function progressText(nextid: String): Void {
@@ -77,6 +111,7 @@ class DialogueLevel implements Level {
         passage.y = 20;
         passage.maxWidth = textbox.getBounds().width - 40;
         passage.textColor = 0xFFFFFF;
+        passage.alpha = 1;
         textbox.addChild(passage);
 
         // Init next height for placement of options
@@ -105,7 +140,7 @@ class DialogueLevel implements Level {
             option.textColor = 0xFFFFFF;
             option.x = 20;
             option.y = nextHeight;
-            option.maxWidth = textbox.tile.width;
+            option.alpha = 1;
             textbox.addChild(option);
 
             // set up option onclick listener

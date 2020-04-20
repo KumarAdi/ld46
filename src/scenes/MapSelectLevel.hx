@@ -45,7 +45,7 @@ class MapSelectLevel extends MapLevel {
                 if (cell.getNeighbors().indexOf(curTown.point) != -1) {
                     // launch dialog
                     curTown = cell;
-                    nextLevel = new DialogueLevel(this, eventData, playerData);
+                    nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                 }
             }
         }
