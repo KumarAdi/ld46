@@ -84,18 +84,19 @@ class MapSelectLevel extends MapLevel {
         // call update resource
         updateResources();
 
+        // check for game over
         if (playerData.checkProperty("supplies", 0, -1)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), new EventsData(Res.data.endings.entry.getText())
                 , playerData, mapData, townTile,
-                curTown, endTown, Res.img.intro.toTile(), 0);
+                curTown, endTown, Res.img.gameover.toTile(), 0);
         }
 
         if (playerData.checkProperty("curse", 100)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), new EventsData(Res.data.endings.entry.getText()),
                 playerData, mapData, townTile,
-                curTown, endTown, Res.img.intro.toTile(), 1);
+                curTown, endTown, Res.img.gameover.toTile(), 1);
         }
     }
 
