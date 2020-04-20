@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.Object;
 import h2d.filter.Outline;
 import h2d.col.Voronoi.Cell;
 import hxd.Event;
@@ -16,7 +17,7 @@ import h2d.Font;
 
 class DialogueLevel implements Level {
     public var scene: Scene;
-    public var textbox: Bitmap;
+    public var textbox: Object;
     public var optionListeners: Array<Interactive>;
     public var eventData: EventData;
     public var playerData: PlayerData;
@@ -57,13 +58,9 @@ class DialogueLevel implements Level {
     public function init(): Void {
         // Init Bg
         var bg = new Bitmap(bgTile, scene);
-        
-        // Init textbox
-        textbox = new Bitmap(Tile.fromColor(0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
-        textbox.x = 1920/2 - textbox.getBounds().width/2;
-        textbox.y = 1080/2 - textbox.getBounds().height/2;
-        // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
-        // font = hxd.res.DefaultFont.get();
+
+        textbox = new Object(scene);
+
         font = Res.fonts.alagard.toFont();
 
         // Init map view button
@@ -100,6 +97,16 @@ class DialogueLevel implements Level {
         // clear previous text
         textbox.removeChildren();
 
+        // Init textbox
+        var textBg = new Bitmap(Tile.fromColor(
+            0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)
+        ), textbox);
+        textBg.x = 1920/2 - textBg.tile.width/2;
+        textBg.y = 1080/2 - textBg.tile.height/2;
+        textBg.alpha = 0.5;
+
+        var outlineFilter = new Outline(1, 0x000000);
+
         // remove previous listeners
         optionListeners = new Array();
 
@@ -108,15 +115,16 @@ class DialogueLevel implements Level {
             passage -> passage.id == nextid)[0];
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
-        passage.x = 20;
-        passage.y = 20;
-        passage.maxWidth = textbox.getBounds().width - 40;
+        passage.filter = outlineFilter;
+        passage.x = textBg.x + 20;
+        passage.y = textBg.y + 20;
+        passage.maxWidth = textBg.tile.width - 40;
         passage.textColor = 0xFFFFFF;
         passage.alpha = 1;
         textbox.addChild(passage);
 
         // Init next height for placement of options
-        var nextHeight = passage.textHeight + 100;
+        var nextHeight = textBg.y + passage.textHeight + 100;
 
         // Init options
         for (opt in passageData.options) {
@@ -137,9 +145,10 @@ class DialogueLevel implements Level {
             }
             var option = new h2d.Text(font);
             option.text = opt.text;
-            option.maxWidth = textbox.getBounds().width - 40;
+            option.filter = outlineFilter;
+            option.maxWidth = textBg.tile.width - 40;
             option.textColor = 0xFFFFFF;
-            option.x = 20;
+            option.x = textBg.x + 20;
             option.y = nextHeight;
             option.alpha = 1;
             textbox.addChild(option);
