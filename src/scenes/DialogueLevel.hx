@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.filter.ColorMatrix;
 import h2d.Object;
 import h2d.filter.Outline;
 import h2d.col.Voronoi.Cell;
@@ -161,8 +162,8 @@ class DialogueLevel implements Level {
         for (opt in passageData.options) {
 
             // if requirements not met, dont display option
+            var flagsMet = true;
             if (opt.requirements != null) {
-                var flagsMet = true;
                 for (flagRequired in opt.requirements) {
                     // overload to avoid null error
                     if (!playerData.checkProperty(flagRequired.flag, flagRequired.magnitude, flagRequired.checkType)) {
@@ -170,9 +171,7 @@ class DialogueLevel implements Level {
                         break;
                     }
                 }
-                if (!flagsMet) {
-                    continue;
-                }
+                
             }
             var option = new h2d.Text(font);
             option.text = opt.text;
@@ -183,6 +182,14 @@ class DialogueLevel implements Level {
             option.y = nextHeight;
             option.alpha = 1;
             textbox.addChild(option);
+
+            // increment next height
+            nextHeight += option.textHeight + 50;
+
+            if (!flagsMet) {
+                option.filter = ColorMatrix.grayed();
+                continue;
+            }
 
             // set up option onclick listener
             var optionListen = new h2d.Interactive(option.textWidth, option.textHeight, option);
@@ -212,9 +219,6 @@ class DialogueLevel implements Level {
                 }
             }
             optionListeners.push(optionListen);
-
-            // increment next height
-            nextHeight += option.textHeight + 50;
         }
     }
 }

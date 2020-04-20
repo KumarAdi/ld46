@@ -47,4 +47,8 @@ class PlayerData {
         this.flags.set(flag, magnitude + this.flags.get(flag));
     }
 
+    public function getProperty(flag: String) {
+        return this.flags.get(flag);
+    }
+
 }

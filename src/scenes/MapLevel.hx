@@ -143,7 +143,6 @@ class MapLevel implements Level {
         curseBarTile.scaleToSize(480, 120);
         curseBar = new Bitmap(curseBarTile, uiBg);
         curseBar.x = 150;
-        trace(playerData.flags.get("curse"));
 
         curseBarFillTile = Tile.fromColor(0x3c2a59);
         curseBarFillTile.scaleToSize(40, 33);
@@ -227,25 +226,25 @@ class MapLevel implements Level {
         playerMarker.y = curTown.point.y - (townTile.height * 0.45);
 
         // update curse bar
-        curseBarFillTile.scaleToSize((40 * playerData.flags.get("curse")), 33);
+        curseBarFillTile.scaleToSize((40 * playerData.getProperty("curse")), 33);
         // update supplies
-        supplies.text = playerData.flags.get("supplies") + " days";
+        supplies.text = playerData.getProperty("supplies") + " days";
         // update money
-        gold.text = playerData.flags.get("money") + " g";
+        gold.text = playerData.getProperty("money") + " g";
         // update relics
-        if (playerData.flags.get("cop") >= 1) {
+        if (playerData.getProperty("cop") >= 1) {
             var crystalTile = Res.img.crystal.toTile();
             crystalTile.scaleToSize(120,120);
             crystalIcon = new Bitmap(crystalTile, uiBg);
             crystalIcon.x = curseBar.x + curseBar.getBounds().width + 100;
         }
-        if (playerData.flags.get("orb") >= 1) {
+        if (playerData.getProperty("orb") >= 1) {
             var orbTile = Res.img.orb.toTile();
             orbTile.scaleToSize(120,120);
             orbIcon = new Bitmap(orbTile, uiBg);
             orbIcon.x = crystalIcon.x + crystalIcon.getBounds().width + 50;
         }
-        if (playerData.flags.get("heartstone") >= 1) {
+        if (playerData.getProperty("heartstone") >= 1) {
             var stoneTile = Res.img.stone.toTile();
             stoneTile.scaleToSize(120,120);
             stoneIcon = new Bitmap(stoneTile, uiBg);
