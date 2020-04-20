@@ -39,12 +39,37 @@ class DialogueLevel implements Level {
         done = false;
         this.parent = parent;
 
-        var scenarioIdx = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
+        var scenarioIdx = Math.floor(Math.random() * eventsData.events.length);
         if (scenario != null) {
             scenarioIdx = scenario;
         }
 
         eventData = eventsData.events[scenarioIdx];
+
+        var satisfied = true;
+        if (eventData.scenarioreq == null) {
+            eventData.scenarioreq = [];
+        }
+        for (scenarioReq in eventData.scenarioreq) {
+            if (playerData.flags.get(scenarioReq.flag) < scenarioReq.magnitude) {
+                satisfied = false;
+                break;
+            }
+        }
+
+        while (!satisfied) {
+            var scenarioIdx = Math.floor(Math.random() * eventsData.events.length);
+            eventData = eventsData.events[scenarioIdx];
+
+            satisfied = true;
+            for (scenarioReq in eventData.scenarioreq) {
+                if (playerData.flags.get(scenarioReq.flag) < scenarioReq.magnitude) {
+                    satisfied = false;
+                    break;
+                }
+            }
+        }
+
         eventsData.events.remove(eventData); // remove the encountered event from the list
 
         this.playerData = playerData;
