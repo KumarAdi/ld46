@@ -26,13 +26,7 @@ class MapSelectLevel extends MapLevel {
         var townSize = new Point(townTile.width, townTile.height);
         var playableArea = new Bounds();
         playableArea.setMin(new Point(0, 0).add(townSize.clone().scale(0.5).add(new Point(25, 0))));
-        // playableArea.setMin(new Point(0, 0)
-        //                     .add(townSize.clone().scale(0.5))
-        //                     .add(new Point(0, 200)));
         playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)).sub(new Point(25, 150)));
-        // playableArea.setMax(new Point(scene.width, scene.height)
-        //                                 .sub(townSize.clone().scale(0.5)
-        //                                 .sub(new Point(0, 100))));
         mapData = new MapData(townSize.length()/2, playableArea);
 
         while (mapData.diagram.cells.length < 7) {
@@ -66,20 +60,17 @@ class MapSelectLevel extends MapLevel {
                         //Play the music and loop it
                         horseSfx.play(false);
                     }
+
                     // launch dialog
                     curTown = cell;
                     if (curTown == endTown) {
                         nextLevel = new CutsceneDialogueLevel(
                             new MainMenu(), new EventsData(Res.data.endings.entry.getText()),
                             playerData, mapData, townTile,
-                            curTown, endTown, Res.img.intro.toTile(), 2);
+                            curTown, endTown, Res.img.ending.toTile(), 2);
                     } else if (visited.indexOf(cell) == -1) {
                         nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                     }
-
-                    // update player stats
-                    playerData.incrementProperty("curse", Math.floor((Math.random() * 7) + 7));
-                    playerData.incrementProperty("supplies", -1);
                 }
             }
         }
@@ -93,8 +84,10 @@ class MapSelectLevel extends MapLevel {
             backBtn = null;
         }
 
-        if (playerData.checkProperty("supplies", 0, -1)) {
+        // call update resource
+        updateResources();
 
+        if (playerData.checkProperty("supplies", 0, -1)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), new EventsData(Res.data.endings.entry.getText())
                 , playerData, mapData, townTile,
@@ -107,5 +100,12 @@ class MapSelectLevel extends MapLevel {
                 playerData, mapData, townTile,
                 curTown, endTown, Res.img.intro.toTile(), 1);
         }
+    }
+
+    private function updateResources() {
+        // update player stats
+        playerData.incrementProperty("curse", 7);
+        //playerData.incrementProperty("curse", Math.floor((Math.random() * 7) + 7));
+        playerData.incrementProperty("supplies", -1);
     }
 }
