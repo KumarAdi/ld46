@@ -45,7 +45,7 @@
                         [
                             {
                                 "consequences":[{"flag": "name", "magnitude": 1}],
-                                "nextid": "d"
+                                "nextid": "e"
                             }
                         ]
                     },
@@ -98,6 +98,11 @@
                     
                     {
                         "text": "Offer supplies, and let them hitch a ride to town (-2S)",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "supplies", "magnitude": 3}
+                        ],
                         "outcomes":
                         [
                             {
@@ -200,6 +205,11 @@
                 [
                     {
                         "text": "Find another way around -1S",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "supplies", "magnitude": 2}
+                        ],
                         "outcomes":
                         [
                             {
@@ -347,10 +357,15 @@
 			},
 			{
                 "id": "j",
-                "text": "Alright that will be 800g worth of goods for a normal horse and wagon, \n but if you’d like we have a special breed of horse that can run twice as fast for 2,000g flat.",
+                "text": "Alright that will be 800g worth of goods for a normal horse and wagon, \n but if you’d like we have a special breed of horse that looks twice as cool for 2,000g flat.",
                 "options":
                 [
-                    {"text": "Pay 2,000g for the special horse >",
+                    {"text": "Pay 2,000g for the cool horse >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 2000}
+                        ],
 					"outcomes":
 					[
 						{
@@ -364,6 +379,11 @@
 					]
 					},
 					{"text": "Pay 800g for the normal horse >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 800}
+                        ],
 					"outcomes":
 					[
 						{
@@ -376,6 +396,12 @@
 					]
 					},
 					{"text": "Pay 400g and 4 supplies for the normal horse >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 400},
+							{"flag": "supplies", "magnitude": 5}
+                        ],
 					"outcomes":
 					[
 						{
@@ -389,6 +415,11 @@
 					]
 					},
 					{"text": "Pay 8 supplies >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "supplies", "magnitude": 9}
+                        ],
 					"outcomes":
 					[
 						{
@@ -490,6 +521,11 @@
                 "options":
                 [
                     {"text": "Warm Butter Scones (50g) >",
+					"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 50}
+                        ],
 					"outcomes":
 					[
 						{
@@ -503,6 +539,11 @@
 					]
 					},
 					{"text": "Plant Identification Guide (100g) >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 100}
+                        ],
 					"outcomes":
 					[
 						{
@@ -516,6 +557,11 @@
 					]
 					},
 					{"text": "Magic Detector (200g) >",
+					"showGray": 1,
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 200}
+                        ],
 					"outcomes":
 					[
 						{
@@ -531,14 +577,15 @@
 					{"text": "Is that a Crystal of Purity in your pack? (Seer's Vision)  >",
 					"requirements":
                         [
-                            {"flag": "servis", "magnitude": 1}
+                            {"flag": "servis", "magnitude": 1},
+							{"flag": "cop", "magnitude": 0, "checkType": 0}
+							
                         ],
 					"outcomes":
 					[
 						{
 							"consequences":
                                 [
-                                    {"flag": "money", "magnitude": -100},
                                     {"flag": "cop", "magnitude": 1},
 									{"flag": "servis", "magnitude": -1}
                                 ],
@@ -631,6 +678,11 @@
                 [
 					{
                         "text": "Pay the toll (-50g) >",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 50}
+                        ],
                         "outcomes":
                         [
                             {
@@ -918,7 +970,8 @@
                         "text": "There's something buried here... (Seer's Vision)",
                         "requirements":
                         [
-                            {"flag": "servis", "magnitude": 1}
+                            {"flag": "servis", "magnitude": 1},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
                         ],
                         "outcomes":
                         [
@@ -1255,6 +1308,11 @@
                     },
                     {
                         "text": "Wait for the fog to clear. -2 Supplies",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "supplies", "magnitude": 3}
+                        ],
                         "outcomes":
                         [
                             {
@@ -1319,6 +1377,11 @@
                     },
                     {
                         "text": "Wait for the fog to clear. -2 Supplies",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "supplies", "magnitude": 3}
+                        ],
                         "outcomes":
                         [
                             {
@@ -1415,8 +1478,8 @@
         "scenarioid": 9,
 		"scenarioreq": 
 		[
-			{"flag": "mary", "magnitude": 0},
-			{"flag": "james", "magnitude": 0}
+			{"flag": "mary", "magnitude": 0, "checkType": 0},
+			{"flag": "james", "magnitude": 0, "checkType": 0}
 		],
         "passages": 
 		[
@@ -1441,9 +1504,10 @@
                     },
                     {
                         "text": "Well it’s not like they’re gonna know if you just leave…",
+						"showGray": 1,
                         "requirements":
                         [
-                            {"flag": "margaret", "magnitude": 0}
+                            {"flag": "margaret", "magnitude": 0, "checkType": 0}
                         ],
                         "outcomes":
                         [
@@ -1536,8 +1600,7 @@
                 "text": "Say you wouldn’t happen to be going to The Misty Mountains would you? I’m an excellent prospector and historian if the situation ever arises, my name is \"James\"",
                 "options":
                 [
-					{"text": "Yes! Come along! >"
-					}
+					{"text": "Yes! Come along! >"}
                 ]
             },
 			{
@@ -1676,6 +1739,10 @@
     },
 	{
         "scenarioid": 11,
+		"scenarioreq": 
+			[
+				{"flag": "orb", "magnitude": 0, "checkType": 0}
+			],
         "passages": 
 		[
             {
@@ -1774,7 +1841,7 @@
                     }
                 ]
             },
-            {
+{
                 "id": "d",
                 "text": "You continue to dance freely, you can’t help but feel like you’re forgetting you need to do something.",
                 "options":
@@ -1824,7 +1891,8 @@
                             {
 								"consequences":
                                 [
-                                    {"flag": "curse", "magnitude": 5}
+                                    {"flag": "curse", "magnitude": 5},
+									{"flag": "orb", "magnitude": 1}
                                 ],
                                 "nextid": "f"
                             }
@@ -1916,7 +1984,7 @@
                     }
                 ]
             },
-            {
+{
                 "id": "k",
                 "text": "You continue to dance freely, you can’t help but feel like you’re forgetting you need to do something.",
                 "options":
@@ -1966,7 +2034,8 @@
                             {
 								"consequences":
                                 [
-                                    {"flag": "curse", "magnitude": 5}
+                                    {"flag": "curse", "magnitude": 5},
+									{"flag": "orb", "magnitude": 1}
                                 ],
                                 "nextid": "m"
                             }
@@ -2022,7 +2091,7 @@
 					{"text": "Thank god thats over with >"}
                 ]
             }
-        ]
+		]
 	},
 	{
         "scenarioid": 12,
@@ -2050,7 +2119,7 @@
                         "text": "Looks like an old dire bear den, shouldn’t be dangerous anymore. (James)",
 						"requirements":
                         [
-                            {"flag": "james", "magnitude": "1"}
+                            {"flag": "james", "magnitude": 1}
                         ],
                         "outcomes":
                         [
@@ -2068,16 +2137,21 @@
                         "outcomes":
                         [
                             {
-                                "nextid": "e"
+                                "nextid": "f"
                             }
                         ]
                     },
 					{
                         "text": "There’s something magic in there… (Seer’s Vision)",
+						"requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
+                        ],
                         "outcomes":
                         [
                             {
-                                "nextid": "f"
+                                "nextid": "g"
                             }
                         ]
                     }
@@ -2095,7 +2169,8 @@
                         "text": "Beeeeeeep (Magic Detector)",
 						"requirements":
                         [
-                            {"flag": "magicdetector", "magnitude": 1}
+                            {"flag": "magicdetector", "magnitude": 1},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
                         ],
                         "outcomes":
                         [
@@ -2112,10 +2187,10 @@
             },
 			{
                 "id": "c",
-                "text": "Hey, the magic detector is going off. It seems to be pointing directly at an off color rock. You take it with you and realize you found a Heart Stone!",
+                "text": "Hey, the magic detector is going off. It seems to be pointing directly at an off color rock. You take the rock with you and realize you found a Heart Stone!",
                 "options":
                 [
-					{"text": "Heart stone, down!"}
+					{"text": "Heartstone, down!"}
                 ]
             },
 			{
@@ -2142,7 +2217,8 @@
 					{"text": "Beeeeeeep (Magic Detector)",
 						"requirements":
                         [
-                            {"flag": "magicdetector", "magnitude": 1}
+                            {"flag": "magicdetector", "magnitude": 1},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
                         ],
                         "outcomes":
                         [
@@ -2229,42 +2305,44 @@
                 "text": "Wait why am I listening to their choices?",
                 "options":
                 [
-					{
-                        "text": "Make a break for it >",
-                        "outcomes":
-                            [
-                                {
-                                    "consequences":
-                                    [
-                                        {"flag": "supplies", "magnitude": -2}
-                                    ],
-                                    "nextid": "c"
-                                }
-                            ]
-                    },
+                    {"text": "Make a break for it",  
+					"outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
+					},
 					{
                         "text": "Fight them off >",
-                        "requirements":
-                            [
-                                {"flag": "money", "magnitude": 250}
-                            ],
-                        "outcomes":
-                            [
-                                {
-                                    "consequences":
-                                    [
-                                        {"flag": "supplies", "magnitude": -2},
-                                        {"flag": "money", "magnitude": -250}
-                                    ],
-                                    "nextid": "d"
-                                }
-                            ]
-                    },
+                    
+					"requirements":
+                        [
+                            {"flag": "money", "magnitude": 250},
+							{"flag": "supplies", "magnitude": 3}
+							
+                        ],
+					"outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2},
+									{"flag": "money", "magnitude": -250}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+						},
 					{
                         "text": "Don't worry, I'll handle this (Geiger)>",
 						"requirements":
                         [
-                            {"flag": "geiger", "magnitude": "1"}
+                            {"flag": "geiger", "magnitude": 1}
                         ],
 						"outcomes":
                         [
@@ -2278,7 +2356,13 @@
                         ]
                     },
                     {
-                        "text": "On second thought, yeah my money is fine (-200g)",
+                        "text": "On second thought, yeah take my money (-200g)",
+						"showGray": 1,
+						"consequences":
+                                [
+									{"flag": "money", "magnitude": 200}
+                                ],
+						
                         "outcomes":
                         [
                             {
@@ -2290,6 +2374,7 @@
                             }
                         ]
                     }
+					
                 ]
             },
 			{
@@ -2331,7 +2416,7 @@
         "passages": [
             {
                 "id": "a",
-                "text": "You arrive at a town that you thought was supposed to be bustling with life. Instead you find a ghost town that looks like it’s been abandoned for a few year. The place is giving you the creeps.",
+                "text": "You arrive at a town that you thought was supposed to be bustling with life. Instead you find a ghost town that looks like it’s been abandoned for a few year. The place is giving you the heebiejeebies.",
                 "options":
                 [
                     {
@@ -2377,7 +2462,8 @@
                         "text": "There's something here...",
                         "requirements":
                         [
-                            {"flag": "servis", "magnitude": 1}
+                            {"flag": "servis", "magnitude": 1},
+							{"flag": "orb", "magnitude": 0, "checkType": 0}
                         ],
                         "outcomes":
                         [
