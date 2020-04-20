@@ -113,6 +113,11 @@ class MapLevel implements Level {
             nextLevel = parent;
         }
 
+        // Init ui bg
+        var bottomBlurTile = Res.img.blur.toTile();
+        bottomBlurTile.scaleToSize(1920, 150);
+        var bottomBlur = new Bitmap(bottomBlurTile, uiBg);
+
         // Init curse bar
         var curseBarTile = Res.img.bar.toTile();
         curseBarTile.scaleToSize(480, 120);
