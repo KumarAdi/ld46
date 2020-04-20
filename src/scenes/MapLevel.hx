@@ -1,5 +1,7 @@
 package scenes;
 
+import h2d.Slider;
+import h2d.col.Voronoi.Diagram;
 import h2d.filter.ColorMatrix;
 import h2d.filter.Outline;
 import h2d.Tile;
@@ -29,6 +31,16 @@ class MapLevel implements Level {
     private var curTown: Cell;
     private var endTown: Cell;
     private var roads: Object;
+    private var curse: Text;
+    private var curseBar: Bitmap;
+    private var curseBarFillTile: Tile;
+    private var curseIcon: Bitmap;
+    private var supplies: Text;
+    private var gold: Text;
+    private var crystalIcon: Bitmap;
+    private var orbIcon: Bitmap;
+    private var stoneIcon: Bitmap;
+    private var uiBg: Object;
     private var endBtn: Interactive;
     private var x: Text; // the button to close the map view
     private final visited = new Array<Cell>();
@@ -56,7 +68,8 @@ class MapLevel implements Level {
         var townLayer = new Object(scene);
 
         var highlighter = new Graphics(roads);
-        highlighter.lineStyle(5, 0xFFFFFF);
+        highlighter.lineStyle(8, 0xFFFFFF);
+
 
         var outline = new Outline(2, 0xFFFFFF);
         for (cell in mapData.diagram.cells) {
@@ -79,7 +92,7 @@ class MapLevel implements Level {
             interactiveTile.onOut = function (e: Event) {
                 highlighter.clear();
                 highlighter = new Graphics(roads);
-                highlighter.lineStyle(10, 0xFFFFFF);
+                highlighter.lineStyle(8, 0xFFFFFF);
                 if (visited.indexOf(cell) == -1) {
                     townSprite.filter = null;
                 }
@@ -101,27 +114,99 @@ class MapLevel implements Level {
         caravanTile.scaleToSize(townSize.x * 0.9, townSize.y * 0.9);
         playerMarker = new Bitmap(caravanTile, scene);
 
-        x = new Text(Res.fonts.pixop.toFont(), scene);
-        x.text = "X";
-        x.scale(3);
-        x.x = 1920 - 3 * x.textWidth - 50;
-        x.y = 25;
-        x.filter = new Outline(1, 0x000000);
+        // UI STUFF
 
+        // Init font
+        var uiFont = Res.fonts.centurygothic.toFont();
+        
+        // var uiBgTile = Tile.fromColor(0, 1920, 200);
+        // var uiBg = new Bitmap(uiBgTile, scene);
+        uiBg = new Object();
+        uiBg.y = scene.height - 150;
+        scene.addChild(uiBg);
+
+        // Init back button
+        x = new Text(uiFont, scene);
+        x.text = "Back to Dialogue";
         var xBtn = new Interactive(x.textHeight, x.textHeight, x);
-
         xBtn.onClick = function (e: Event) {
             nextLevel = parent;
         }
+
+        // Init ui bg
+        var bottomBlurTile = Res.img.blur.toTile();
+        bottomBlurTile.scaleToSize(1920, 150);
+        var bottomBlur = new Bitmap(bottomBlurTile, uiBg);
+
+        // Init curse bar
+        var curseBarTile = Res.img.bar.toTile();
+        curseBarTile.scaleToSize(480, 120);
+        curseBar = new Bitmap(curseBarTile, uiBg);
+        curseBar.x = 150;
+        trace(playerData.flags.get("curse"));
+
+        curseBarFillTile = Tile.fromColor(0x3c2a59);
+        curseBarFillTile.scaleToSize(40, 33);
+        var curseBarFill = new Bitmap(curseBarFillTile, curseBar);
+        curseBarFill.x = 46;
+        curseBarFill.y = 43;
+        var curseIconTile = Res.img.curse.toTile();
+        curseIconTile.scaleToSize(120, 120);
+        curseIcon = new Bitmap(curseIconTile, curseBar);
+        curseIcon.x = 360;
+
+        // Init curse text
+        curse = new Text(uiFont, curseBar);
+        curse.text = "The Curse";
+        curse.x = (curseBar.getBounds().width / 2) - (curse.textWidth / 2) - 5;
+        curse.y = curseBar.getBounds().height - 24;
+
+        // Init relics
+        var crystalMissingTile = Res.img.crystalmissing.toTile();
+        crystalMissingTile.scaleToSize(120,120);
+        crystalIcon = new Bitmap(crystalMissingTile, uiBg);
+        crystalIcon.x = curseBar.x + curseBar.getBounds().width + 100;
+
+        var orbMissingTile = Res.img.orbmissing.toTile();
+        orbMissingTile.scaleToSize(120,120);
+        orbIcon = new Bitmap(orbMissingTile, uiBg);
+        orbIcon.x = crystalIcon.x + crystalIcon.getBounds().width + 50;
+
+        var stoneMissingTile = Res.img.stonemissing.toTile();
+        stoneMissingTile.scaleToSize(120,120);
+        stoneIcon = new Bitmap(stoneMissingTile, uiBg);
+        stoneIcon.x = orbIcon.x + orbIcon.getBounds().width + 50;
+
+        // Init relics text
+        var relics = new Text(uiFont, uiBg);
+        relics.text = "The Relics";
+        relics.x = orbIcon.x + (orbIcon.getBounds().width / 2) - (relics.textWidth / 2) - 5;
+        relics.y = orbIcon.getBounds().height - 24;
+        
+        // Init supplies text
+        var suppliesTitle = new Text(uiFont, uiBg);
+        suppliesTitle.text = "Supplies";
+        supplies = new Text(Res.fonts.alagard.toFont(), suppliesTitle);
+        supplies.x = 50;
+        supplies.y = 40;
+        suppliesTitle.x = scene.width - 350;       
+        suppliesTitle.y = 30; 
+
+        // Init money text
+        var goldTitle = new Text(uiFont, uiBg);
+        goldTitle.text = "Satchel";
+        gold = new Text(Res.fonts.alagard.toFont(), goldTitle);
+        gold.x = 50;
+        gold.y = 40;
+        goldTitle.x = suppliesTitle.x - 250;
+        goldTitle.y = 30;
     }
 
     public function init() {
         var roadLines = new Graphics(roads);
-        roadLines.lineStyle(10);
-
+        roadLines.lineStyle(16, 0x8f6c3b);
         visited.push(curTown);
 
-        trace(visited);
         for (town => cell in towns) {
             if (visited.indexOf(cell) != -1) {
                 town.parent.filter = ColorMatrix.grayed();
@@ -140,6 +225,32 @@ class MapLevel implements Level {
     public function update(dt: Float): Null<Level> {
         playerMarker.x = curTown.point.x - (townTile.width * 0.45);
         playerMarker.y = curTown.point.y - (townTile.height * 0.45);
+
+        // update curse bar
+        curseBarFillTile.scaleToSize((40 * playerData.flags.get("curse")), 33);
+        // update supplies
+        supplies.text = playerData.flags.get("supplies") + " days";
+        // update money
+        gold.text = playerData.flags.get("money") + " g";
+        // update relics
+        if (playerData.flags.get("cop") >= 1) {
+            var crystalTile = Res.img.crystal.toTile();
+            crystalTile.scaleToSize(120,120);
+            crystalIcon = new Bitmap(crystalTile, uiBg);
+            crystalIcon.x = curseBar.x + curseBar.getBounds().width + 100;
+        }
+        if (playerData.flags.get("orb") >= 1) {
+            var orbTile = Res.img.orb.toTile();
+            orbTile.scaleToSize(120,120);
+            orbIcon = new Bitmap(orbTile, uiBg);
+            orbIcon.x = crystalIcon.x + crystalIcon.getBounds().width + 50;
+        }
+        if (playerData.flags.get("heartstone") >= 1) {
+            var stoneTile = Res.img.stone.toTile();
+            stoneTile.scaleToSize(120,120);
+            stoneIcon = new Bitmap(stoneTile, uiBg);
+            stoneIcon.x = orbIcon.x + orbIcon.getBounds().width + 50;
+        }
 
         // null out nextLevel so it's not set when we come back
         var ret = nextLevel;
