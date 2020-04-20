@@ -592,6 +592,14 @@
 							"nextid": "f"
 						}
 					]
+					},
+					{"text": "Thank you, but... >",
+					"outcomes":
+					[
+						{
+							"nextid": "h"
+						}
+					]
 					}
                 ]
             },
@@ -605,6 +613,11 @@
                         "outcomes":
                         [
                             {
+								"consequences":
+                                [
+                                    {"flag": "money", "magnitude": 50},
+									{"flag": "supplies", "magnitude": 1}
+                                ],
                                 "nextid": "g"
                             }
                         ]
@@ -648,6 +661,16 @@
                 "options":
                 [
                     {"text": "Goodbye travelling merchant! >"}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "Oh of course! I get it the prices are a bit high, here, take this as thanks for the good company. (+50g, +1 supplies)",
+                "options":
+                [
+					{
+                        "text": "Thank you!"
+                    }
                 ]
             }
         ]
@@ -2432,7 +2455,11 @@
                     },
                     {
                         "text": "Let me have a look at it (Margaret)",
-                        "outcomes":
+						"requirements":
+                        [
+                            {"flag": "margaret", "magnitude": 1}
+                        ],
+                        "outcomes":	
                         [
                             {
 								"consequences":
@@ -2455,6 +2482,179 @@
                     }
                 ]
             }
+		]
+	},
+	{
+        "scenarioid": 15,
+		"scenarioreq":
+		[
+			{"flag": "geiger", "magnitude": 0, "checkType": 0}
+		],
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "You stumble upon a mercenary encampment, they look tough, best not get into any sort of tussle.",
+                "options":
+                [
+					{
+                        "text": "Hire Mercenary (-200g)",
+						"showGray": 1,
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 200}
+                        ],
+                        "outcomes":	
+                        [
+                            {
+								"consequences":
+                                [
+									{"flag": "money", "magnitude": -200},
+									{"flag": "geiger", "magnitude": 1}
+                                ],
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+					{
+						"text": "These guys aren’t good people, we should get out of here fast (Mary)",
+						"requirements":
+                        [
+                            {"flag": "mary", "magnitude": "1"}
+                        ],
+                        "outcomes":	
+                        [
+                            {
+                                "nextid": "c"
+                            }
+                        ]
+					},
+					{
+						"text": "Leave",
+						 "outcomes":	
+                        [
+                            {
+                                "nextid": "d"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "b",
+                "text": "You guys have good coin then? I’ll join you, I’m the best there is. Name’s Geiger. Pleasure to make your acquaintance.",
+                "options":
+                [
+					{
+                        "text": "Pleased."
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "You bolt extremely quickly away, they didn’t seem to put up too much of a chase, but they did seem a bit ticked that you left. Thank goodness you got out of there",
+                "options":
+                [
+					{
+                        "text": "phew"
+                    }
+                ]
+            },
+			{
+                "id": "d",
+                "text": "You start to leave but you aren’t quite fast enough. A large mercenary stands in your way.",
+                "options":
+                [
+					{
+                        "text": "oh boy.",
+						"outcomes":	
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Hold on now, don’t think you can just go window shoppin’ anywhere n' get away with it. \n Buy the product or not, we're gonna need some coin for our time. \n\n This is obviously robbery, but what else can you do?",
+                "options":
+                [
+					{
+                        "text": "Window shopping?! That was a test, You're hired (-250g)",
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 250}
+                        ],
+						"outcomes":	
+                        [
+                            {
+								"consequences":
+                                [
+									{"flag": "money", "magnitude": -250},
+									{"flag": "geiger", "magnitude": 1}
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+                    },
+					{
+                        "text": "A few pennies for your troubles then (-50g)",
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 50}
+                        ],
+						"outcomes":	
+                        [
+                            {
+								"consequences":
+                                [
+									{"flag": "money", "magnitude": -50}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    },
+					{
+                        "text": "I have no money, please don't hurt me take my food instead (-1 Supplies)",
+						"requirements":
+                        [
+                            {"flag": "money", "magnitude": 49, "checkType": -1}
+                        ],
+						"outcomes":	
+                        [
+                            {
+								"consequences":
+                                [
+									{"flag": "supply", "magnitude": -1}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "f",
+                "text": "Perfect, trust me I’m well worth the price. Name’s Geiger. Pleasure to make your acquaintance.",
+                "options":
+                [
+					{
+                        "text": "(Nervous) Pleased."
+                    }
+                ]
+            },
+			{
+                "id": "g",
+                "text": "Alright then ‘ave a good day! The giant mercenary smiles, but you know you won’t \"‘ave a good day.\" defiantly so.",
+                "options":
+                [
+					{
+                        "text": "Hmph"
+                    }
+                ]
+            }			
 		]
 	},
     {
