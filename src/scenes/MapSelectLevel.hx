@@ -68,6 +68,7 @@ class MapSelectLevel extends MapLevel {
                         //Play the music and loop it
                         horseSfx.play(false);
                     }
+
                     // launch dialog
                     curTown = cell;
                     if (curTown == endTown) {
@@ -78,10 +79,6 @@ class MapSelectLevel extends MapLevel {
                     } else if (visited.indexOf(cell) == -1) {
                         nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                     }
-
-                    // update player stats
-                    playerData.incrementProperty("curse", Math.floor((Math.random() * 7) + 7));
-                    playerData.incrementProperty("supplies", -1);
                 }
             }
         }
@@ -90,8 +87,10 @@ class MapSelectLevel extends MapLevel {
     override function init() {
         super.init();
 
-        if (playerData.checkProperty("supplies", 0, -1)) {
+        // call update resource
+        updateResources();
 
+        if (playerData.checkProperty("supplies", 0, -1)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), new EventsData(Res.data.endings.entry.getText())
                 , playerData, mapData, townTile,
@@ -104,5 +103,12 @@ class MapSelectLevel extends MapLevel {
                 playerData, mapData, townTile,
                 curTown, endTown, Res.img.intro.toTile(), 1);
         }
+    }
+
+    private function updateResources() {
+        // update player stats
+        playerData.incrementProperty("curse", 7);
+        //playerData.incrementProperty("curse", Math.floor((Math.random() * 7) + 7));
+        playerData.incrementProperty("supplies", -1);
     }
 }
