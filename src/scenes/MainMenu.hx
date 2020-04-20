@@ -18,6 +18,9 @@ class MainMenu implements Level {
     var time = 0.;
     var stime = 0.;
 
+    // init bgm
+    private static var bgm:Sound;
+
     public function new() {
         this.scene = new Scene();
         scene.scaleMode = LetterBox(1920, 1080);
@@ -42,8 +45,10 @@ class MainMenu implements Level {
             startLevel = true;
         }
         
-        // init bgm
-        var bgm:Sound = null;
+        if (bgm != null) {
+            bgm.stop();
+        }
+
         //If we support mp3 we have our sound
         if(hxd.res.Sound.supportedFormat(Mp3)){
             bgm = hxd.Res.sound.adventure;
