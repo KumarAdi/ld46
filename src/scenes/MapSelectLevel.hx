@@ -59,7 +59,13 @@ class MapSelectLevel extends MapLevel {
                     }
                     // launch dialog
                     curTown = cell;
-                    nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
+                    if (curTown == endTown) {
+                        nextLevel = new CutsceneDialogueLevel(
+                            new MainMenu(), eventData, playerData, mapData, townTile,
+                            curTown, endTown, Res.img.intro.toTile());
+                    } else if (visited.indexOf(cell) == -1) {
+                        nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
+                    }
                 }
             }
         }
@@ -67,5 +73,17 @@ class MapSelectLevel extends MapLevel {
 
     override function init() {
         super.init();
+
+        if (playerData.flags.get("supplies") <= 0) {
+            nextLevel = new CutsceneDialogueLevel(
+                new MainMenu(), eventData, playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile());
+        }
+
+        if (playerData.flags.get("curse") >= 100) {
+            nextLevel = new CutsceneDialogueLevel(
+                new MainMenu(), eventData, playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile());
+        }
     }
 }

@@ -1,10 +1,9 @@
 package scenes;
 
+import h2d.filter.ColorMatrix;
 import h2d.filter.Outline;
-import h2d.col.Voronoi.Diagram;
 import h2d.Tile;
 import h2d.col.Voronoi.Cell;
-import hxd.res.DefaultFont;
 import h2d.Text;
 import data.PlayerData;
 import h2d.Object;
@@ -15,7 +14,6 @@ import hxd.Res;
 import h2d.col.Point;
 import h2d.Bitmap;
 import h2d.Scene;
-import h2d.col.Bounds;
 import data.MapData;
 
 class MapLevel implements Level {
@@ -33,6 +31,7 @@ class MapLevel implements Level {
     private var roads: Object;
     private var endBtn: Interactive;
     private var x: Text; // the button to close the map view
+    private final visited = new Array<Cell>();
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
@@ -59,6 +58,7 @@ class MapLevel implements Level {
         var highlighter = new Graphics(roads);
         highlighter.lineStyle(5, 0xFFFFFF);
 
+        var outline = new Outline(2, 0xFFFFFF);
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
             var townSprite = new Bitmap(townTile, townLayer);
@@ -71,12 +71,18 @@ class MapLevel implements Level {
                     highlighter.moveTo(town.x, town.y);
                     highlighter.lineTo(neighbor.x, neighbor.y);
                 }
+                if (visited.indexOf(cell) == -1) {
+                    townSprite.filter = outline;
+                }
             }
 
             interactiveTile.onOut = function (e: Event) {
                 highlighter.clear();
                 highlighter = new Graphics(roads);
                 highlighter.lineStyle(10, 0xFFFFFF);
+                if (visited.indexOf(cell) == -1) {
+                    townSprite.filter = null;
+                }
             }
 
             towns.set(interactiveTile, cell);
@@ -112,6 +118,15 @@ class MapLevel implements Level {
     public function init() {
         var roadLines = new Graphics(roads);
         roadLines.lineStyle(10);
+
+        visited.push(curTown);
+
+        trace(visited);
+        for (town => cell in towns) {
+            if (visited.indexOf(cell) != -1) {
+                town.parent.filter = ColorMatrix.grayed();
+            }
+        }
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
