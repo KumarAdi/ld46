@@ -44,13 +44,9 @@ class DialogueLevel implements Level {
         eventsData.events.remove(eventData); // remove the encountered event from the list
 
         this.playerData = playerData;
-
         this.mapData = mapData;
-
         this.townTile = townTile;
-
         this.curTown = curTown;
-
         this.endTown = endTown;
     }
 
@@ -69,13 +65,13 @@ class DialogueLevel implements Level {
         font = Res.fonts.alagard.toFont();
 
         // Init map view button
-        var x = new Text(Res.fonts.pixop.toFont(), scene);
-        x.text = "VIEW MAP";
-        x.scale(5);
+        var viewMap = new Text(Res.fonts.pixop.toFont(), scene);
+        viewMap.text = "VIEW MAP";
+        viewMap.scale(5);
 
-        var xBtn = new Interactive(x.textHeight, x.textHeight, x);
+        var viewMapBtn = new Interactive(viewMap.textWidth, viewMap.textHeight, viewMap);
 
-        xBtn.onClick = function (e: Event) {
+        viewMapBtn.onClick = function (e: Event) {
             nextLevel = new MapLevel(this, scene, mapData, playerData, townTile, curTown, endTown);
         }
 
