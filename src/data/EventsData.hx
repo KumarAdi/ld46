@@ -19,6 +19,7 @@ typedef OptionData = {
     var text: String;
     var requirements: Array<FlagData>;
     var outcomes: Array<OutcomeData>;
+    var showGray: Int;
 }
 
 typedef PassageData = {
