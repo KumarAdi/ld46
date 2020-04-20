@@ -118,9 +118,6 @@ class MapLevel implements Level {
 
         // Init font
         var uiFont = Res.fonts.centurygothic.toFont();
-        
-        // var uiBgTile = Tile.fromColor(0, 1920, 200);
-        // var uiBg = new Bitmap(uiBgTile, scene);
         uiBg = new Object();
         uiBg.y = scene.height - 150;
         scene.addChild(uiBg);

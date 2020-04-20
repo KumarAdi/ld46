@@ -25,7 +25,11 @@ class FirstLevel extends MapSelectLevel {
             {text: "This is your caravan", loc: curTown.point},
             {text: "The brown lines are roads", loc: curTown.point},
             {text: "You can travel to neighboring towns by clicking on them", loc: curTown.getNeighbors()[0]},
-            {text: "The Great Wizard lives in this town!", loc: endTown.point}
+            {text: "The Great Wizard lives in this town!", loc: endTown.point},
+            {text: "This is how many supplies you have. Traveling from town to town takes up 1 unit of supplies.", loc: new Point((scene.width -350), uiBg.y + 50)},
+            {text: "This is the amount of gold contained in your satchel. Use this to trade with other townsfolk.", loc: new Point((scene.width - 600), uiBg.y + 50)},
+            {text: "These are The Relics. When you accquire one, it will show up here.", loc: new Point(orbIcon.x - 40, uiBg.y + 50)},
+            {text: "This bar shows the power of the curse. Find The Relics and bring your dragon to The Great Wizard before it's too late!", loc: new Point(curseBar.x + 100, uiBg.y + 80)}
         ];
 
         // init tutorial box
@@ -33,10 +37,10 @@ class FirstLevel extends MapSelectLevel {
         var tutorialTile = Tile.fromColor(0x000000);
         tutorialTile.scaleToSize(380, 300);
         var tutorialBg = new Bitmap(tutorialTile, tutorialParent);
-        tutorialBg.alpha = 0.7;
+        tutorialBg.alpha = 0.8;
         var tutorialBox = new Interactive(tutorialBg.getBounds().width, tutorialBg.getBounds().height, tutorialParent);
         var tutorialText = new Text(Res.fonts.centurygothic.toFont(), tutorialParent);
-        tutorialText.maxWidth = tutorialBg.getBounds().width - 12;
+        tutorialText.maxWidth = tutorialBg.getBounds().width - 26;
         tutorialText.x = 13;
         tutorialText.y = 9;
 
@@ -66,7 +70,7 @@ class FirstLevel extends MapSelectLevel {
         tutorialTile.scaleToSize(380, tutorialText.textHeight + 20);
         tutorialBox.width = tutorialBg.getBounds().width;
         tutorialBox.height = tutorialBg.getBounds().height;
-        tutorialParent.x = Math.min(scene.width - tutorialText.maxWidth - 20, tutorial.loc.x - (townTile.width / 2));
+        tutorialParent.x = Math.min(scene.width - tutorialText.maxWidth - 40, tutorial.loc.x - (townTile.width / 2));
         tutorialParent.y = Math.max(20, tutorial.loc.y - (townTile.height / 2 + tutorialText.textHeight));
     }
 }
