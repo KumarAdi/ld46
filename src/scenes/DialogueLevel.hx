@@ -39,7 +39,7 @@ class DialogueLevel implements Level {
 
         var bgTile = Res.img.village_bg.toTile();
         var bg = new Bitmap(bgTile, scene);
-        textbox = new Bitmap(Tile.fromColor(0x00AA00, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
+        textbox = new Bitmap(Tile.fromColor(0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
         textbox.x = 1920/2 - textbox.getBounds().width/2;
         textbox.y = 1080/2 - textbox.getBounds().height/2;
         // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
@@ -70,6 +70,8 @@ class DialogueLevel implements Level {
             passage -> passage.id == nextid)[0];
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
+        passage.x = 20;
+        passage.y = 20;
         passage.maxWidth = textbox.getBounds().width - 40;
         passage.textColor = 0xFFFFFF;
         textbox.addChild(passage);
@@ -106,23 +108,31 @@ class DialogueLevel implements Level {
             // set up option onclick listener
             var optionListen = new h2d.Interactive(option.textWidth, option.textHeight, option);
             optionListen.onClick = function(event : hxd.Event) {
-                var flags = playerData.flags;
-                if (opt.consequences != null) {
-                    for (consequence in opt.consequences) {
-                        if (consequence.probability != null && Math.random() > consequence.probability) {
-                            break;
-                        }
-                        if (flags.exists(consequence.flag)) {
-                            flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
-                        } else {
-                            flags.set(consequence.flag, consequence.magnitude);
+                if (opt.outcomes != null) {
+
+                    var outcome= opt.outcomes[0];
+                    if (opt.outcomes.length > 1) { // there are multiple outcomes with different probs
+                        for (currentOutcome in opt.outcomes) {
+                            if ((Math.random() * 100) > currentOutcome.probability) {
+                                outcome = currentOutcome;
+                                break;
+                            }
                         }
                     }
-                }
-                trace(opt.nextid);
-                if (opt.nextid != null) {
-                    progressText(opt.nextid);
-                } else {
+
+                    if (outcome.consequences != null) {
+                        for (consequence in outcome.consequences) {
+                            var flags = playerData.flags;
+                            if (flags.exists(consequence.flag)) {
+                                flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
+                            } else {
+                                flags.set(consequence.flag, consequence.magnitude);
+                            }
+                        }
+                    }
+                    trace(outcome.nextid);
+                    progressText(outcome.nextid);
+                } else { // outcome is null
                     //otherwise close dialogue and go back to map level
                     done = true;
                 }

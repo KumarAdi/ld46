@@ -9,7 +9,7 @@
                 [
                     {
                         "text": "continue >",
-                        "nextid": "b"
+                        "outcomes":[{"nextid": "b"}]
                     }
                 ]
             },
@@ -20,7 +20,7 @@
                 [
                     {
                         "text": "continue >",
-                        "nextid": "c"
+                        "outcomes":[{"nextid": "c"}]
                     }
                 ]
             },
@@ -31,27 +31,33 @@
                 [
                     {
                         "text": "1. (Pick one male name: Daniel, Sherman, Peter, Dale, Freddy, Norman, Samuel, Wally)",
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "name", "magnitude": 0}
-                        ],
-                        "nextid": "d"
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 0}],
+                                "nextid": "d"
+                            }
+                        ]
                     },
                     {
                         "text": "2. (Pick one female name: Mackenzie, Madeline, Megan, Macy, Marie, Mia, Melissa)",
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "name", "magnitude": 1}
-                        ],
-                        "nextid": "d"
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 1}],
+                                "nextid": "d"
+                            }
+                        ]
                     },
                     {
                         "text": "3. Something cool and badass!",
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "name", "magnitude": 2}
-                        ],
-                        "nextid": "e"
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 2}],
+                                "nextid": "e"
+                            }
+                        ]
                     }
                 ]
             },
@@ -83,21 +89,31 @@
                 [
                     {
                         "text": "Offer some supplies (-2S)",
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "supplies", "magnitude": -2},
-                            {"flag": "money", "magnitude": 25}
-                        ],
-                        "nextid": "b"
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2},
+                                    {"flag": "money", "magnitude": 25}
+                                ],
+                                "nextid": "b"
+                            }
+                        ]
                     },
                     {
                         "text": "Offer supplies, and let them hitch a ride to town (-2S)",
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "supplies", "magnitude": -2},
-                            {"flag": "stowaways", "magnitude": 1, "probability": 0.5}
-                        ],
-                        "nextid": "c"
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2},
+                                    {"flag": "stowaways", "magnitude": 1, "probability": 0.5}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
                     },
                     {
                         "text": "Offer to help fix their wagon (-1 Spare Part)",
@@ -105,13 +121,18 @@
                         [
                             {"flag": "sparepart", "magnitude": 1}
                         ],
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "sparepart", "magnitude": -1},
-                            {"flag": "money", "magnitude": 200},
-                            {"flag": "goodluckcharm", "magnitude": 1}
-                        ],
-                        "nextid": "d"
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "sparepart", "magnitude": -1},
+                                    {"flag": "money", "magnitude": 200},
+                                    {"flag": "goodluckcharm", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
                     },
                     {
                         "text": "Offer to help fix their wagon (Engineer's help)",
@@ -119,12 +140,17 @@
                         [
                             {"flag": "engineer", "magnitude": 1}
                         ],
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "money", "magnitude": 200},
-                            {"flag": "goodluckcharm", "magnitude": 1}
-                        ],
-                        "nextid": "d"
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 200},
+                                    {"flag": "goodluckcharm", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
                     },
                     {
                         "text": "They have plenty of money? You have a dragon. Take their money.",
@@ -132,11 +158,16 @@
                         [
                             {"flag": "health", "magnitude": 40}
                         ],
-                        "consequences":
+                        "outcomes":
                         [
-                            {"flag": "money", "magnitude": 200}
-                        ],
-                        "nextid": "e"
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 200}
+                                ],
+                                "nextid": "e"
+                            }
+                        ]
                     }
                 ]
             },

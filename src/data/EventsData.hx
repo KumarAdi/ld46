@@ -6,14 +6,19 @@ import haxe.Json;
 typedef FlagData = {
     var flag: String;
     var magnitude: Int;
-    var probability: Null<Float>;
+    //var lessThan: Bool; // for requirements, default is greater than or equal to, set to true for less than
+}
+
+typedef OutcomeData= {
+    var nextid: String;
+    var consequences: Array<FlagData>;
+    var probability: Null<Float>; // is one outcome in the outcomes array has a probability, then all should have it
 }
 
 typedef OptionData = {
     var text: String;
-    var nextid: String;
     var requirements: Array<FlagData>;
-    var consequences: Array<FlagData>;
+    var outcomes: Array<OutcomeData>;
 }
 
 typedef PassageData = {
