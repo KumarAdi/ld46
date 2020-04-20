@@ -16,7 +16,8 @@ class FirstLevel extends MapSelectLevel {
         super(parent);
 
         // launch dialouge right when map opens up too
-        nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown, 0);
+        nextLevel = new CutsceneDialogueLevel(this, eventData, playerData, mapData,
+                                      townTile, curTown, endTown, Res.img.intro.toTile(), 0);
         tutorialIdx = 0;
 
         var tutorials = [

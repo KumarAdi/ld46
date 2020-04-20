@@ -51,7 +51,6 @@ class MainMenu implements Level {
     }
 
     public function init() {
-        trace("Menu");
     }
 
     public function update(dt: Float): Null<Level> {
