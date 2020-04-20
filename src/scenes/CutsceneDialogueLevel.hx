@@ -39,10 +39,11 @@ class CutsceneDialogueLevel extends DialogueLevel {
         start.x = scene.width/2 - start.textWidth/2;
         start.y = 4 * (scene.height/5);
 
-        var startBtn = new Interactive(start.textWidth, start.textHeight, start);
+        var startBtn = new Interactive(scene.width, scene.height, scene);
         startBtn.onClick = function (e: Event) {
             startLevel = true;
             start.remove();
+            startBtn.remove();
         }
     }
 

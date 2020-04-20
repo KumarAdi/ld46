@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.filter.Outline;
 import h2d.Object;
 import hxd.Res;
 import hxd.Event;
@@ -19,6 +20,7 @@ class MainMenu implements Level {
 
     public function new() {
         this.scene = new Scene();
+        scene.scaleMode = LetterBox(1920, 1080);
         startLevel = false;
 
         // Init map view button
@@ -28,10 +30,11 @@ class MainMenu implements Level {
         title.y = scene.height/3;
 
         var startParent = new Object(scene);
-        start = new Text(Res.fonts.pixop.toFont(), startParent);
+        start = new Text(Res.fonts.pixopbold.toFont(), startParent);
         start.text = "-Click to Begin-";
+        start.filter = new Outline(2,0x000000);
         startParent.x = scene.width/2 - start.textWidth/2;
-        startParent.y = 2 * (scene.height/3);
+        startParent.y = 4 * (scene.height/5);
         start.visible = false;
 
         var startBtn = new Interactive(scene.width, scene.height, scene);
