@@ -46,7 +46,7 @@ class MapData {
 
             var foundCandidate = false;
 
-            for (x in 0...30) {
+            for (x in 0...40) {
                 var r = Math.random() * minDistance + (1.5 * minDistance);
                 var theta = Math.random() * 2 * Math.PI;
 
