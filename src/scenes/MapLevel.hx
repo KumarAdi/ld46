@@ -89,7 +89,7 @@ class MapLevel implements Level {
         // var uiBgTile = Tile.fromColor(0, 1920, 200);
         // var uiBg = new Bitmap(uiBgTile, scene);
         var uiBg = new Object();
-        uiBg.y = scene.height - 100;
+        uiBg.y = scene.height - 150;
         scene.addChild(uiBg);
 
         var x = new Text(Res.fonts.alagard.toFont(), uiBg);
@@ -102,15 +102,36 @@ class MapLevel implements Level {
             nextLevel = parent;
         }
 
+        var curseBarTile = Res.img.bar.toTile();
+        curseBarTile.scaleToSize(480, 120);
+        var curseBar = new Bitmap(curseBarTile, uiBg);
+        curseBar.x = 100;
+        var curseTile = Res.img.curse.toTile();
+        curseTile.scaleToSize(120, 120);
+        var curseIcon = new Bitmap(curseTile, curseBar);
+        curseIcon.x = 20;
+
+        var crystalMissingTile = Res.img.crystalmissing.toTile();
+        crystalMissingTile.scaleToSize(120,120);
+        var crystalMissingIcon = new Bitmap(crystalMissingTile, uiBg);
+        crystalMissingIcon.x = curseBar.x + curseBar.getBounds().width + 100;
+
+        var orbMissingTile = Res.img.orbmissing.toTile();
+        orbMissingTile.scaleToSize(120,120);
+        var orbMissingIcon = new Bitmap(orbMissingTile, uiBg);
+        orbMissingIcon.x = crystalMissingIcon.x + crystalMissingIcon.getBounds().width + 100;
+
+        var stoneMissingTile = Res.img.stonemissing.toTile();
+        stoneMissingTile.scaleToSize(120,120);
+        var stoneMissingIcon = new Bitmap(stoneMissingTile, uiBg);
+        stoneMissingIcon.x = orbMissingIcon.x + orbMissingIcon.getBounds().width + 100;
+
         curse = new Text(Res.fonts.alagard.toFont(), uiBg);
         curse.x = 400;
-        curse.y = 35;
         supplies = new Text(Res.fonts.alagard.toFont(), uiBg);
         supplies.x = 800;
-        supplies.y = 35;
         gold = new Text(Res.fonts.alagard.toFont(), uiBg);
         gold.x = 1200;
-        gold.y = 35;
     }
 
     public function init() {
