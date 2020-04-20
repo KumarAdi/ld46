@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.col.Voronoi.Diagram;
 import h2d.Tile;
 import h2d.col.Voronoi.Cell;
 import hxd.res.DefaultFont;
@@ -27,8 +28,10 @@ class MapLevel implements Level {
     private var nextLevel: Null<Level>;
     private var towns: Map<Interactive, Cell>;
     private var curTown: Cell;
+    private var endTown: Cell;
+    private var roads: Object;
 
-    public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile) {
+    public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
             scene = new Scene();
             scene.scaleMode = LetterBox(1920, 1080);
@@ -39,17 +42,20 @@ class MapLevel implements Level {
         this.mapData = mapData;
         this.playerData = playerData;
         this.townTile = townTile;
+        this.curTown = curTown;
 
         var townSize = new Point(townTile.width, townTile.height);
 
         scene.addChild(new Bitmap(Res.img.grass.toTile()));
         
         towns = new Map();
-        var roads = new Object(scene);
+
+        roads = new Object(scene);
         var townLayer = new Object(scene);
 
-        var lineDrawer = new Graphics(roads);
-        lineDrawer.lineStyle(10);
+        var highlighter = new Graphics(roads);
+        highlighter.lineStyle(10, 0xFFFFFF);
+
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
             var townSprite = new Bitmap(townTile, townLayer);
@@ -59,22 +65,18 @@ class MapLevel implements Level {
 
             interactiveTile.onOver = function (e: Event) {
                 for (neighbor in cell.getNeighbors()) {
-                    lineDrawer.moveTo(town.x, town.y);
-                    lineDrawer.lineTo(neighbor.x, neighbor.y);
+                    highlighter.moveTo(town.x, town.y);
+                    highlighter.lineTo(neighbor.x, neighbor.y);
                 }
             }
 
             interactiveTile.onOut = function (e: Event) {
-                lineDrawer.clear();
-                lineDrawer = new Graphics(roads);
-                lineDrawer.lineStyle(10);
+                highlighter.clear();
+                highlighter = new Graphics(roads);
+                highlighter.lineStyle(10, 0xFFFFFF);
             }
 
             towns.set(interactiveTile, cell);
-
-            if (curTown == null || cell.point.x < curTown.point.x) {
-                curTown = cell;
-            }
         }
 
         var caravanTile = Res.img.caravan.toTile();
@@ -93,7 +95,16 @@ class MapLevel implements Level {
     }
 
     public function init() {
+        var roadLines = new Graphics(roads);
+        roadLines.lineStyle(15);
 
+        for (cell in mapData.diagram.cells) {
+            var town = cell.point;
+            for (neighbor in cell.getNeighbors()) {
+                roadLines.moveTo(town.x, town.y);
+                roadLines.lineTo(neighbor.x, neighbor.y);
+            }
+        }
     }
 
     public function update(dt: Float): Null<Level> {

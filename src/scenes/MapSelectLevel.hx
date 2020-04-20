@@ -27,8 +27,18 @@ class MapSelectLevel extends MapLevel {
         playableArea.setMin(new Point(0, 0).add(townSize.clone().scale(0.5)));
         playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)));
         mapData = new MapData(townSize.length()/2, playableArea);
+
+        for (cell in mapData.diagram.cells) {
+            if (curTown == null || cell.point.x < curTown.point.x) {
+                curTown = cell;
+            }
+
+            if (endTown == null || cell.point.x > endTown.point.x) {
+                endTown = cell;
+            }
+        }
         
-        super(parent, scene, mapData, playerData, townTile);
+        super(parent, scene, mapData, playerData, townTile, curTown, endTown);
 
         for (town => cell in this.towns) {
             town.onClick = function (e: Event) {
