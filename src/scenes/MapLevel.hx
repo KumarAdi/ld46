@@ -65,7 +65,7 @@ class MapLevel implements Level {
         var townLayer = new Object(scene);
 
         var highlighter = new Graphics(roads);
-        highlighter.lineStyle(10, 0xFFFFFF);
+        highlighter.lineStyle(8, 0xFFFFFF);
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
@@ -84,7 +84,7 @@ class MapLevel implements Level {
             interactiveTile.onOut = function (e: Event) {
                 highlighter.clear();
                 highlighter = new Graphics(roads);
-                highlighter.lineStyle(10, 0xFFFFFF);
+                highlighter.lineStyle(8, 0xFFFFFF);
             }
 
             towns.set(interactiveTile, cell);
@@ -184,7 +184,7 @@ class MapLevel implements Level {
 
     public function init() {
         var roadLines = new Graphics(roads);
-        roadLines.lineStyle(15);
+        roadLines.lineStyle(16, 0x8f6c3b);
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
