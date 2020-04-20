@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.filter.Outline;
 import h2d.col.Voronoi.Diagram;
 import h2d.Tile;
 import h2d.col.Voronoi.Cell;
@@ -30,6 +31,8 @@ class MapLevel implements Level {
     private var curTown: Cell;
     private var endTown: Cell;
     private var roads: Object;
+    private var endBtn: Interactive;
+    private var x: Text; // the button to close the map view
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
@@ -54,7 +57,7 @@ class MapLevel implements Level {
         var townLayer = new Object(scene);
 
         var highlighter = new Graphics(roads);
-        highlighter.lineStyle(10, 0xFFFFFF);
+        highlighter.lineStyle(5, 0xFFFFFF);
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
@@ -77,15 +80,27 @@ class MapLevel implements Level {
             }
 
             towns.set(interactiveTile, cell);
+            if (cell == endTown) {
+                endBtn = interactiveTile;
+            }
         }
+
+        var flagTile = Res.img.wizardflag.toTile();
+        flagTile.scaleToSize(townTile.width, townTile.height);
+        var flag = new Bitmap(flagTile, endBtn.parent);
+        flag.x = townTile.width / 2 - 25;
+        flag.y = -25;
 
         var caravanTile = Res.img.caravan.toTile();
         caravanTile.scaleToSize(townSize.x * 0.9, townSize.y * 0.9);
         playerMarker = new Bitmap(caravanTile, scene);
 
-        var x = new Text(DefaultFont.get(), scene);
+        x = new Text(Res.fonts.pixop.toFont(), scene);
         x.text = "X";
-        x.scale(10);
+        x.scale(3);
+        x.x = 1920 - 3 * x.textWidth - 50;
+        x.y = 25;
+        x.filter = new Outline(1, 0x000000);
 
         var xBtn = new Interactive(x.textHeight, x.textHeight, x);
 
@@ -96,7 +111,7 @@ class MapLevel implements Level {
 
     public function init() {
         var roadLines = new Graphics(roads);
-        roadLines.lineStyle(15);
+        roadLines.lineStyle(10);
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;

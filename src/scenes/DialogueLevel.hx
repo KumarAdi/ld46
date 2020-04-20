@@ -70,6 +70,9 @@ class DialogueLevel implements Level {
         viewMap = new Text(Res.fonts.pixop.toFont(), scene);
         viewMap.text = "VIEW MAP";
         viewMap.scale(5);
+        viewMap.x = (scene.width - 5 * viewMap.textWidth) / 2;
+        viewMap.y = scene.height - 5 * viewMap.textHeight - 50;
+        viewMap.filter = new Outline(1, 0x000000, 0.5);
 
         var viewMapBtn = new Interactive(viewMap.textWidth, viewMap.textHeight, viewMap);
 

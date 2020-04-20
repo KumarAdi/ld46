@@ -41,6 +41,8 @@ class MapSelectLevel extends MapLevel {
         
         super(parent, scene, mapData, playerData, townTile, curTown, endTown);
 
+        x.remove();
+
         for (town => cell in this.towns) {
             town.onClick = function (e: Event) {
                 if (cell.getNeighbors().indexOf(curTown.point) != -1) {
