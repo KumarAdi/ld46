@@ -25,11 +25,11 @@ class PlayerData {
         instance = new PlayerData();
     }
 
-    public function checkProperty(flag: String, magnitude: Int, ?type: Int) {
+    public function checkProperty(flag: String, magnitude: Int, ?checkType: Int) {
         if (!flags.exists(flag)) {
             return false;
         }
-        switch (type) {
+        switch (checkType) {
             case 0: return flags.get(flag) == magnitude;
             case -1: return flags.get(flag) <= magnitude;
             case _: return flags.get(flag) >= magnitude;
