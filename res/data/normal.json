@@ -516,8 +516,8 @@
                 ]
             },
             {
-                "id": "b",
-                "text": "Only a fool would turn down a travelling merchant! You pull over for a while to make tea and company. \n You have a hearty chat before he settles enough to show you his wares. \n Only one item per customer, see anything you like?",
+                "id": "g",
+                "text": "Only one item per customer, see anything you like?",
                 "options":
                 [
                     {"text": "Warm Butter Scones (50g) >",
@@ -593,6 +593,22 @@
 						}
 					]
 					}
+                ]
+            },
+			{
+                "id": "b",
+                "text": "Only a fool would turn down a travelling merchant! You pull over for a while to make tea and company. \n You have a hearty chat before he settles enough to show you his wares.",
+                "options":
+                [
+					{
+                        "text": "Let's see...",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "g"
+                            }
+                        ]
+                    }
                 ]
             },
             {
@@ -2305,44 +2321,42 @@
                 "text": "Wait why am I listening to their choices?",
                 "options":
                 [
-                    {"text": "Make a break for it",  
-					"outcomes":
-                        [
-                            {
-								"consequences":
-                                [
-                                    {"flag": "supplies", "magnitude": -2}
-                                ],
-                                "nextid": "c"
-                            }
-                        ]
-					},
+					{
+                        "text": "Make a break for it >",
+                        "outcomes":
+                            [
+                                {
+                                    "consequences":
+                                    [
+                                        {"flag": "supplies", "magnitude": -2}
+                                    ],
+                                    "nextid": "c"
+                                }
+                            ]
+                    },
 					{
                         "text": "Fight them off >",
-                    
-					"requirements":
-                        [
-                            {"flag": "money", "magnitude": 250},
-							{"flag": "supplies", "magnitude": 3}
-							
-                        ],
-					"outcomes":
-                        [
-                            {
-								"consequences":
-                                [
-                                    {"flag": "supplies", "magnitude": -2},
-									{"flag": "money", "magnitude": -250}
-                                ],
-                                "nextid": "d"
-                            }
-                        ]
-						},
+                        "requirements":
+                            [
+                                {"flag": "money", "magnitude": 250}
+                            ],
+                        "outcomes":
+                            [
+                                {
+                                    "consequences":
+                                    [
+                                        {"flag": "supplies", "magnitude": -2},
+                                        {"flag": "money", "magnitude": -250}
+                                    ],
+                                    "nextid": "d"
+                                }
+                            ]
+                    },
 					{
                         "text": "Don't worry, I'll handle this (Geiger)>",
 						"requirements":
                         [
-                            {"flag": "geiger", "magnitude": 1}
+                            {"flag": "geiger", "magnitude": "1"}
                         ],
 						"outcomes":
                         [
@@ -2356,13 +2370,7 @@
                         ]
                     },
                     {
-                        "text": "On second thought, yeah take my money (-200g)",
-						"showGray": 1,
-						"consequences":
-                                [
-									{"flag": "money", "magnitude": 200}
-                                ],
-						
+                        "text": "On second thought, yeah my money is fine (-200g)",
                         "outcomes":
                         [
                             {
@@ -2374,7 +2382,6 @@
                             }
                         ]
                     }
-					
                 ]
             },
 			{
@@ -2411,6 +2418,45 @@
             }
         ]
     },	
+	{
+        "scenarioid": 14,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "There’s a strange looking contraption lying broken on the ground. You can’t seem to make any which way out of what it is. It’s far too large to take with you, what could it be?",
+                "options":
+                [
+					{
+                        "text": "Oh well"
+                    },
+                    {
+                        "text": "Let me have a look at it (Margaret)",
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+									{"flag": "car", "magnitude": 1}
+                                ],
+                                "nextid": "b"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "Margaret looks like a magician as she reassembles the broken parts and turns it on within mere seconds! \n It’s a much more efficient means of travel we’ll be able to get there in no time!",
+                "options":
+                [
+					{
+                        "text": "Wow! Sick ride!"
+                    }
+                ]
+            }
+		]
+	},
     {
         "scenarioid": 16,
         "passages": [
