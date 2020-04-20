@@ -28,9 +28,10 @@ class MapLevel implements Level {
     private var nextLevel: Null<Level>;
     private var towns: Map<Interactive, Cell>;
     private var curTown: Cell;
+    private var endTown: Cell;
     private var roads: Object;
 
-    public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile) {
+    public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
             scene = new Scene();
             scene.scaleMode = LetterBox(1920, 1080);
@@ -41,6 +42,7 @@ class MapLevel implements Level {
         this.mapData = mapData;
         this.playerData = playerData;
         this.townTile = townTile;
+        this.curTown = curTown;
 
         var townSize = new Point(townTile.width, townTile.height);
 
@@ -75,10 +77,6 @@ class MapLevel implements Level {
             }
 
             towns.set(interactiveTile, cell);
-
-            if (curTown == null || cell.point.x < curTown.point.x) {
-                curTown = cell;
-            }
         }
 
         var caravanTile = Res.img.caravan.toTile();
