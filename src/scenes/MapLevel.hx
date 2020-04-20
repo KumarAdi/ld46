@@ -86,8 +86,11 @@ class MapLevel implements Level {
         caravanTile.scaleToSize(townSize.x * 0.9, townSize.y * 0.9);
         playerMarker = new Bitmap(caravanTile, scene);
         
-        var uiBgTile = Tile.fromColor(0, 1920, 200);
-        var uiBg = new Bitmap(uiBgTile, scene);
+        // var uiBgTile = Tile.fromColor(0, 1920, 200);
+        // var uiBg = new Bitmap(uiBgTile, scene);
+        var uiBg = new Object();
+        uiBg.y = scene.height - 100;
+        scene.addChild(uiBg);
 
         var x = new Text(Res.fonts.alagard.toFont(), uiBg);
         x.text = "X";
@@ -99,16 +102,15 @@ class MapLevel implements Level {
             nextLevel = parent;
         }
 
-
         curse = new Text(Res.fonts.alagard.toFont(), uiBg);
-            curse.x = 400;
-            curse.scale(3);
+        curse.x = 400;
+        curse.y = 35;
         supplies = new Text(Res.fonts.alagard.toFont(), uiBg);
-            supplies.x = 800;
-            supplies.scale(3);
+        supplies.x = 800;
+        supplies.y = 35;
         gold = new Text(Res.fonts.alagard.toFont(), uiBg);
-            gold.x = 1200;
-            gold.scale(3);
+        gold.x = 1200;
+        gold.y = 35;
     }
 
     public function init() {

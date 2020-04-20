@@ -21,19 +21,24 @@ class MapSelectLevel extends MapLevel {
         eventData = new EventsData();
 
         this.townTile = Res.img.town1.toTile();
-        townTile.scaleToSize(200, 200);
+        townTile.scaleToSize(170, 170);
         var townSize = new Point(townTile.width, townTile.height);
         var playableArea = new Bounds();
-        playableArea.setMin(new Point(0, 0)
-                            .add(townSize.clone().scale(0.5))
-                            .add(new Point(0, 200)));
-        playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)));
+        playableArea.setMin(new Point(0, 0).add(townSize.clone().scale(0.5).add(new Point(25, 0))));
+        // playableArea.setMin(new Point(0, 0)
+        //                     .add(townSize.clone().scale(0.5))
+        //                     .add(new Point(0, 200)));
+        playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)).sub(new Point(25, 150)));
+        // playableArea.setMax(new Point(scene.width, scene.height)
+        //                                 .sub(townSize.clone().scale(0.5)
+        //                                 .sub(new Point(0, 100))));
         mapData = new MapData(townSize.length()/2, playableArea);
 
         while (mapData.diagram.cells.length < 7) {
             mapData = new MapData(townSize.length()/2, playableArea);
         }
 
+        // set start and end towns
         for (cell in mapData.diagram.cells) {
             if (curTown == null || cell.point.x < curTown.point.x) {
                 curTown = cell;
