@@ -6,7 +6,7 @@ import haxe.Json;
 typedef FlagData = {
     var flag: String;
     var magnitude: Int;
-    //var lessThan: Bool; // for requirements, default is greater than or equal to, set to true for less than
+    var checkType: Int;
 }
 
 typedef OutcomeData= {

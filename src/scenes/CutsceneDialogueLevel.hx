@@ -20,13 +20,10 @@ class CutsceneDialogueLevel extends DialogueLevel {
     private var startLevel: Bool;
 
     public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, mapData: MapData, townTile: Tile, curTown: Cell, endTown: Cell, bgTile: Tile, ?scenario: Int) {
-        super(parent, eventsData, playerData, mapData, townTile, curTown, endTown, scenario);
+        this.bgTile = bgTile;
+        fadeIn = true;
 
-        this.bgTile = Res.img.village_bg.toTile();
-        if (bgTile != null) {
-            this.bgTile = bgTile;
-            fadeIn = true;
-        }
+        super(parent, eventsData, playerData, mapData, townTile, curTown, endTown, scenario);
     }
 
     override function init() {

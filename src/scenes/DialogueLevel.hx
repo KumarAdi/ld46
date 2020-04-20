@@ -51,7 +51,7 @@ class DialogueLevel implements Level {
             eventData.scenarioreq = [];
         }
         for (scenarioReq in eventData.scenarioreq) {
-            if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude)) {
+            if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude, scenarioReq.checkType)) {
                 satisfied = false;
                 break;
             }
@@ -62,8 +62,11 @@ class DialogueLevel implements Level {
             eventData = eventsData.events[scenarioIdx];
 
             satisfied = true;
+            if (eventData.scenarioreq == null) {
+                eventData.scenarioreq = [];
+            }
             for (scenarioReq in eventData.scenarioreq) {
-                if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude)) {
+                if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude, scenarioReq.checkType)) {
                     satisfied = false;
                     break;
                 }
@@ -77,10 +80,10 @@ class DialogueLevel implements Level {
         this.townTile = townTile;
         this.curTown = curTown;
         this.endTown = endTown;
-        this.bgTile = Res.img.village_bg.toTile();
-    }
+        if (this.bgTile == null) {
+            this.bgTile = Res.img.village_bg.toTile();
+        }
 
-    public function init(): Void {
         // Init Bg
         var bg = new Bitmap(bgTile, scene);
 
@@ -104,6 +107,9 @@ class DialogueLevel implements Level {
 
         // Init first passage
         progressText("a");
+    }
+
+    public function init(): Void {
     }
 
     public function update(dt: Float): Null<Level> {
@@ -159,7 +165,7 @@ class DialogueLevel implements Level {
                 var flagsMet = true;
                 for (flagRequired in opt.requirements) {
                     // overload to avoid null error
-                    if (!playerData.checkProperty(flagRequired.flag, flagRequired.magnitude)) {
+                    if (!playerData.checkProperty(flagRequired.flag, flagRequired.magnitude, flagRequired.checkType)) {
                         flagsMet = false;
                         break;
                     }

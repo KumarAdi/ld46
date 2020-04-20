@@ -53,6 +53,7 @@ class MainMenu implements Level {
     }
 
     public function init() {
+        PlayerData.resetInstance();
     }
 
     public function update(dt: Float): Null<Level> {

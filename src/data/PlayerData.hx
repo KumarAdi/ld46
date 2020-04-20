@@ -21,6 +21,10 @@ class PlayerData {
         return instance;
     }
 
+    public static function resetInstance() {
+        instance = new PlayerData();
+    }
+
     public function checkProperty(flag: String, magnitude: Int, ?type: Int) {
         if (!flags.exists(flag)) {
             return false;
