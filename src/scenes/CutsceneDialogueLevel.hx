@@ -29,6 +29,7 @@ class CutsceneDialogueLevel extends DialogueLevel {
     override function init() {
         super.init();
 
+        viewMapIcon.remove();
         viewMap.remove();
 
         textbox.alpha = 0;

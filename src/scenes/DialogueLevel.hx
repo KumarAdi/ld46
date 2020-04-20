@@ -32,6 +32,7 @@ class DialogueLevel implements Level {
     private var endTown: Cell;
     private var bgTile: Tile;
     private var viewMap: Text;
+    private var viewMapIcon: Bitmap;
 
     public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, mapData: MapData, townTile: Tile, curTown: Cell, endTown: Cell, ?scenario: Int) {
         scene = new Scene();
@@ -93,14 +94,19 @@ class DialogueLevel implements Level {
         font = Res.fonts.alagard.toFont();
 
         // Init map view button
-        viewMap = new Text(Res.fonts.pixop.toFont(), scene);
-        viewMap.text = "VIEW MAP";
-        viewMap.scale(5);
-        viewMap.x = (scene.width - 5 * viewMap.textWidth) / 2;
-        viewMap.y = scene.height - 5 * viewMap.textHeight - 50;
+        var viewMapIconTile = Res.img.map.toTile();
+        viewMapIconTile.scaleToSize(150, 150);
+        viewMapIcon = new Bitmap(viewMapIconTile, scene);
+        viewMapIcon.x = 20;
+        viewMapIcon.y = 20;
+        viewMap = new Text(Res.fonts.pixopbold.toFont(), scene);
+        viewMap.text = "View map";
+        viewMap.scale(1.4);
+        viewMap.x = 130;//(scene.width - 5 * viewMap.textWidth) / 2;
+        viewMap.y = 80;//scene.height - 5 * viewMap.textHeight - 50;
         viewMap.filter = new Outline(1, 0x000000, 0.5);
 
-        var viewMapBtn = new Interactive(viewMap.textWidth, viewMap.textHeight, viewMap);
+        var viewMapBtn = new Interactive(viewMapIcon.getBounds().width + viewMap.textWidth, viewMapIcon.getBounds().width, viewMapIcon);
 
         viewMapBtn.onClick = function (e: Event) {
             nextLevel = new MapLevel(this, scene, mapData, playerData, townTile, curTown, endTown);
