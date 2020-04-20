@@ -30,6 +30,9 @@ class MapLevel implements Level {
     private var curTown: Cell;
     private var endTown: Cell;
     private var roads: Object;
+    private var curse: Text;
+    private var supplies: Text;
+    private var gold: Text;
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
@@ -82,16 +85,30 @@ class MapLevel implements Level {
         var caravanTile = Res.img.caravan.toTile();
         caravanTile.scaleToSize(townSize.x * 0.9, townSize.y * 0.9);
         playerMarker = new Bitmap(caravanTile, scene);
+        
+        var uiBgTile = Tile.fromColor(0, 1920, 200);
+        var uiBg = new Bitmap(uiBgTile, scene);
 
-        var x = new Text(DefaultFont.get(), scene);
+        var x = new Text(Res.fonts.alagard.toFont(), uiBg);
         x.text = "X";
-        x.scale(10);
+        x.scale(3);
 
         var xBtn = new Interactive(x.textHeight, x.textHeight, x);
 
         xBtn.onClick = function (e: Event) {
             nextLevel = parent;
         }
+
+
+        curse = new Text(Res.fonts.alagard.toFont(), uiBg);
+            curse.x = 400;
+            curse.scale(3);
+        supplies = new Text(Res.fonts.alagard.toFont(), uiBg);
+            supplies.x = 800;
+            supplies.scale(3);
+        gold = new Text(Res.fonts.alagard.toFont(), uiBg);
+            gold.x = 1200;
+            gold.scale(3);
     }
 
     public function init() {
@@ -110,6 +127,10 @@ class MapLevel implements Level {
     public function update(dt: Float): Null<Level> {
         playerMarker.x = curTown.point.x - (townTile.width * 0.45);
         playerMarker.y = curTown.point.y - (townTile.height * 0.45);
+
+        curse.text = "Curse: " + playerData.flags.get("curse");
+        supplies.text = "Supplies: " + playerData.flags.get("supplies");
+        gold.text = "Gold: " + playerData.flags.get("money");
 
         // null out nextLevel so it's not set when we come back
         var ret = nextLevel;
