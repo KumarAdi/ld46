@@ -1,5 +1,6 @@
 package scenes;
 
+import h2d.Object;
 import hxd.Res;
 import hxd.Event;
 import h2d.Interactive;
@@ -26,13 +27,14 @@ class MainMenu implements Level {
         title.x = scene.width/2 - title.textWidth/2;
         title.y = scene.height/3;
 
-        start = new Text(Res.fonts.pixop.toFont(), scene);
+        var startParent = new Object(scene);
+        start = new Text(Res.fonts.pixop.toFont(), startParent);
         start.text = "-Click to Begin-";
-        start.x = scene.width/2 - start.textWidth/2;
-        start.y = 2 * (scene.height/3);
+        startParent.x = scene.width/2 - start.textWidth/2;
+        startParent.y = 2 * (scene.height/3);
         start.visible = false;
 
-        var startBtn = new Interactive(start.textWidth, start.textHeight, start);
+        var startBtn = new Interactive(start.textWidth, start.textHeight, startParent);
         startBtn.onClick = function (e: Event) {
             startLevel = true;
         }
