@@ -37,6 +37,10 @@ class MapLevel implements Level {
     private var curseIcon: Bitmap;
     private var supplies: Text;
     private var gold: Text;
+    private var crystalIcon: Bitmap;
+    private var orbIcon: Bitmap;
+    private var stoneIcon: Bitmap;
+    private var uiBg: Object;
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
@@ -97,7 +101,7 @@ class MapLevel implements Level {
         
         // var uiBgTile = Tile.fromColor(0, 1920, 200);
         // var uiBg = new Bitmap(uiBgTile, scene);
-        var uiBg = new Object();
+        uiBg = new Object();
         uiBg.y = scene.height - 150;
         scene.addChild(uiBg);
 
@@ -121,9 +125,9 @@ class MapLevel implements Level {
         var curseBarFill = new Bitmap(curseBarFillTile, curseBar);
         curseBarFill.x = 46;
         curseBarFill.y = 43;
-        var curseTile = Res.img.curse.toTile();
-        curseTile.scaleToSize(120, 120);
-        curseIcon = new Bitmap(curseTile, curseBar);
+        var curseIconTile = Res.img.curse.toTile();
+        curseIconTile.scaleToSize(120, 120);
+        curseIcon = new Bitmap(curseIconTile, curseBar);
         curseIcon.x = 360;
 
         // Init curse text
@@ -135,24 +139,24 @@ class MapLevel implements Level {
         // Init relics
         var crystalMissingTile = Res.img.crystalmissing.toTile();
         crystalMissingTile.scaleToSize(120,120);
-        var crystalMissingIcon = new Bitmap(crystalMissingTile, uiBg);
-        crystalMissingIcon.x = curseBar.x + curseBar.getBounds().width + 100;
+        crystalIcon = new Bitmap(crystalMissingTile, uiBg);
+        crystalIcon.x = curseBar.x + curseBar.getBounds().width + 100;
 
         var orbMissingTile = Res.img.orbmissing.toTile();
         orbMissingTile.scaleToSize(120,120);
-        var orbMissingIcon = new Bitmap(orbMissingTile, uiBg);
-        orbMissingIcon.x = crystalMissingIcon.x + crystalMissingIcon.getBounds().width + 50;
+        orbIcon = new Bitmap(orbMissingTile, uiBg);
+        orbIcon.x = crystalIcon.x + crystalIcon.getBounds().width + 50;
 
         var stoneMissingTile = Res.img.stonemissing.toTile();
         stoneMissingTile.scaleToSize(120,120);
-        var stoneMissingIcon = new Bitmap(stoneMissingTile, uiBg);
-        stoneMissingIcon.x = orbMissingIcon.x + orbMissingIcon.getBounds().width + 50;
+        stoneIcon = new Bitmap(stoneMissingTile, uiBg);
+        stoneIcon.x = orbIcon.x + orbIcon.getBounds().width + 50;
 
         // Init relics text
         var relics = new Text(uiFont, uiBg);
         relics.text = "The Relics";
-        relics.x = orbMissingIcon.x + (orbMissingIcon.getBounds().width / 2) - (relics.textWidth / 2) - 5;
-        relics.y = orbMissingIcon.getBounds().height - 24;
+        relics.x = orbIcon.x + (orbIcon.getBounds().width / 2) - (relics.textWidth / 2) - 5;
+        relics.y = orbIcon.getBounds().height - 24;
         
         // Init supplies text
         var suppliesTitle = new Text(uiFont, uiBg);
@@ -190,12 +194,31 @@ class MapLevel implements Level {
         playerMarker.x = curTown.point.x - (townTile.width * 0.45);
         playerMarker.y = curTown.point.y - (townTile.height * 0.45);
 
-        // var cursePercent = playerData.flags.get("curse") / 10;
+        // update curse bar
         curseBarFillTile.scaleToSize((40 * playerData.flags.get("curse")), 33);
-        //curseIcon.x = curseBarFill.getBounds().width - 50;
-        
+        // update supplies
         supplies.text = playerData.flags.get("supplies") + " days";
+        // update money
         gold.text = playerData.flags.get("money") + " g";
+        // update relics
+        if (playerData.flags.get("cop") >= 1) {
+            var crystalTile = Res.img.crystal.toTile();
+            crystalTile.scaleToSize(120,120);
+            crystalIcon = new Bitmap(crystalTile, uiBg);
+            crystalIcon.x = curseBar.x + curseBar.getBounds().width + 100;
+        }
+        if (playerData.flags.get("orb") >= 1) {
+            var orbTile = Res.img.orb.toTile();
+            orbTile.scaleToSize(120,120);
+            orbIcon = new Bitmap(orbTile, uiBg);
+            orbIcon.x = crystalIcon.x + crystalIcon.getBounds().width + 50;
+        }
+        if (playerData.flags.get("heartstone") >= 1) {
+            var stoneTile = Res.img.stone.toTile();
+            stoneTile.scaleToSize(120,120);
+            stoneIcon = new Bitmap(stoneTile, uiBg);
+            stoneIcon.x = orbIcon.x + orbIcon.getBounds().width + 50;
+        }
 
         // null out nextLevel so it's not set when we come back
         var ret = nextLevel;
