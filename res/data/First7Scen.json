@@ -1,0 +1,1234 @@
+[
+    {
+        "scenarioid": 1,
+        "passages": [
+            {
+                "id": "a",
+                "text": "Hey look! A dragon pup!",
+                "options":
+                [
+                    {
+                        "text": "continue >",
+                        "outcomes":[{"nextid": "b"}]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "Oh no, it's afflicted with 'The Curse'\nWe're going to have to take you to the Grand Wizard Abracadabraham in The Misty Mountains!",
+                "options":
+                [
+                    {
+                        "text": "continue >",
+                        "outcomes":[{"nextid": "c"}]
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "Looks like we're going to be traveling a while, what shall I name you?",
+                "options":
+                [
+                    {
+                        "text": "1. Wally",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 0}],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "2. Melissa)",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 1}],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "3. Something cool and badass!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":[{"flag": "name", "magnitude": 2}],
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "d",
+                "text": "I'll call you... Wally !",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "I'll call you... Melissa!",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "f",
+                "text": "Well you are a dragon, and look really awesome… How about [The Drag Queen]!\nYeah! That sounds amazing, people are going to be terrified of you.",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
+        ]
+    },
+    {
+        "scenarioid": 2,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You spot a broken down wagon with some people nearby. They look half starved, they've been stuck for a while.\nPlease take us to the nearest town and let us borrow some supplies, we have plenty of money!",
+                "options":
+                [
+                    
+                    {
+                        "text": "Offer supplies, and let them hitch a ride to town (-2S)",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2},
+                                    {"flag": "money", "magnitude": 200}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "I can help fix their wagon! (Margaret)",
+                        "requirements":
+                        [
+                            {"flag": "margaret", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 200},
+                                    {"flag": "goodluckcharm", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Let me take care of 'em, you want the money right? (Geiger)",
+                        "requirements":
+                        [
+                            {"flag": "geiger", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 200}
+                                ],
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					{
+                        "text": "Ignore their plight",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "We can't thank you enough, please take this for your troubles, +200g",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "d",
+                "text": "Margaret works her mechanical prowess and soon the wagon is fixed! Thank you, so much! Here take this, it's all we have, +200g, + a good luck charm",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "e",
+                "text": "The domineering presence of Geiger is enough for them to freeze. Geiger walks over, takes their money, and you make your merry way, +200g",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "They probably aren't in too much trouble anyways",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 3,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You notice a speck of red a few miles down the plains. A few minutes later, you find that speck of red everywhere. There’s a grasslands fire, the smoke is starting to choke you out.!",
+                "options":
+                [
+                    {
+                        "text": "Find another way around -1S",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -1}
+                                ],
+                                "nextid": "d",
+								"probability" : 60
+                            },
+							{
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -1}
+                                ],
+                                "nextid": "b",
+								"probability" : 40
+                            }
+                        ]
+                    },
+                    {
+                        "text": "There's a path over there! Quickly! (Mary)",
+                        "requirements":
+                        [
+                            {"flag": "mary", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					{
+                        "text": "Force your way through the fire",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+                    },
+					{
+                        "text": "There's a path... (Seer's Vision)",
+						"requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			 {
+                "id": "b",
+                "text": "You look around for another way, but the fire goes for miles in each direction, \n there doesn’t seem to be a way around this.",
+                "options":
+                [
+                    {"text": "what? >",
+					"outcomes":
+					[
+						{
+							"nextid": "a"
+						}
+					]
+					}
+                ]
+            },
+            {
+                "id": "d",
+                "text": "You notice a small path of cobblestone which cuts right through the fire, but the path is quickly closing. It’s now or never! \n That was close, but you made it to the other side unscathed and notice a town not far away \n That will make a good resting point",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "e",
+                "text": "You take a small path of cobblestone which cuts right through the fire, but the path is quickly closing. It’s now or never! \n That was close, but you made it to the other side unscathed and notice a town not far away \n That will make a good resting point",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "You hold your breath for what feels like forever as your steed and wagon barrel through the raging fire. \n Undoubtedly no sane person would have ever made this choice. \n Your wagon is in shambles and your horse collapses of heat exhaustion and smoke inhalation. ",
+                "options":
+                [
+                    {"text": "Don't judge me >",
+					"outcomes":
+					[
+						{
+							"nextid": "i"
+						}
+					]
+					}
+                ]
+			},
+			{
+				"id": "g",
+                "text": "there’s a small path of cobblestone which cuts right through the fire, \n you take your time, \n you were in no real danger. ",
+                "options":
+                [
+                    {"text": "continue >",
+					"outcomes":
+					[
+						{
+							"nextid": "h"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "A few moments later the world starts to take standard form again, and you feel normal. \n I think the effects of those berries have finally worn off! You head towards the nearby town that was your destination.",
+                "options":
+                [
+                    {"text": "Thank goodness >"}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "Thankfully, there’s a town about a mile out where you can purchase a new wagon \nWelcome to Stable Hands, the wagon/horse shop with the most stable hands, you look like you just came out of a fire.",
+                "options":
+                [
+                    {"text": "Thanks I need a new wagon and a horse >",
+					"outcomes":
+					[
+						{
+							"nextid": "j"
+						}
+					]
+					}
+                ]
+			},
+			{
+                "id": "j",
+                "text": "Alright that will be 800g worth of goods for a normal horse and wagon, \n but if you’d like we have a special breed of horse that can run twice as fast for 2,000g flat.",
+                "options":
+                [
+                    {"text": "Pay 2,000g for the special horse >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -2000},
+                                    {"flag": "fasthorse", "magnitude": 1}
+                                ],
+							"nextid": "k"
+						}
+					]
+					},
+					{"text": "Pay 800g for the normal horse >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -800}
+                                ],
+							"nextid": "l"
+						}
+					]
+					},
+					{"text": "Pay 400g and 4 supplies for the normal horse >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -400},
+                                    {"flag": "supplies", "magnitude": -4}
+                                ],
+							"nextid": "l"
+						}
+					]
+					},
+					{"text": "Pay 8 supplies >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -8}
+                                ],
+							"nextid": "l"
+						}
+					]
+					},
+					{"text": "Your prices are outrageous! >",
+					"outcomes":
+					[
+						{
+							"nextid": "m"
+						}
+					]
+					}
+                ]
+				
+			},
+			{
+                "id": "k",
+                "text": "You receive a wagon and the ‘Special Horse’",
+                "options":
+                [
+                    {"text": "Cool! >"}
+                ]
+			},
+			{
+                "id": "l",
+                "text": "You receive a wagon and a horse, you’re ready to ride!",
+                "options":
+                [
+                    {"text": "Cool! >"}
+                ]
+			},
+			{
+                "id": "m",
+                "text": "Alright listen, I'm not here to argue, you can have our lame horse if you want for free, \n but he is pretty damn slow. \n It’s not much better, but it’s something",
+                "options":
+                [
+                    {"text": "buy the lame horse (-100g) >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -100},
+                                    {"flag": "lame", "magnitude": 1}
+                                ],
+							"nextid": "n"
+						}
+					]
+					},
+					{
+                        "text": "On second thought... >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "j"
+                            }
+                        ]
+                    }
+                ]
+			},
+			{
+                "id": "n",
+                "text": "You recieved a wagon and a lame horse!",
+                "options":
+                [
+                    {"text": "alright... >"}
+                ]
+			}
+        ]
+    },
+	{
+        "scenarioid": 4,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You stumble upon an old man carrying a heavy pack, there are trinkets and baubles dangling on the outside of the bursting to the brim backpack. \n A travelling merchant! \n Good evening! Could I trouble you for a cup of tea and some company?",
+                "options":
+                [
+					{
+                        "text": "Of course!",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "Only a fool would turn down a travelling merchant! You pull over for a while to make tea and company. \n You have a hearty chat before he settles enough to show you his wares. \n Only one item per customer, see anything you like?",
+                "options":
+                [
+                    {"text": "Warm Butter Scones (50g) >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -50},
+                                    {"flag": "supplies", "magnitude": 2}
+                                ],
+							"nextid": "c"
+						}
+					]
+					},
+					{"text": "Plant Identification Guide (100g) >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -100},
+                                    {"flag": "pig", "magnitude": 1}
+                                ],
+							"nextid": "d"
+						}
+					]
+					},
+					{"text": "Magic Detector (200g) >",
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -200},
+                                    {"flag": "magicdetector", "magnitude": 1}
+                                ],
+							"nextid": "d"
+						}
+					]
+					},
+					{"text": "Is that a Crystal of Purity in your pack? (Seer's Vision)  >",
+					"requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+					"outcomes":
+					[
+						{
+							"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -100},
+                                    {"flag": "cop", "magnitude": 1},
+									{"flag": "servis", "magnitude": -1}
+                                ],
+							"nextid": "f"
+						}
+					]
+					}
+                ]
+            },
+            {
+                "id": "c",
+                "text": "Hmm.. that looks delicious! You pay the merchant and receive the item. \n Ooh very nice, that was home made! \n Good luck on your adventure!",
+                "options":
+                [
+                    {"text": "yummy! >"}
+                ]
+            },
+            {
+                "id": "d",
+                "text": "Hmm.. that looks useful! You pay the merchant and receive the item. \n Ooh very nice, that will certainly help you in a pinch! \n Good luck on your adventure!",
+                "options":
+                [
+                    {"text": "Goodbye travelling merchant! >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Ah! You have a good eye, unfortunately people don't really need these anymore, I've been lugging it around for ages, \n I'd be delighted to give this one to you on the house.",
+                "options":
+                [
+                    {"text": "Thank you! >",
+					"outcomes":
+					[
+						{
+							"nextid": "f"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "A few moments later the world starts to take standard form again, and you feel normal. \n I think the effects of those berries have finally worn off!",
+                "options":
+                [
+                    {"text": "Goodbye travelling merchant! >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 5,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You see an army marching in formation. The kingsmen can only mean trouble, you continue your way and hope they don’t bother you.",
+                "options":
+                [
+					{
+                        "text": "Continue  >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "HAALLTTT",
+                "options":
+                [
+					{
+                        "text": "oh no  >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "c"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "If you’re even THINKING of passing through THIS AREA without paying the TOLL, \n You and I are going to be having ONE VERY unpleasant chat. \n\n Why do army sergeants always have to scream?",
+                "options":
+                [
+					{
+                        "text": "Pay the toll (-50g) >",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                    [
+                                        {"flag": "money", "magnitude": -50}
+                                    ],
+                                "nextid": "d"
+                            }
+                        ]
+					},
+					{
+                        "text": "Make a break for it >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+					},
+					{
+                        "text": "Have a very unpleasant 'chat' >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "Thank you for your SUPPORT to the KING in these HARD TIMES.",
+                "options":
+                [
+					{
+                        "text": "what an ass  >"
+                    }
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Oh of course I can pay th- Whats that over there?! \n You make a quick run while the sergeant is distracted",
+                "options":
+                [
+					{"text": "HYAH RIDE >",
+					"outcomes":
+					[
+						{
+							"nextid": "g"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "GET THEM!!!!!!",
+                "options":
+                [
+					{"text": "FASTER >",
+					"outcomes":
+					[
+						{
+							"nextid": "h"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "You gallop as fast as you can, but the distraction wasn’t enough for a perfect escape. \n You manage to get away with minor graze wounds from arrows. \n The stress seems to be getting to poor Dragon",
+                "options":
+                [
+					{"text": "phew... >",
+							"consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 5}
+                                ]
+					}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "PLEASE GET OUT OF THE WAGON TO CHAT",
+                "options":
+                [
+					{"text": "okay okay jeez >",
+					"outcomes":
+					[
+						{
+							"nextid": "i"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "NOW YOU SEE HERE, WE’LL let you go JUST this ONCE, but PLEASE remember to PAY THE TOLL PROPERLY next time. AS IT IS WRITTEN, \"For the UPHOLDING and KEEPING all Churches and Chapels and the DOMINION OF THE KING over these lands:",
+                "options":
+                [
+					{"text": "Look blankly >",
+					"outcomes":
+					[
+						{
+							"nextid": "j"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "It is ORDERED and ORDAINED by the lords and commons assembled in parliament, that FOUR, three, TWO, or ONE SUBSTANTIAL inhabitants or inhabitants crossing such tolled lands, of every PARISH or CHAPELRY aforesaid (Having respect to the PROPORTIONS of Greatness of EVERY SUCH Parish or Chapelry)",
+                "options":
+                [
+					{"text": "Zone out >",
+					"outcomes":
+					[
+						{
+							"nextid": "k"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "k",
+                "text": "Shall be NOMINATED and CHOSEN DAILY, on any tolled traveling land, by the Sergeant of every ARMY serving the KING (Which are or shall be rateable to the Repair of any such Army in the Kingdom), or the GREATEST PART OF SUCH of them as Shall be then ASSEMBLED for the CHOICE OF OFFICERS within the PARISH or army to be Churchwarden or Churchwardens or COLLECTOR OF MONIES for ROYAL DUTIES, within every such Parish or Army respectively where any such Churchwarden or Churchwardens HAVE or HATH been FORMERLY used to be NOMINATED or CHOSEN;",
+                "options":
+                [
+					{"text": "stay zoned >",
+					"outcomes":
+					[
+						{
+							"nextid": "l"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "l",
+                "text": "or, in default hereof, every such PARISH or traveler shall FORFEIT the Sum of 50g to the Use of the KING of the said Parish, to be recovered as is hereafter expressed; which Churchwardens or Collectors, so to be chosen, are within ONE MONTH after their CHOICE to be allowed and APPROVED of under the hands and SEALS of two OF the next JUSTICES adjoining to the Parish or Chapelry AFORESAID.",
+                "options":
+                [
+					{"text": "Bwah whuh?? He's still talking? >",
+					"outcomes":
+					[
+						{
+							"nextid": "m"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "m",
+                "text": "and it is further ORDAINED, that the CHURCHWARDENS or COLLECTORS aforesaid, together with the OVERSEERS of the POOR of the same Parish or Chapelry or the greater PART OF THEM, upon PUBLIC NOTICE thereof first to be given by the Churchwardens in the said Church or Chapel,",
+                "options":
+                [
+					{"text": "I think I made a mistake >",
+					"outcomes":
+					[
+						{
+							"nextid": "n"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "n",
+                "text": "Shall from TIME TO TIME make RATES, or assessments, by TAXATION of every Inhabitant dwelling or residing within such PARISH or CHAPELRY, and of EVERY occupier of Lands, Houses, Tithes Impropriate or Impropriation of Tithes, Coal-mines, or saleable Underwoods, or other Hereditaments, within the said Parish or CHAPELRY,",
+                "options":
+                [
+					{"text": "I get it, I get it.. >",
+					"outcomes":
+					[
+						{
+							"nextid": "o"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "o",
+                "text": "in such competent Sum and Sums of Money as THEY SHALL think fit, for AND towards THE Reparation and Maintenance of every such Parish Church or Chapel RESPECTIVELY, and PROVIDING of BOOKS for the SAID CHURCH OR CHAPEL, and of BREAD and WINE TO be USED at the ADMINISTRATION of the Sacrament.…",
+                "options":
+                [
+					{"text": "I SAID I GET IT >",
+					"outcomes":
+					[
+						{
+							"nextid": "p"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "p",
+                "text": "ALRIGHT, just promise to pay next time and BE ON YOUR WAY \n What was he even talking about??",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 6,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "You see the remnants of an ancient battlefield.",
+                "options":
+                [
+                    {
+                        "text": "Search for treasure",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 100}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Check for supplies",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "I bet I can find something valuable (James)",
+                        "requirements":
+                        [
+                            {"flag": "james", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 300}
+                                ],
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					                    {
+                        "text": "Ahah, a perfect time for my magic detector!",
+                        "requirements":
+                        [
+                            {"flag": "magicdetector", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "heartstone", "magnitude": 1}
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+                    },
+					                    {
+                        "text": "There's something buried here... (Seer's Vision)",
+                        "requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "heartstone", "magnitude": 1}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "You gather as many shiny objects as you can, you find shields and weapons that you think might be valuable [+100g]",
+                "options":
+                [
+					{"text": "Shiny >"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "You find some extremely hardtack. It’s unpleasant, but will do in a pinch [+1 Supplies]",
+                "options":
+                [
+					{"text": "It's better than nothing >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "James comes back with the crown of an old king [+250g]",
+                "options":
+                [
+					{"text": "Nice Job James! >"}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "Beep. Beep. Beep...",
+                "options":
+                [
+					{"text": "Continue >",
+					"outcomes":
+					[
+						{
+							"nextid": "i"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "You dig at the spot you can feel something buried, and find a Heart Stone! Yes! This should fuel a Crystal of Purity!",
+                "options":
+                [
+					{"text": "Woohoo! >",
+					"outcomes":
+					[
+						{
+							"nextid": "h"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "Beep. Beep. Beeeeeeeep...",
+                "options":
+                [
+					{"text": "Continue >",
+					"outcomes":
+					[
+						{
+							"nextid": "j"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "Beepbeepbeepbeepbeepbeep!",
+                "options":
+                [
+					{"text": "Something's here! >",
+					"outcomes":
+					[
+						{
+							"nextid": "k"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "You dig under the hotspot for the Magic Detector and find a Heart Stone! Yes! This should fuel the Crystal of Purity!!",
+                "options":
+                [
+					{"text": "Woohoo! >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 7,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "A field of Goldenberries! I’ve only ever heard of them! They’re supposed to be delicious!",
+                "options":
+                [
+                    {
+                        "text": "Gather Goldenberries",
+                        "outcomes":
+                        [
+                            {"nextid": "k"}
+                        ]
+                    },
+                    {
+                        "text": "Consult Plant Identification Guide",
+                        "requirements":
+                        [
+                            {"flag": "pig", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 2}
+                                ],
+                                "nextid": "e",
+								"probability" : 25
+                            },
+							{
+								"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 1}
+                                ],
+                                "nextid": "f",
+								"probability" : 50
+                            },
+							{
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": 1}
+                                ],
+                                "nextid": "g",
+								"probability" : 25
+                            }
+                        ]
+                    },
+					                    {
+                        "text": "Woah, a whole field of goldenberries, let me make sure they're safe (mary)",
+                        "requirements":
+                        [
+                            {"flag": "mary", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                           {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 2}
+                                ],
+                                "nextid": "h",
+								"probability" : 25
+                            },
+							{
+								"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 1}
+                                ],
+                                "nextid": "i",
+								"probability" : 50
+                            },
+							{
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": 1}
+                                ],
+                                "nextid": "j",
+								"probability" : 25
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "k",
+                "text": "You eat your fill on delicious Goldenberries, and take some for the road. +1 Supplies",
+                "options":
+                [
+                    {
+                        "text": "Yummy! >",
+                        "outcomes":
+                        [
+							{
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -1}
+                                ],
+                                "nextid": "c",
+								"probability" : 60
+                            },
+							{
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": 1}
+                                ],
+                                "nextid": "d",
+								"probability" : 40
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "c",
+                "text": "You start feeling a little queasy… I don’t think those were Goldenberries, you throw the rest out -1 Supplies \n Those couldn’t have been good for you.",
+                "options":
+                [
+					{"text": "Yuck >"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "You start feeling a little queasy… Just as you’re getting ready to hurl, the world changes colors! You feel as though you could see things you couldn’t before, it’s a strange sensation that you’re overall not a fan of. You throw out the rest of the berries and hope this isn’t permanent \n -1 Supplies + Seer's Vision",
+                "options":
+                [
+					{"text": "Weird >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Wow! Real goldenberries, apparantly the leaves and stalks are delicious too!",
+                "options":
+                [
+					{"text": "Yummy! >"}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "Wow, you almost made a mistake! These are Fool’s Goldenberries, the much more common variety that are mildly toxic. Making a jam out of them should squeeze the poison out. \n Too bad they weren’t real Goldenberries +1 Supplies",
+                "options":
+                [
+					{"text": "Yummy >"}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "I’ve only ever heard of these! Vermeil Goldenberries. Said to be a legend, those who eat these can see through natural oddities with Seer’s Vision. ",
+                "options":
+                [
+					{"text": "I'm gonna have to eat that >",
+					"outcomes":
+					[
+						{
+							"nextid": "d"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "Wow! I haven’t seen real goldenberries in the field before! Let me help you gather as much as we can!",
+                "options":
+                [
+					{"text": "Yummy! >"}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "See the clustering of the berries? It’s very similar to how Goldenberries are suppose to look, but these are Fool’s Goldenberries, you shouldn’t eat them raw, but we can make a jam out of them",
+                "options":
+                [
+					{"text": "Yummy >"}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "I’ve only ever heard of these! Vermeil Goldenberries. Said to be a legend, those who eat these can see through natural oddities with Seer’s Vision. Let’s eat some!",
+                "options":
+                [
+					{"text": "Okay! >",
+					"outcomes":
+					[
+						{
+							"nextid": "d"
+						}
+					]
+					}
+                ]
+            }
+        ]
+    }
+]

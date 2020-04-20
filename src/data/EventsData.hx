@@ -6,7 +6,7 @@ import haxe.Json;
 typedef FlagData = {
     var flag: String;
     var magnitude: Int;
-    //var lessThan: Bool; // for requirements, default is greater than or equal to, set to true for less than
+    var checkType: Int;
 }
 
 typedef OutcomeData= {
@@ -29,6 +29,7 @@ typedef PassageData = {
 
 typedef EventData = {
     var scenarioid: Int;
+    var scenarioreq: Array<FlagData>;
     var passages: Array<PassageData>;
 }
 
@@ -36,7 +37,7 @@ class EventsData {
     public var events: Array<EventData>;
 
     public function new() {
-        var json = Res.data.test.entry.getText();
+        var json = Res.data.through10.entry.getText();
         events = Json.parse(json);
     }
 

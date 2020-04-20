@@ -1,11 +1,12 @@
 package scenes;
 
+import h2d.Object;
+import h2d.filter.Outline;
 import h2d.col.Voronoi.Cell;
 import hxd.Event;
 import h2d.Text;
 import data.MapData;
 import h2d.Interactive;
-import haxe.display.Display.Package;
 import h2d.Bitmap;
 import h2d.Tile;
 import h2d.Scene;
@@ -16,7 +17,7 @@ import h2d.Font;
 
 class DialogueLevel implements Level {
     public var scene: Scene;
-    public var textbox: Bitmap;
+    public var textbox: Object;
     public var optionListeners: Array<Interactive>;
     public var eventData: EventData;
     public var playerData: PlayerData;
@@ -28,6 +29,8 @@ class DialogueLevel implements Level {
     private var nextLevel: Null<Level>;
     private var curTown: Cell;
     private var endTown: Cell;
+    private var bgTile: Tile;
+    private var viewMap: Text;
 
     public function new(parent: Level, eventsData: EventsData, playerData: PlayerData, mapData: MapData, townTile: Tile, curTown: Cell, endTown: Cell, ?scenario: Int) {
         scene = new Scene();
@@ -36,11 +39,40 @@ class DialogueLevel implements Level {
         done = false;
         this.parent = parent;
 
-        var scenarioIdx = Math.floor(Math.random() * eventsData.events.length); // just random picking for now, might need to add logic based on flags
+        var scenarioIdx = Math.floor(Math.random() * eventsData.events.length);
         if (scenario != null) {
             scenarioIdx = scenario;
         }
+
         eventData = eventsData.events[scenarioIdx];
+
+        var satisfied = true;
+        if (eventData.scenarioreq == null) {
+            eventData.scenarioreq = [];
+        }
+        for (scenarioReq in eventData.scenarioreq) {
+            if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude, scenarioReq.checkType)) {
+                satisfied = false;
+                break;
+            }
+        }
+
+        while (!satisfied) {
+            var scenarioIdx = Math.floor(Math.random() * eventsData.events.length);
+            eventData = eventsData.events[scenarioIdx];
+
+            satisfied = true;
+            if (eventData.scenarioreq == null) {
+                eventData.scenarioreq = [];
+            }
+            for (scenarioReq in eventData.scenarioreq) {
+                if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude, scenarioReq.checkType)) {
+                    satisfied = false;
+                    break;
+                }
+            }
+        }
+
         eventsData.events.remove(eventData); // remove the encountered event from the list
 
         this.playerData = playerData;
@@ -48,26 +80,24 @@ class DialogueLevel implements Level {
         this.townTile = townTile;
         this.curTown = curTown;
         this.endTown = endTown;
-    }
+        if (this.bgTile == null) {
+            this.bgTile = Res.img.village_bg.toTile();
+        }
 
-    public function init(): Void {
         // Init Bg
-        var bgTile = Res.img.village_bg.toTile();
         var bg = new Bitmap(bgTile, scene);
-        
-        // Init textbox
-        textbox = new Bitmap(Tile.fromColor(0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)), scene);
-        textbox.x = 1920/2 - textbox.getBounds().width/2;
-        textbox.y = 1080/2 - textbox.getBounds().height/2;
-        textbox.alpha = 1;
-        // new Bitmap(Res.img.textbox.toTile(), scene); // needs james textbox
-        // font = hxd.res.DefaultFont.get();
+
+        textbox = new Object(scene);
+
         font = Res.fonts.alagard.toFont();
 
         // Init map view button
-        var viewMap = new Text(Res.fonts.pixop.toFont(), scene);
+        viewMap = new Text(Res.fonts.pixop.toFont(), scene);
         viewMap.text = "VIEW MAP";
         viewMap.scale(5);
+        viewMap.x = (scene.width - 5 * viewMap.textWidth) / 2;
+        viewMap.y = scene.height - 5 * viewMap.textHeight - 50;
+        viewMap.filter = new Outline(1, 0x000000, 0.5);
 
         var viewMapBtn = new Interactive(viewMap.textWidth, viewMap.textHeight, viewMap);
 
@@ -77,6 +107,9 @@ class DialogueLevel implements Level {
 
         // Init first passage
         progressText("a");
+    }
+
+    public function init(): Void {
     }
 
     public function update(dt: Float): Null<Level> {
@@ -95,6 +128,16 @@ class DialogueLevel implements Level {
         // clear previous text
         textbox.removeChildren();
 
+        // Init textbox
+        var textBg = new Bitmap(Tile.fromColor(
+            0x000000, Math.floor(scene.width / 2), Math.floor(scene.height / 2)
+        ), textbox);
+        textBg.x = 1920/2 - textBg.tile.width/2;
+        textBg.y = 1080/2 - textBg.tile.height/2;
+        textBg.alpha = 0.5;
+
+        var outlineFilter = new Outline(1, 0x000000);
+
         // remove previous listeners
         optionListeners = new Array();
 
@@ -103,15 +146,16 @@ class DialogueLevel implements Level {
             passage -> passage.id == nextid)[0];
         var passage = new h2d.Text(font);
         passage.text = passageData.text;
-        passage.x = 20;
-        passage.y = 20;
-        passage.maxWidth = textbox.getBounds().width - 40;
+        passage.filter = outlineFilter;
+        passage.x = textBg.x + 20;
+        passage.y = textBg.y + 20;
+        passage.maxWidth = textBg.tile.width - 40;
         passage.textColor = 0xFFFFFF;
         passage.alpha = 1;
         textbox.addChild(passage);
 
         // Init next height for placement of options
-        var nextHeight = passage.textHeight + 100;
+        var nextHeight = textBg.y + passage.textHeight + 100;
 
         // Init options
         for (opt in passageData.options) {
@@ -121,7 +165,7 @@ class DialogueLevel implements Level {
                 var flagsMet = true;
                 for (flagRequired in opt.requirements) {
                     // overload to avoid null error
-                    if (!playerData.flags.exists(flagRequired.flag) || playerData.flags.get(flagRequired.flag) < flagRequired.magnitude) {
+                    if (!playerData.checkProperty(flagRequired.flag, flagRequired.magnitude, flagRequired.checkType)) {
                         flagsMet = false;
                         break;
                     }
@@ -132,9 +176,10 @@ class DialogueLevel implements Level {
             }
             var option = new h2d.Text(font);
             option.text = opt.text;
-            option.maxWidth = textbox.getBounds().width - 40;
+            option.filter = outlineFilter;
+            option.maxWidth = textBg.tile.width - 40;
             option.textColor = 0xFFFFFF;
-            option.x = 20;
+            option.x = textBg.x + 20;
             option.y = nextHeight;
             option.alpha = 1;
             textbox.addChild(option);
@@ -156,12 +201,7 @@ class DialogueLevel implements Level {
 
                     if (outcome.consequences != null) {
                         for (consequence in outcome.consequences) {
-                            var flags = playerData.flags;
-                            if (flags.exists(consequence.flag)) {
-                                flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
-                            } else {
-                                flags.set(consequence.flag, consequence.magnitude);
-                            }
+                            playerData.incrementProperty(consequence.flag, consequence.magnitude);
                         }
                     }
                     trace(outcome.nextid);

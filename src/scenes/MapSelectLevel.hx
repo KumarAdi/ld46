@@ -1,5 +1,6 @@
 package scenes;
 
+import hxd.res.Sound;
 import data.EventsData;
 import h2d.Scene;
 import hxd.Res;
@@ -51,12 +52,31 @@ class MapSelectLevel extends MapLevel {
         
         super(parent, scene, mapData, playerData, townTile, curTown, endTown);
 
+        x.remove();
+
         for (town => cell in this.towns) {
             town.onClick = function (e: Event) {
                 if (cell.getNeighbors().indexOf(curTown.point) != -1) {
+                    // play sound effect
+                    var horseSfx:Sound = null;
+                    //If we support mp3 we have our sound
+                    if(hxd.res.Sound.supportedFormat(Mp3)){
+                        horseSfx = hxd.Res.sound.horse;
+                    }  
+
+                    if(horseSfx != null){
+                        //Play the music and loop it
+                        horseSfx.play(false);
+                    }
                     // launch dialog
                     curTown = cell;
-                    nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
+                    if (curTown == endTown) {
+                        nextLevel = new CutsceneDialogueLevel(
+                            new MainMenu(), eventData, playerData, mapData, townTile,
+                            curTown, endTown, Res.img.intro.toTile());
+                    } else if (visited.indexOf(cell) == -1) {
+                        nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
+                    }
                 }
             }
         }
@@ -64,5 +84,17 @@ class MapSelectLevel extends MapLevel {
 
     override function init() {
         super.init();
+
+        if (playerData.checkProperty("supplies", 0, -1)) {
+            nextLevel = new CutsceneDialogueLevel(
+                new MainMenu(), eventData, playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile());
+        }
+
+        if (playerData.checkProperty("curse", 100)) {
+            nextLevel = new CutsceneDialogueLevel(
+                new MainMenu(), eventData, playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile());
+        }
     }
 }

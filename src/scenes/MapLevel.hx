@@ -2,9 +2,10 @@ package scenes;
 
 import h2d.Slider;
 import h2d.col.Voronoi.Diagram;
+import h2d.filter.ColorMatrix;
+import h2d.filter.Outline;
 import h2d.Tile;
 import h2d.col.Voronoi.Cell;
-import hxd.res.DefaultFont;
 import h2d.Text;
 import data.PlayerData;
 import h2d.Object;
@@ -15,7 +16,6 @@ import hxd.Res;
 import h2d.col.Point;
 import h2d.Bitmap;
 import h2d.Scene;
-import h2d.col.Bounds;
 import data.MapData;
 
 class MapLevel implements Level {
@@ -41,6 +41,9 @@ class MapLevel implements Level {
     private var orbIcon: Bitmap;
     private var stoneIcon: Bitmap;
     private var uiBg: Object;
+    private var endBtn: Interactive;
+    private var x: Text; // the button to close the map view
+    private final visited = new Array<Cell>();
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
@@ -67,6 +70,8 @@ class MapLevel implements Level {
         var highlighter = new Graphics(roads);
         highlighter.lineStyle(8, 0xFFFFFF);
 
+
+        var outline = new Outline(2, 0xFFFFFF);
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
             var townSprite = new Bitmap(townTile, townLayer);
@@ -79,16 +84,31 @@ class MapLevel implements Level {
                     highlighter.moveTo(town.x, town.y);
                     highlighter.lineTo(neighbor.x, neighbor.y);
                 }
+                if (visited.indexOf(cell) == -1) {
+                    townSprite.filter = outline;
+                }
             }
 
             interactiveTile.onOut = function (e: Event) {
                 highlighter.clear();
                 highlighter = new Graphics(roads);
                 highlighter.lineStyle(8, 0xFFFFFF);
+                if (visited.indexOf(cell) == -1) {
+                    townSprite.filter = null;
+                }
             }
 
             towns.set(interactiveTile, cell);
+            if (cell == endTown) {
+                endBtn = interactiveTile;
+            }
         }
+
+        var flagTile = Res.img.wizardflag.toTile();
+        flagTile.scaleToSize(townTile.width, townTile.height);
+        var flag = new Bitmap(flagTile, endBtn.parent);
+        flag.x = townTile.width / 2 - 25;
+        flag.y = -25;
 
         var caravanTile = Res.img.caravan.toTile();
         caravanTile.scaleToSize(townSize.x * 0.9, townSize.y * 0.9);
@@ -106,7 +126,7 @@ class MapLevel implements Level {
         scene.addChild(uiBg);
 
         // Init back button
-        var x = new Text(uiFont, scene);
+        x = new Text(uiFont, scene);
         x.text = "Back to Dialogue";
         var xBtn = new Interactive(x.textHeight, x.textHeight, x);
         xBtn.onClick = function (e: Event) {
@@ -185,6 +205,13 @@ class MapLevel implements Level {
     public function init() {
         var roadLines = new Graphics(roads);
         roadLines.lineStyle(16, 0x8f6c3b);
+        visited.push(curTown);
+
+        for (town => cell in towns) {
+            if (visited.indexOf(cell) != -1) {
+                town.parent.filter = ColorMatrix.grayed();
+            }
+        }
 
         for (cell in mapData.diagram.cells) {
             var town = cell.point;
