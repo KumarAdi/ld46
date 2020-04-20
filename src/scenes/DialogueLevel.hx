@@ -171,7 +171,7 @@ class DialogueLevel implements Level {
                         break;
                     }
                 }
-                
+                // if (!flagsMet )
             }
             var option = new h2d.Text(font);
             option.text = opt.text;

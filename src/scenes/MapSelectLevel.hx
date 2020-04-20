@@ -19,7 +19,7 @@ class MapSelectLevel extends MapLevel {
         scene.scaleMode = LetterBox(1920, 1080);
 
         playerData = PlayerData.getInstance();
-        eventData = new EventsData();
+        eventData = new EventsData(Res.data.normal.entry.getText());
 
         this.townTile = Res.img.town1.toTile();
         townTile.scaleToSize(170, 170);
@@ -72,8 +72,9 @@ class MapSelectLevel extends MapLevel {
                     curTown = cell;
                     if (curTown == endTown) {
                         nextLevel = new CutsceneDialogueLevel(
-                            new MainMenu(), eventData, playerData, mapData, townTile,
-                            curTown, endTown, Res.img.intro.toTile());
+                            new MainMenu(), new EventsData(Res.data.endings.entry.getText()),
+                            playerData, mapData, townTile,
+                            curTown, endTown, Res.img.intro.toTile(), 2);
                     } else if (visited.indexOf(cell) == -1) {
                         nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                     }
@@ -86,15 +87,18 @@ class MapSelectLevel extends MapLevel {
         super.init();
 
         if (playerData.checkProperty("supplies", 0, -1)) {
+
             nextLevel = new CutsceneDialogueLevel(
-                new MainMenu(), eventData, playerData, mapData, townTile,
-                curTown, endTown, Res.img.intro.toTile());
+                new MainMenu(), new EventsData(Res.data.endings.entry.getText())
+                , playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile(), 0);
         }
 
         if (playerData.checkProperty("curse", 100)) {
             nextLevel = new CutsceneDialogueLevel(
-                new MainMenu(), eventData, playerData, mapData, townTile,
-                curTown, endTown, Res.img.intro.toTile());
+                new MainMenu(), new EventsData(Res.data.endings.entry.getText()),
+                playerData, mapData, townTile,
+                curTown, endTown, Res.img.intro.toTile(), 1);
         }
     }
 }

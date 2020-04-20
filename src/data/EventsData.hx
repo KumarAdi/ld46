@@ -36,8 +36,8 @@ typedef EventData = {
 class EventsData {
     public var events: Array<EventData>;
 
-    public function new() {
-        var json = Res.data.through10.entry.getText();
+    public function new(jsonData: String) {
+        var json = jsonData;
         events = Json.parse(json);
     }
 

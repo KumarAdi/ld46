@@ -40,7 +40,7 @@
                         ]
                     },
                     {
-                        "text": "2. Melissa)",
+                        "text": "2. Melissa",
                         "outcomes":
                         [
                             {
@@ -432,13 +432,12 @@
                 "text": "Alright listen, I'm not here to argue, you can have our lame horse if you want for free, \n but he is pretty damn slow. \n It’s not much better, but it’s something",
                 "options":
                 [
-                    {"text": "buy the lame horse (-100g) >",
+                    {"text": "Get the lame horse >",
 					"outcomes":
 					[
 						{
 							"consequences":
                                 [
-                                    {"flag": "money", "magnitude": -100},
                                     {"flag": "lame", "magnitude": 1}
                                 ],
 							"nextid": "n"
@@ -1027,7 +1026,7 @@
                 ]
             },
 			{
-                "id": "j",
+                "id": "k",
                 "text": "You dig under the hotspot for the Magic Detector and find a Heart Stone! Yes! This should fuel the Crystal of Purity!!",
                 "options":
                 [
@@ -1231,6 +1230,1102 @@
             }
         ]
     },
+	{
+        "scenarioid": 8,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "As you ride for an abnormally long time, a mist begins to settle around the plains. \n A few minutes later you cannot see even a few feet in front of you.",
+                "options":
+                [
+                    {
+                        "text": "Keep Travelling, you’ll reach your destination eventually.",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b",
+								"probability": 90 
+                            },
+							{
+                                "nextid": "c",
+								"probability": 10 
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Wait for the fog to clear. -2 Supplies",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Don't worry, I got this (Mary)",
+                        "requirements":
+                        [
+                            {"flag": "mary", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+	                {
+                        "text": "I see the path… (Seer’s Vision)",
+                        "requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "The mist is all around you…",
+                "options":
+                [
+					{
+                        "text": "Keep Travelling, you’ll reach your destination eventually.",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b",
+								"probability": 90 
+                            },
+							{
+                                "nextid": "c",
+								"probability": 10 
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Wait for the fog to clear. -2 Supplies",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": -2}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Don't worry, I got this (Mary)",
+                        "requirements":
+                        [
+                            {"flag": "mary", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+	                {
+                        "text": "I see the path… (Seer’s Vision)",
+                        "requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "Ahah! I knew I'd get there eventually",
+                "options":
+                [
+					{"text": "I did it! >"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "It takes a long time, but eventually the fog lifts and you are able to start moving again. -2 Supplies",
+                "options":
+                [
+					{"text": "I'm not sure it was worth it >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Mary takes control of the cart and boldly pushes forwards, you have no idea how she knows where she’s going, maybe its blind luck, but it works and soon enough you’re out of the smoke.",
+                "options":
+                [
+					{"text": "Good job! >"}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "You continue down the path and don’t falter, the way to go feels clear as day until you’re out of the fog. The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Easy >",
+					"outcomes":
+					[
+						{
+							"nextid": "h"
+						}
+					]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 9,
+		"scenarioreq": 
+		[
+			{"flag": "mary", "magnitude": 0},
+			{"flag": "james", "magnitude": 0}
+		],
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "While traveling you notice a blindfolding person kneeling on the ground. You get close to investigate and you find that their hands and feet are bound.",
+                "options":
+                [
+                    {
+                        "text": "Untie them immediately",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b",
+								"probability": 50 
+                            },
+							{
+                                "nextid": "c",
+								"probability": 50 
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Well it’s not like they’re gonna know if you just leave…",
+                        "requirements":
+                        [
+                            {"flag": "margaret", "magnitude": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+	                {
+                        "text": "Margaret is compassionate and will not allow you to make any other choice",
+                        "requirements":
+                        [
+                            {"flag": "margaret", "magnitude": 1}
+                        ],
+                       "outcomes":
+                        [
+                            {
+                                "nextid": "b",
+								"probability": 50 
+                            },
+							{
+                                "nextid": "c",
+								"probability": 50 
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "Thank you so much! Oh man I thought I was gonna die here.",
+                "options":
+                [
+					{
+                        "text": "What happened?",
+                        "outcomes":
+                        [
+							{
+                                "nextid": "e"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "Thank you so much! Wow I really thought I was gonna die this time.",
+                "options":
+                [
+					{"text": "This time?! >",
+					"outcomes":
+                        [
+							{
+                                "nextid": "g"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "You wonder the moral implications not saving someone has. Does it make you a bad person if you didn’t tie them up? I guess it doesn’t matter anymore.",
+                "options":
+                [
+					{"text": "Stop testing me >"}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "I was searching for some rumoured ruins not far from here, I stumbled upon a group of witches who thought I was documenting their ancient rituals, not that I wasn’t taking notes, but they took me out here as punishment.",
+                "options":
+                [
+					{"text": "Wow... >",
+						"outcomes":
+                        [
+							{
+								"consequences":
+                                [
+                                    {"flag": "james", "magnitude": 1}
+									
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "Say you wouldn’t happen to be going to The Misty Mountains would you? I’m an excellent prospector and historian if the situation ever arises, my name is \"James\"",
+                "options":
+                [
+					{"text": "Yes! Come along! >"
+					}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "Oh you know how it is.",
+                "options":
+                [
+					{"text": "I really don't >",
+					"outcomes":
+                        [
+							{
+                                "nextid": "h"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "Well I was foraging for food on my way to Misty Mountains and I stumbled upon this Mercenary Encampment. They were trading in illegal animals and I caught them. It turns out they were very dangerous, but not entirely terrible since instead of killing me outright they just left me here to die.",
+                "options":
+                [
+					{"text": "Wow I- >",
+					"outcomes":
+                        [
+							{
+                                "nextid": "i"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "Hey are you headed to Misty Mountains? Oh I bet you need an expert survivalist/navigator? My name is \"Mary\" and I think we’d make one hell of a team.",
+                "options":
+                [
+					{"text": "I don't- >",
+					"outcomes":
+                        [
+							{
+                                "nextid": "j"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "Perfect!",
+                "options":
+                [
+					{"text": "But I- >",
+					"outcomes":
+                        [
+							{
+                                "consequences":
+                                [
+                                    {"flag": "mary", "magnitude": 1}
+                                ],
+                                "nextid": "k"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "k",
+                "text": "And thus, you have gained a new companion",
+                "options":
+                [
+					{"text": "Alright >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 10,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "On the trail you ride up to a very ambiguous mob. They seem to be trying to say something about the king, but it’s hard to tell what. Some of the mob have banners holding up the king’s face, others have pitchforks and torches. A few smatterings of signs saying \"We have strong feelings about the king!\"",
+                "options":
+                [
+					{"text": "Just ignore them >",
+						"outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "b",
+                "text": "Oy you! \n The mob’s attention turns to you. \n What do you think, are you for the King? Or against him.",
+                "options":
+                [
+					{
+                        "text": "Long Live the King!",
+                        "outcomes":
+                        [
+                                {"nextid": "c"}
+                        ]
+                    },
+                    {
+                        "text": "He's a greedy tyrant!",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "d"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "The mob seems to take a second before someone in the back shouts \n Yeah what he said! \n Yeaaahhhhhhhh! \n We should burn the witch! \n Yeaaahhhhhhh! \n You’ve seemed to unite the mob under one ideal, great job, you king's pet!",
+                "options":
+                [
+					{"text": "Let’s get out of here >"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "The mob seems to take a second before someone in the back shouts \n Yeah what he said! \n Yeaaahhhhhhhh! \n March on the Kingdom! \n Yeaaahhhhhhhh! \n You’ve seemed to unite the mob under one ideal, great job, you revolutionary!",
+                "options":
+                [
+					{"text": "Let’s get out of here >"}
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 11,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "You hear a strange whisper, a song! No… a chant? It's coming from the woods... ",
+                "options":
+                [
+                    {
+                        "text": "Time to investigate!",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "We're on a time limit here",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "h"
+                            }
+                        ]
+                    },
+					{
+                        "text": "There's something I need here... (Seer's Vision)",
+                        "requirements":
+                        [
+                            {"flag": "servis", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "i"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "The sounds get louder and louder as you get closer and closer. Suddenly an arm comes through the bushes and pulls you into a clearing with a bunch of witch cultists dancing around a fire! There is an Orb of Truesight being forged atop the fire!",
+                "options":
+                [
+                    {
+                        "text": "Perfect!",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "c"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "Te’lu Krakate memori wah’lu!! \n The cultists don’t stop dancing, in fact, you feel the urge to start dancing as well, and before you know it, you’re humming and chanting and are dancing like you never knew you could!",
+                "options":
+                [
+                    {
+                        "text": "Let's just enjoy ourselves here!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "If only I could get closer to that Orb...",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					{
+                        "text": "We need to get out of here... NOW",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "d",
+                "text": "You continue to dance freely, you can’t help but feel like you’re forgetting you need to do something.",
+                "options":
+                [
+                    {
+                        "text": "Let's just enjoy ourselves here!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 1}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "If only I could get closer to that Orb... (+5 Curse Progression)",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					{
+                        "text": "We need to get out of here... NOW",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "e",
+                "text": "You dance yourself closer and closer to the fire, and when the opportunity strikes SNATCH.. The fire starts to dim and die. \n You start to feel intense pain, but  you can bear it. The rest of the cultists however are doubled over in pain screaming.",
+                "options":
+                [
+                    {
+                        "text": "Yeah now's a perfect time to leave!",
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 5}
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },	
+			{
+                "id": "f",
+                "text": "You quickly rush out of the small wooded area and back to your wagon. The proximity to strange magics have worsened the curse \n That seemed dangerous?",
+                "options":
+                [
+                    {
+                        "text": "At least we got the orb! >"
+                    }
+                ]
+            },
+			{
+                "id": "g",
+                "text": "Definitely not going to stick around any longer, you resist the impulse to dance and face the fire. \n But you can’t… Just then you have this brilliant idea, and staring directly at the fire, you moonwalk all the way to safety. That was a close one.",
+                "options":
+                [
+                    {
+                        "text": "Never going back there >"
+                    }
+                ]
+            },
+			{
+                "id": "h",
+                "text": "You ignore the strange chanting, probably a wise decision.",
+                "options":
+                [
+                    {
+                        "text": "Thats right >"
+                    }
+                ]
+            },
+			{
+                "id": "i",
+                "text": "The sounds get louder and louder as you get closer and closer. Suddenly an arm comes through the bushes and pulls you into a clearing with a bunch of witch cultists dancing around a fire! There is an Orb of Truesight being forged atop the fire!",
+                "options":
+                [
+                    {
+                        "text": "Perfect!",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "j"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "j",
+                "text": "Te’lu Krakate memori wah’lu!! \n The cultists don’t stop dancing, in fact, you feel the urge to start dancing as well, and before you know it, you’re humming and chanting and are dancing like you never knew you could!",
+                "options":
+                [
+                    {
+                        "text": "Let's just enjoy ourselves here!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 1}
+                                ],
+                                "nextid": "k"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "If only I could get closer to that Orb...",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "l"
+                            }
+                        ]
+                    },
+					{
+                        "text": "We need to get out of here... NOW",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "n"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "k",
+                "text": "You continue to dance freely, you can’t help but feel like you’re forgetting you need to do something.",
+                "options":
+                [
+                    {
+                        "text": "Let's just enjoy ourselves here!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 1}
+                                ],
+                                "nextid": "k"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "If only I could get closer to that Orb... (+5 Curse Progression)",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "l"
+                            }
+                        ]
+                    },
+					{
+                        "text": "We need to get out of here... NOW",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "n"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "l",
+                "text": "You dance yourself closer and closer to the fire, and when the opportunity strikes SNATCH.. The fire starts to dim and die. \n You start to feel intense pain, but  you can bear it. The rest of the cultists however are doubled over in pain screaming.",
+                "options":
+                [
+                    {
+                        "text": "Yeah now's a perfect time to leave!",
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "curse", "magnitude": 5}
+                                ],
+                                "nextid": "m"
+                            }
+                        ]
+                    }
+                ]
+            },	
+			{
+                "id": "m",
+                "text": "You quickly rush out of the small wooded area and back to your wagon. The proximity to strange magics have worsened the curse \n That seemed dangerous?",
+                "options":
+                [
+                    {
+                        "text": "At least we got the orb! >",
+						"outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "o"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "n",
+                "text": "Definitely not going to stick around any longer, you resist the impulse to dance and face the fire. \n But you can’t… Just then you have this brilliant idea, and staring directly at the fire, you moonwalk all the way to safety. That was a close one.",
+                "options":
+                [
+                    {
+                        "text": "Never going back there >",
+						"outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "o"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "o",
+                "text": "The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
+                ]
+            }
+        ]
+	},
+	{
+        "scenarioid": 12,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "There’s a strange cave here, I bet there’s treasure in there! But it could be very dangerous..",
+                "options":
+                [
+					{
+                        "text": "Let's explore!",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 50}
+                                ],
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Looks like an old dire bear den, shouldn’t be dangerous anymore. (James)",
+						"requirements":
+                        [
+                            {"flag": "james", "magnitude": "1"}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                 "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 300}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+					{
+                        "text": "Better keep going.",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+					{
+                        "text": "There’s something magic in there… (Seer’s Vision)",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "It’s a dark cave and it’s hard to tell what’s what. You pick up a few shiny stones hoping they’re worth something. (+50g)",
+                "options":
+                [
+					{
+                        "text": "Money! >"
+                    },
+                    {
+                        "text": "Beeeeeeep (Magic Detector)",
+						"requirements":
+                        [
+                            {"flag": "magicdetector", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "heartstone", "magnitude": 1}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "Hey, the magic detector is going off. It seems to be pointing directly at an off color rock. You take it with you and realize you found a Heart Stone!",
+                "options":
+                [
+					{"text": "Heart stone, down!"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "You and James head into the den, it’s far too dark for you to see anything, however James is immediately pulled towards a large quantity of rosy rocks.",
+                "options":
+                [
+					{"text": "What are those? >",
+					 "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+					}					
+                ]
+            },
+			{
+                "id": "e",
+                "text": "James: \n It’s orichalcum! Loads of it! We’re going to be rich! (+300g)",
+                "options":
+                [
+					{"text": "Nice job James >"},
+					{"text": "Beeeeeeep (Magic Detector)",
+						"requirements":
+                        [
+                            {"flag": "magicdetector", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "heartstone", "magnitude": 1}
+                                ],
+                                "nextid": "c"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "f",
+                "text": "Sometimes, it’s better not to take risks.",
+                "options":
+                [
+					{"text": "That's right >"}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "It’s a dark cave, but you can sense exactly where you need to go. You pick up an off color rock, and you know that you need it. You found a Heart Stone!",
+                "options":
+                [
+					{"text": "Heartstone, down",
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "heartstone", "magnitude": 1},
+									{"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "h"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "h",
+                "text": "The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
+                ]
+            }
+        ]
+    },	
+	{
+        "scenarioid": 13,
+        "passages": 
+		[
+            {
+                "id": "a",
+                "text": "The sun is burning bright on a nice day \n FWWWHIIPPPP- An arrow whizzes near your face, so much for a nice day. Six bandits pop out of nowhere. \n Your money or your life!",
+                "options":
+                [
+					{
+                        "text": "Your money (-all money)",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Your life (- life)",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "b",
+                "text": "Wait why am I listening to their choices?",
+                "options":
+                [
+					{
+                        "text": "Make a break for it >",
+                        "outcomes":
+                            [
+                                {
+                                    "consequences":
+                                    [
+                                        {"flag": "supplies", "magnitude": -2}
+                                    ],
+                                    "nextid": "c"
+                                }
+                            ]
+                    },
+					{
+                        "text": "Fight them off >",
+                        "requirements":
+                            [
+                                {"flag": "money", "magnitude": 250}
+                            ],
+                        "outcomes":
+                            [
+                                {
+                                    "consequences":
+                                    [
+                                        {"flag": "supplies", "magnitude": -2},
+                                        {"flag": "money", "magnitude": -250}
+                                    ],
+                                    "nextid": "d"
+                                }
+                            ]
+                    },
+					{
+                        "text": "Don't worry, I'll handle this (Geiger)>",
+						"requirements":
+                        [
+                            {"flag": "geiger", "magnitude": "1"}
+                        ],
+						"outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 1}
+                                ],
+                                "nextid": "e"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "On second thought, yeah my money is fine (-200g)",
+                        "outcomes":
+                        [
+                            {
+								"consequences":
+                                [
+                                    {"flag": "money", "magnitude": -200}
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+			{
+                "id": "c",
+                "text": "You successfully surprise them and break through their formation, you think you’ve gotten away safely when you see your horse has an arrow in its ass. \n You need to use supplies to make your horse feel better (-2 Supplies)",
+                "options":
+                [
+					{"text": "My Horse!"}
+                ]
+            },
+			{
+                "id": "d",
+                "text": "It takes a lot of bravado to try to handle 6 armed bandits, unfortunately it doesn’t go well for you. They leave you wounded, but alive \n They take all the money they find on you and some of your supplies (-250g, -2 supplies)",
+                "options":
+                [
+					{"text": "Damnit >"}					
+                ]
+            },
+			{
+                "id": "e",
+                "text": "The mighty mercenary leaps out of the wagon and eviscerates the bandits in mere seconds \n perhaps he is worth every penny. The bandits had some supplies on them (+1 Supplies)",
+                "options":
+                [
+					{"text": "That was brutal >"}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "You don't give them all of your money and insist that it’s all that you have, the suckers bought it!",
+                "options":
+                [
+					{"text": "That's right >"}
+                ]
+            }
+        ]
+    },	
     {
         "scenarioid": 16,
         "passages": [
@@ -1262,10 +2357,10 @@
                         ]
                     },
                     {
-                        "text": "I know this place...",
+                        "text": "I know this place... (James)",
                         "requirements":
                         [
-                            {"flag": "james", "magnitude": "1"}
+                            {"flag": "james", "magnitude": 1}
                         ],
                         "outcomes":
                         [
@@ -1282,7 +2377,7 @@
                         "text": "There's something here...",
                         "requirements":
                         [
-                            {"flag": "servis", "magnitude": "1"}
+                            {"flag": "servis", "magnitude": 1}
                         ],
                         "outcomes":
                         [
@@ -1303,7 +2398,7 @@
                 "options":
                 [
                     {
-                        "text": "continue >"
+                        "text": "Yummy >"
                     }
                 ]
             },
@@ -1313,7 +2408,7 @@
                 "options":
                 [
                     {
-                        "text": "continue >"
+                        "text": "Shiny! >"
                     }
                 ]
             },
@@ -1322,21 +2417,40 @@
                 "text": "James explains:\nThis was an old witches town that was thriving until the reign of the new king. The king sent an army to force the witches out and the town has been abandoned ever since. A long line of prestigious witches used to live here. James runs off to a manor near the center of town and comes back with bundles of old spell tomes and gold (+300g)",
                 "options":
                 [
-                    {"text": "continue >"}
+                    {"text": "Nice job James! >"}
                 ]
             },
             {
                 "id": "e",
-                "text": "You wander up to a manor near the center of town, and in one of the spires you find an Orb of Truesight! (+Orb) The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "text": "You wander up to a manor near the center of town, and in one of the spires you find an Orb of Truesight! (+Orb)",
                 "options":
                 [
-                    {"text": "continue >"}
+                    {"text": "Orb, down >",
+					"outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "servis", "magnitude": -1}
+                                ],
+                                "nextid": "f"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "f",
+                "text": "The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+					{"text": "Thank god thats over with >"}
                 ]
             }
         ]
     },
     {
-        "scenarioid": 2,
+        "scenarioid": 17,
         "passages": [
             {
                 "id": "a",

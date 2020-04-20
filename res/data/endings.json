@@ -1,0 +1,643 @@
+[
+    {
+        "scenarioid": 1,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You're out of food and supplies...",
+                "options":
+                [
+                    {
+                        "text": "Oh no, really? >",
+                        "outcomes":[{"nextid": "b"}]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "It's unfortunate, \n to be stranded, your horse out of energy, you starve with any peers you have, and pass away quietly, unremembered, forgotten.",
+                "options":
+                [
+                    {
+                        "text": "This can't be the end... >",
+                        "outcomes":[{"nextid": "c"}]
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "No matter, you can always try again!",
+                "options":
+                [
+                    {
+                        "text": "Main Menu"
+                    }
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 2,
+        "passages": [
+            {
+                "id": "a",
+                "text": "The curse has reached it's peak, it's too late for the poor pup",
+                "options":
+                [
+                    {
+                        "text": "I can still save him! >",
+                        "outcomes":[{"nextid": "b"}]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "It's far too late for that, the curse has reached its heart, soon it will perish",
+                "options":
+                [
+                    {
+                        "text": "I really did try >",
+                        "outcomes":[{"nextid": "c"}]
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "No matter, you can always try again!",
+                "options":
+                [
+                    {
+                        "text": "Main Menu"
+                    }
+                ]
+            }
+        ]
+    },
+	{
+        "scenarioid": 3,
+        "passages": [
+            {
+                "id": "a",
+                "text": "Welcome my friend, I've been expecting you, I trust you brought all three relics required to cure your poor dragon pup?",
+                "options":
+                [
+                    {
+                        "text": "I have.",
+						"requirements":
+                        [
+                            {"flag": "heartstone", "magnitude": 1},
+							{"flag": "cop", "magnitude": 1},
+							{"flag": "orb", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "I was hoping to borrow some of your equipment",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "Wonderful, let me see the sorry thing",
+                "options":
+                [
+                    {
+                        "text": "okay >",
+                        "outcomes":[{"nextid": "c"}]
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "hmmm yes that is the curse",
+                "options":
+                [
+                    {
+                        "text": "I know >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "d"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "d",
+                "text": "BVVVVVVVVVVVVWWWWWWWWWAAAAAAAMPPPPPPPPPPPPPP \n There! That should do it, keep good care of your little dragonling now, they're really quite rare",
+                "options":
+                [
+                    {"text": "Continue >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "e",
+                "text": "Congratulations on your adventure! You've successfully saved your dragon! You've done well to 'keep it alive' Feel free to play again for fun!",
+                "options":
+                [
+                    {
+                        "text": "Main Menu"
+                    }
+                ]
+            },
+            {
+                "id": "f",
+                "text": "You do know borrowing equipment is an expense you probably can't afford?",
+                "options":
+                [
+                    {"text": "Yes >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "g"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "g",
+                "text": "Alright then, what are you missing?",
+                "options":
+                [
+                    {"text": "The Heartstone",
+						"requirements":
+                        [
+							{"flag": "cop", "magnitude": 1},
+							{"flag": "orb", "magnitude": 1},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "h"
+                            }
+                        ]
+					},
+					{"text": "The Crystal of Purity",
+						"requirements":
+                        [
+                            {"flag": "heartstone", "magnitude": 1},
+							{"flag": "orb", "magnitude": 1},
+							{"flag": "cop", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "i"
+                            }
+                        ]
+					},
+					{"text": "The Orb of Truesight",
+						"requirements":
+                        [
+                            {"flag": "heartstone", "magnitude": 1},
+							{"flag": "cop", "magnitude": 1},
+							{"flag": "orb", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "j"
+                            }
+                        ]
+					},
+					{"text": "The Heartstone, and the Orb of Truesight",
+						"requirements":
+                        [
+                            {"flag": "cop", "magnitude": 1},
+							{"flag": "orb", "magnitude": 0, "checkType": 0},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "k"
+                            }
+                        ]
+					},
+					{"text": "The Crystal of Purity, and the Orb of Truesight",
+						"requirements":
+                        [
+                            {"flag": "heartstone", "magnitude": 1},
+							{"flag": "orb", "magnitude": 0, "checkType": 0},
+							{"flag": "cop", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "l"
+                            }
+                        ]
+					},
+					{"text": "The Heartstone, and The Crystal of Purity",
+						"requirements":
+                        [
+                            {"flag": "orb", "magnitude": 1},
+							{"flag": "cop", "magnitude": 0, "checkType": 0},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "m"
+                            }
+                        ]
+					},
+					{"text": "I have nothing...",
+						"requirements":
+                        [
+                            {"flag": "orb", "magnitude": 0, "checkType": 0},
+							{"flag": "cop", "magnitude": 0, "checkType": 0},
+							{"flag": "heartstone", "magnitude": 0, "checkType": 0}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "n"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "h",
+                "text": "Ahh, the Heartstone, yes I do happen to have one in store, \n it'll cost you 400g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "i",
+                "text": "Ahh, the Crystal of Purity, yes I do happen to have one in store, \n it'll cost you 400g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "j",
+                "text": "Ahh, the Orb of Truesight, yes I do happen to have one in store, \n it'll cost you 400g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 400, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "k",
+                "text": "The Heartstone AND the Orb of Truesight, my you really came unprepared, \n it'll cost you 800g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "l",
+                "text": "The Crystal of Purity AND the Orb of Truesight, my you really came unprepared, \n it'll cost you 800g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "m",
+                "text": "The Heartstone AND the Crystal of Purity, my you really came unprepared, \n it'll cost you 800g to rent, can you afford that?",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 800, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "n",
+                "text": "You have nothing?!? I can't believe you even decided to come here \n Well if you have nothing it will cost 1,200g for me to rent you everything",
+                "options":
+                [
+                    {"text": "Yes",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 1200}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "o"
+                            }
+                        ]
+					},
+					{"text": "That's too expensive...",
+					"requirements":
+                        [
+							{"flag": "money", "magnitude": 1200, "checkType": -1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "p"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "o",
+                "text": "Good, \n very well then, let's get started",
+                "options":
+                [
+                    {"text": "Finally",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "p",
+                "text": "You dare come to my tower, and take up MY TIME, without even having the money and resources to save your own pet?! \n You sicken me and disgust me, get out of my sight before I decide to kill you, take your filthy animal as well.",
+                "options":
+                [
+                    {"text": "But-",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "q"
+                            }
+                        ]
+					},
+					{"text": "Leave the tower",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "r"
+                            }
+                        ]
+					}
+                ]
+            },
+			{
+                "id": "q",
+                "text": "BUT NOTHING. YOU TEST MY PATIENCE",
+                "options":
+                [
+                    {"text": "I-",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "r"
+                            }
+                        ]
+					},
+					{"text": "Leave the tower",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "s"
+                            }
+                        ]
+					}
+				]
+            },
+			{
+                "id": "s",
+                "text": "If only there was something else you cuold do, unfortunately the curse has reached it's peak, it's too late for the poor pup",
+                "options":
+                [
+                    {
+                        "text": "I can still save him! >",
+                        "outcomes":[{"nextid": "u"}]
+                    }
+                ]
+            },
+            {
+                "id": "u",
+                "text": "It's far too late for that, the curse has reached its heart, soon it will perish",
+                "options":
+                [
+                    {
+                        "text": "I really did try >",
+                        "outcomes":[{"nextid": "v"}]
+                    }
+                ]
+            },
+            {
+                "id": "v",
+                "text": "No matter, you can always try again!",
+                "options":
+                [
+                    {
+                        "text": "Main Menu"
+                    }
+                ]
+            },
+			{
+                "id": "r",
+                "text": "BUT NOTHING. YOU TEST MY PATIENCE",
+                "options":
+                [
+                    {"text": "I-",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "t"
+                            }
+                        ]
+					},
+					{"text": "Leave the tower",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "s"
+                            }
+                        ]
+					}
+				]
+            },
+			{
+                "id": "t",
+                "text": "The wizard zaps you with deadly energy, killing you, and the dragon.",
+                "options":
+                [
+                    {"text": "Is this really how it ends?",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "w"
+                            }
+                        ]
+					}
+				]
+            },
+			{
+                "id": "w",
+                "text": "It is, however, you can always try again!",
+                "options":
+                [
+                    {
+                        "text": "Main Menu"
+                    }
+				]
+            }
+        ]
+    }
+	
+]
