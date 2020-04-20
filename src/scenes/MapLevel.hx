@@ -226,7 +226,7 @@ class MapLevel implements Level {
         playerMarker.y = curTown.point.y - (townTile.height * 0.45);
 
         // update curse bar
-        curseBarFillTile.scaleToSize((40 * playerData.getProperty("curse")), 33);
+        curseBarFillTile.scaleToSize((4 * playerData.getProperty("curse")), 33);
         // update supplies
         supplies.text = playerData.getProperty("supplies") + " days";
         // update money

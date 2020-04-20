@@ -8,9 +8,16 @@ class PlayerData {
 
     private function new() {
         flags = new Map();
-        flags.set("curse", 1);
-        flags.set("supplies", 3);
-        flags.set("money", 3);
+        flags.set("curse", 30);
+        flags.set("supplies", 8);
+        flags.set("money", 250);
+        flags.set("heartstone", 0);
+        flags.set("orb", 0);
+        flags.set("cop", 0);
+        flags.set("mary", 0);
+        flags.set("james", 0);
+        flags.set("margaret", 0);
+        flags.set("geiger", 0);
     }
 
     public static function getInstance(): PlayerData {
