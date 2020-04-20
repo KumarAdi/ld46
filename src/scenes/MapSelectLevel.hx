@@ -79,9 +79,9 @@ class MapSelectLevel extends MapLevel {
     override function init() {
         super.init();
 
-        if (backBtn != null) {
-            backBtn.remove();
-            backBtn = null;
+        if (backIcon != null) {
+            backIcon.remove();
+            backIcon = null;
         }
 
         // call update resource
