@@ -204,8 +204,8 @@ class MapLevel implements Level {
         backBtn.y = 60;//scene.height - 5 * viewMap.textHeight - 50;
         backBtn.filter = new Outline(1, 0x000000, 0.5);
         var backInteract = new Interactive(
-            backIcon.tile.width,
-            backIcon.tile.height, backIcon);
+            backIcon.getBounds().width,
+            backIcon.getBounds().height, backIcon);
         backInteract.onClick = function(e: Event) {
             nextLevel = parent;
         };
