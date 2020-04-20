@@ -37,7 +37,7 @@ class EventsData {
     public var events: Array<EventData>;
 
     public function new() {
-        var json = Res.data.test.entry.getText();
+        var json = Res.data.through10.entry.getText();
         events = Json.parse(json);
     }
 
