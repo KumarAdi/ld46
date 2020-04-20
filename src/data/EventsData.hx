@@ -29,6 +29,7 @@ typedef PassageData = {
 
 typedef EventData = {
     var scenarioid: Int;
+    var scenarioreq: Array<FlagData>;
     var passages: Array<PassageData>;
 }
 
