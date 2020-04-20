@@ -74,13 +74,13 @@ class MapSelectLevel extends MapLevel {
     override function init() {
         super.init();
 
-        if (playerData.flags.get("supplies") <= 0) {
+        if (playerData.checkProperty("supplies", 0, -1)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), eventData, playerData, mapData, townTile,
                 curTown, endTown, Res.img.intro.toTile());
         }
 
-        if (playerData.flags.get("curse") >= 100) {
+        if (playerData.checkProperty("curse", 100)) {
             nextLevel = new CutsceneDialogueLevel(
                 new MainMenu(), eventData, playerData, mapData, townTile,
                 curTown, endTown, Res.img.intro.toTile());

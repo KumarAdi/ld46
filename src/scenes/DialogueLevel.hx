@@ -51,7 +51,7 @@ class DialogueLevel implements Level {
             eventData.scenarioreq = [];
         }
         for (scenarioReq in eventData.scenarioreq) {
-            if (playerData.flags.get(scenarioReq.flag) < scenarioReq.magnitude) {
+            if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude)) {
                 satisfied = false;
                 break;
             }
@@ -63,7 +63,7 @@ class DialogueLevel implements Level {
 
             satisfied = true;
             for (scenarioReq in eventData.scenarioreq) {
-                if (playerData.flags.get(scenarioReq.flag) < scenarioReq.magnitude) {
+                if (!playerData.checkProperty(scenarioReq.flag, scenarioReq.magnitude)) {
                     satisfied = false;
                     break;
                 }
@@ -159,7 +159,7 @@ class DialogueLevel implements Level {
                 var flagsMet = true;
                 for (flagRequired in opt.requirements) {
                     // overload to avoid null error
-                    if (!playerData.flags.exists(flagRequired.flag) || playerData.flags.get(flagRequired.flag) < flagRequired.magnitude) {
+                    if (!playerData.checkProperty(flagRequired.flag, flagRequired.magnitude)) {
                         flagsMet = false;
                         break;
                     }
@@ -195,12 +195,7 @@ class DialogueLevel implements Level {
 
                     if (outcome.consequences != null) {
                         for (consequence in outcome.consequences) {
-                            var flags = playerData.flags;
-                            if (flags.exists(consequence.flag)) {
-                                flags.set(consequence.flag, flags.get(consequence.flag) + consequence.magnitude);
-                            } else {
-                                flags.set(consequence.flag, consequence.magnitude);
-                            }
+                            playerData.incrementProperty(consequence.flag, consequence.magnitude);
                         }
                     }
                     trace(outcome.nextid);
