@@ -1,0 +1,258 @@
+[
+    {
+        "scenarioid": 16,
+        "passages": [
+            {
+                "id": "a",
+                "text": "You arrive at a town that you thought was supposed to be bustling with life. Instead you find a ghost town that looks like it’s been abandoned for a few year. The place is giving you the creeps.",
+                "options":
+                [
+                    {
+                        "text": "Take what you can and leave",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "supplies", "magnitude": 1}
+                                ],
+                                "nextid": "b",
+                                "probability": 50
+                            },
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "gold", "magnitude": 50}
+                                ],
+                                "nextid": "c",
+                                "probability": 50
+                            }
+                        ]
+                    },
+                    {
+                        "text": "I know this place...",
+                        "requirements":
+                        [
+                            {"flag": "james", "magnitude": "1"}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 300}
+                                ],
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "There's something here...",
+                        "requirements":
+                        [
+                            {"flag": "servis", "magnitude": "1"}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "orb", "magnitude": 1}
+                                ],
+                                "nextid": "e"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "You find a storehouse with a few supplies (+1S)",
+                "options":
+                [
+                    {
+                        "text": "continue >"
+                    }
+                ]
+            },
+            {
+                "id": "c",
+                "text": "You find some nobles house and take a few of the small shiny objects (+50g)",
+                "options":
+                [
+                    {
+                        "text": "continue >"
+                    }
+                ]
+            },
+            {
+                "id": "d",
+                "text": "James explains:\nThis was an old witches town that was thriving until the reign of the new king. The king sent an army to force the witches out and the town has been abandoned ever since. A long line of prestigious witches used to live here. James runs off to a manor near the center of town and comes back with bundles of old spell tomes and gold (+300g)",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "e",
+                "text": "You wander up to a manor near the center of town, and in one of the spires you find an Orb of Truesight! (+Orb) The world starts to take standard form again, and you feel normal. I think the effects of those berries have finally worn off!",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
+        ]
+    },
+    {
+        "scenarioid": 2,
+        "passages": [
+            {
+                "id": "a",
+                "text": "There seems to be a revolution going on in this town. People have taken up arms and a guillotine and have flooded the streets. The nobles are screaming for help from the top of their villas. This seems like a domestic dispute, but nobles are known for having lots of wealth...",
+                "options":
+                [
+                    {
+                        "text": "Help the people execute the nobles",
+                        "outcomes":
+                        [
+                            {
+                                "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 17}
+                                ],
+                                "nextid": "b"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Help the nobles escape",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "c"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "I can take care of this mob (Geiger)",
+                        "requirements":
+                        [
+                            {"flag": "geiger", "magnitude": 1}
+                        ],
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "d"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Leave them be",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "e"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "b",
+                "text": "You push into the crowds and screaming ‘VIVA LA REVOLUCIÓN’.\nAfter making your way to the nobles and you force them into the guillotine.\nAfter spilling the nobles blood and splitting the nobles wealth equally between everyone, you make a profit of 17g (+17g)",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "c",
+                "text": "You shout ‘HEY, THEY’RE GETTING AWAY’ and point in the opposite direction. The crowd blindly follows your orders and you manage to catch up to the nobles who are fleeing in the opposite direction.",
+                "options":
+                [
+                    {
+                        "text": "(It worked?!) >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "f"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "d",
+                "text": "With the grace of a giant man with a giant sword, Geiger cleaves through large swathes of townsfolk. You watch in horror from your wagon, unable to lift a finger against the carnage that unfolds.",
+                "options":
+                [
+                    {
+                        "text": "(speechless) >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "g"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "e",
+                "text": "You decide not to get involved in the politics of this dangerous town and just keep riding.",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "f",
+                "text": "The nobles scoff,\n\"Money? How am I supposed to know you’re the one who caused that distraction, besides, it’s my money and I deserve it. Now bugger off!\"",
+                "options":
+                [
+                    {
+                        "text": "Bugger off... >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "h"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "g",
+                "text": "When the dust (or rather, the mist of fresh blood) settles, Geiger jaunts back toward the wagon, casually proclaiming,\n\"Mm, got the nobles as well, I’m keepin’ his money though.\"",
+                "options":
+                [
+                    {
+                        "text": "... >",
+                        "outcomes":
+                        [
+                            {
+                                "nextid": "i"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "h",
+                "text": "(You begin to see why there was a revolution...)",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            },
+            {
+                "id": "i",
+                "text": "You don’t dare to say anything and set back onto the road.",
+                "options":
+                [
+                    {"text": "continue >"}
+                ]
+            }
+        ]
+    }
+]
