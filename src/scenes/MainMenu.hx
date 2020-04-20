@@ -34,7 +34,7 @@ class MainMenu implements Level {
         startParent.y = 2 * (scene.height/3);
         start.visible = false;
 
-        var startBtn = new Interactive(start.textWidth, start.textHeight, startParent);
+        var startBtn = new Interactive(scene.width, scene.height, scene);
         startBtn.onClick = function (e: Event) {
             startLevel = true;
         }
