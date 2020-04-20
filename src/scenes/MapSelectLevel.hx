@@ -26,13 +26,7 @@ class MapSelectLevel extends MapLevel {
         var townSize = new Point(townTile.width, townTile.height);
         var playableArea = new Bounds();
         playableArea.setMin(new Point(0, 0).add(townSize.clone().scale(0.5).add(new Point(25, 0))));
-        // playableArea.setMin(new Point(0, 0)
-        //                     .add(townSize.clone().scale(0.5))
-        //                     .add(new Point(0, 200)));
         playableArea.setMax(new Point(scene.width, scene.height).sub(townSize.clone().scale(0.5)).sub(new Point(25, 150)));
-        // playableArea.setMax(new Point(scene.width, scene.height)
-        //                                 .sub(townSize.clone().scale(0.5)
-        //                                 .sub(new Point(0, 100))));
         mapData = new MapData(townSize.length()/2, playableArea);
 
         while (mapData.diagram.cells.length < 7) {
@@ -75,7 +69,7 @@ class MapSelectLevel extends MapLevel {
                         nextLevel = new CutsceneDialogueLevel(
                             new MainMenu(), new EventsData(Res.data.endings.entry.getText()),
                             playerData, mapData, townTile,
-                            curTown, endTown, Res.img.intro.toTile(), 2);
+                            curTown, endTown, Res.img.ending.toTile(), 2);
                     } else if (visited.indexOf(cell) == -1) {
                         nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                     }
