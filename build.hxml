@@ -2,5 +2,6 @@
 -D heaps_enable_hl_mp3 
 -lib hlsdl
 -hl build/hl/game.hl
+# -js docs/game.js
 -cp src
 -main Main
