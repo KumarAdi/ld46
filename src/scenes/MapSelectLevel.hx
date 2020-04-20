@@ -52,8 +52,6 @@ class MapSelectLevel extends MapLevel {
         
         super(parent, scene, mapData, playerData, townTile, curTown, endTown);
 
-        x.remove();
-
         for (town => cell in this.towns) {
             town.onClick = function (e: Event) {
                 if (cell.getNeighbors().indexOf(curTown.point) != -1) {
@@ -89,6 +87,11 @@ class MapSelectLevel extends MapLevel {
 
     override function init() {
         super.init();
+
+        if (backBtn != null) {
+            backBtn.remove();
+            backBtn = null;
+        }
 
         if (playerData.checkProperty("supplies", 0, -1)) {
 

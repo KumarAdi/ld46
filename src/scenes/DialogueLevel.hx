@@ -109,7 +109,7 @@ class DialogueLevel implements Level {
         var viewMapBtn = new Interactive(viewMapIcon.getBounds().width + viewMap.textWidth, viewMapIcon.getBounds().width, viewMapIcon);
 
         viewMapBtn.onClick = function (e: Event) {
-            nextLevel = new MapLevel(this, scene, mapData, playerData, townTile, curTown, endTown);
+            nextLevel = new MapLevel(this, null, mapData, playerData, townTile, curTown, endTown);
         }
 
         // Init first passage
