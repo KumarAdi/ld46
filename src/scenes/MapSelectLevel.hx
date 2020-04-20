@@ -78,6 +78,10 @@ class MapSelectLevel extends MapLevel {
                     } else if (visited.indexOf(cell) == -1) {
                         nextLevel = new DialogueLevel(this, eventData, playerData, mapData, townTile, curTown, endTown);
                     }
+
+                    // update player stats
+                    playerData.incrementProperty("curse", Math.floor((Math.random() * 7) + 7));
+                    playerData.incrementProperty("supplies", -1);
                 }
             }
         }

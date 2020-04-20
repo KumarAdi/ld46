@@ -125,7 +125,7 @@ class MapLevel implements Level {
         // Init back button
         x = new Text(uiFont, scene);
         x.text = "Back to Dialogue";
-        var xBtn = new Interactive(x.textHeight, x.textHeight, x);
+        var xBtn = new Interactive(x.textWidth, x.textHeight, x);
         xBtn.onClick = function (e: Event) {
             nextLevel = parent;
         }
