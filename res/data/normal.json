@@ -3026,7 +3026,6 @@
                 [
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3040,7 +3039,6 @@
                     },
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3076,7 +3074,6 @@
                 [
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3110,7 +3107,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3124,7 +3120,6 @@
                     },
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3160,7 +3155,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3194,7 +3188,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3208,7 +3201,6 @@
                     },
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3244,7 +3236,6 @@
                 [
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3321,7 +3312,7 @@
 								"consequences":
                                 [
                                     {"flag": "money", "magnitude": -600},
-									{"flag": "supplies", "magnitude": -3}
+									{"flag": "supplies", "magnitude": 3}
                                 ],
                                 "nextid": "h"
 							}
@@ -3332,7 +3323,7 @@
 						"outcomes":
 						[
 							{
-								"nextid": "i"
+								"nextid": "z"
 							}
 						]
 					}
@@ -3349,7 +3340,7 @@
                 ]
             },
 			{
-                "id": "i",
+                "id": "z",
                 "text": "\"Come back soon!\"",
                 "options":
                 [
