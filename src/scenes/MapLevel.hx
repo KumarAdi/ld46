@@ -42,16 +42,17 @@ class MapLevel implements Level {
     private var stoneIcon: Bitmap;
     private var uiBg: Object;
     private var endBtn: Interactive;
-    private var x: Text; // the button to close the map view
+    private var backIcon: Bitmap; // the button to close the map view
     private final visited = new Array<Cell>();
 
     public function new(parent: Level, ?scene: Scene, mapData: MapData, playerData: PlayerData, townTile: Tile, curTown: Cell, endTown: Cell) {
         if (scene == null) {
             scene = new Scene();
             scene.scaleMode = LetterBox(1920, 1080);
-        } else {
-            this.scene = scene;
         }
+        
+        this.scene = scene;
+
         this.parent = parent;
         this.mapData = mapData;
         this.playerData = playerData;
@@ -122,14 +123,6 @@ class MapLevel implements Level {
         uiBg.y = scene.height - 150;
         scene.addChild(uiBg);
 
-        // Init back button
-        x = new Text(uiFont, scene);
-        x.text = "Back to Dialogue";
-        var xBtn = new Interactive(x.textWidth, x.textHeight, x);
-        xBtn.onClick = function (e: Event) {
-            nextLevel = parent;
-        }
-
         // Init ui bg
         var bottomBlurTile = Res.img.blur.toTile();
         bottomBlurTile.scaleToSize(1920, 150);
@@ -196,6 +189,26 @@ class MapLevel implements Level {
         gold.y = 40;
         goldTitle.x = suppliesTitle.x - 250;
         goldTitle.y = 30;
+
+
+        // Init back button
+        var backIconTile = Res.img.bubble.toTile();
+        backIconTile.scaleToSize(150, 150);
+        backIcon = new Bitmap(backIconTile, scene);
+        backIcon.x = 20;
+        backIcon.y = 20;
+        var backBtn = new Text(Res.fonts.pixopbold.toFont(), backIcon);
+        backBtn.text = "Back to Dialogue";
+        backBtn.scale(1.4);
+        backBtn.x = 110;//(scene.width - 5 * viewMap.textWidth) / 2;
+        backBtn.y = 60;//scene.height - 5 * viewMap.textHeight - 50;
+        backBtn.filter = new Outline(1, 0x000000, 0.5);
+        var backInteract = new Interactive(
+            backIcon.getBounds().width,
+            backIcon.getBounds().height, backIcon);
+        backInteract.onClick = function(e: Event) {
+            nextLevel = parent;
+        };
     }
 
     public function init() {
