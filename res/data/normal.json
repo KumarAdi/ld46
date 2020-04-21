@@ -597,7 +597,14 @@
 					[
 						{
 							"nextid": "h"
-						}
+                        },
+                        {
+                            "consequences":
+                                [
+                                    {"flag": "money", "magnitude": 50},
+                                    {"flag": "supplies", "magnitude": 1}
+                                ]
+                        }
 					]
 					}
                 ]
@@ -613,13 +620,6 @@
                         [
                             {
                                 "nextid": "g"
-                            },
-                            {
-                                "consequences":
-                                    [
-                                        {"flag": "money", "magnitude": 50},
-                                        {"flag": "supplies", "magnitude": 1}
-                                    ]
                             }
                         ]
                     }
