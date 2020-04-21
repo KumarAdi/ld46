@@ -10,7 +10,7 @@ class PlayerData {
         flags = new Map();
         flags.set("curse", 3);
         flags.set("supplies", 12);
-        flags.set("money", 400);
+        flags.set("money", 600);
         flags.set("heartstone", 0);
         flags.set("orb", 0);
         flags.set("cop", 0);
