@@ -285,6 +285,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 400}
@@ -316,6 +317,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 400}
@@ -347,6 +349,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 400}
@@ -378,6 +381,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 800}
@@ -409,6 +413,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 800}
@@ -440,6 +445,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 800}
@@ -471,6 +477,7 @@
                 "options":
                 [
                     {"text": "Yes",
+					"showGray": 1,
 					"requirements":
                         [
 							{"flag": "money", "magnitude": 1200}
@@ -528,7 +535,7 @@
                         "outcomes":
                         [
                             {
-                                "nextid": "r"
+                                "nextid": "s"
                             }
                         ]
 					}
@@ -543,7 +550,7 @@
                         "outcomes":
                         [
                             {
-                                "nextid": "r"
+                                "nextid": "t"
                             }
                         ]
 					},
@@ -559,7 +566,7 @@
             },
 			{
                 "id": "s",
-                "text": "If only there was something else you cuold do, unfortunately the curse has reached it's peak, it's too late for the poor pup",
+                "text": "If only there was something else you could do, unfortunately the curse has reached it's peak, it's too late for the poor pup",
                 "options":
                 [
                     {
