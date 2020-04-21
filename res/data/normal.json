@@ -2988,7 +2988,6 @@
                 [
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3002,7 +3001,6 @@
                     },
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3038,7 +3036,6 @@
                 [
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3072,7 +3069,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3086,7 +3082,6 @@
                     },
 					{
                         "text": "Orb of Truesight",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "orb", "magnitude": 0, "checkType": 0}
@@ -3122,7 +3117,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3156,7 +3150,6 @@
                 [
 					{
                         "text": "Heartstone",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "heartstone", "magnitude": 0, "checkType": 0}
@@ -3170,7 +3163,6 @@
                     },
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3206,7 +3198,6 @@
                 [
 					{
                         "text": "Crystal of Purity",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "cop", "magnitude": 0, "checkType": 0}
@@ -3294,7 +3285,7 @@
 						"outcomes":
 						[
 							{
-								"nextid": "i"
+								"nextid": "z"
 							}
 						]
 					}
@@ -3311,7 +3302,7 @@
                 ]
             },
 			{
-                "id": "i",
+                "id": "z",
                 "text": "\"Come back soon!\"",
                 "options":
                 [
@@ -3333,7 +3324,6 @@
                 [
 					{
                         "text": "Ask about ‘Geiger, Mercenary, Merciless, Strongest man alive, 200g’",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "geiger", "magnitude": 0, "checkType": 0}
@@ -3347,7 +3337,6 @@
                     },
 					{
                         "text": "Ask about ‘Mary, Survivalist, Navigator, Buckets of fun! 200g’",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "mary", "magnitude": 0, "checkType": 0}
@@ -3361,7 +3350,6 @@
                     },
 					{
                         "text": "Ask about ‘James, Historian, Prospector, Share the wealth! 200g’",
-						"showGray": 1,
 						"requirements":
                         [
                             {"flag": "james", "magnitude": 0, "checkType": 0}
