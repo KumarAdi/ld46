@@ -207,7 +207,7 @@ class DialogueLevel implements Level {
                     var outcome= opt.outcomes[0];
                     if (opt.outcomes.length > 1) { // there are multiple outcomes with different probs
                         for (currentOutcome in opt.outcomes) {
-                            if ((Math.random() * 100) > currentOutcome.probability) {
+                            if ((Math.random() * 100) < currentOutcome.probability) {
                                 outcome = currentOutcome;
                                 break;
                             }

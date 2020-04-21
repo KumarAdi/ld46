@@ -8,7 +8,7 @@ class PlayerData {
 
     private function new() {
         flags = new Map();
-        flags.set("curse", 10);
+        flags.set("curse", 3);
         flags.set("supplies", 12);
         flags.set("money", 400);
         flags.set("heartstone", 0);
