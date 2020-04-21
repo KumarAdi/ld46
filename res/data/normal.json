@@ -461,13 +461,12 @@
                 "text": "\"Alright listen, I'm not here to argue, you can have our lame horse if you want for free, but he is pretty damn slow. It’s not much better than walking, but it’s something\"",
                 "options":
                 [
-                    {"text": "> \"I'll take the lame horse, thank you very much!\" [-100g]",
+                    {"text": "> \"I'll take the lame horse, thank you very much!\"",
 					"outcomes":
 					[
 						{
 							"consequences":
                                 [
-                                    {"flag": "money", "magnitude": -100},
                                     {"flag": "lame", "magnitude": 1}
                                 ],
 							"nextid": "n"
