@@ -1223,10 +1223,6 @@
                         "outcomes":
                         [
 							{
-                                "consequences":
-                                [
-                                    {"flag": "supplies", "magnitude": -1}
-                                ],
                                 "nextid": "c",
 								"probability" : 60
                             },
